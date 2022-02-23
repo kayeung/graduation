@@ -13,11 +13,25 @@
   <!-- <script src="../oppo-web-ui/js/iconfont.js"></script> -->
   <script
     src="https://at.alicdn.com/t/font_3187659_m9vtsaarabh.js?spm=a313x.7781069.1998910419.74&file=font_3187659_m9vtsaarabh.js"></script>
+    <!-- jQThumb缩略图插件 -->
+<script src="../oppo-web-ui/js/jqthumb.min.js"></script>
+<script>
+  //处理缩略图
+  function DrawImage(hotimg) {
+    $(hotimg).jqthumb({
+      width: '80%',//宽度
+      height: '50px',//高度
+      position : { y: '50%', x: '50%'},//从图片的中间开始产生缩略图
+      zoom: '1',//缩放比例
+      method: 'auto'//提交方法，用于不一样的浏览器环境，默认为‘auto’
+    });
+  }
+</script>
 </head>
 
 <body class="body">
   <!-- 导航条 -->
-  <nav class="navbar navbar-default navbar-fixed-top " id="oppo-navbar">
+  <nav class="navbar navbar-default navbar-static-top " id="oppo-navbar">
     <div class="container-fluid container">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header">
@@ -70,10 +84,11 @@
           alt="...">
         <img src="img/topbanner1.webp" class="img-responsive hidden-xs" alt="...">
         <div class="carousel-content container">
-         <h2 class="title">OPPO Find N <br> 全新折叠旗舰</h2>
-         <h3 class="subtitle">从尝鲜，到常用</h3>
-         <a href="#" id="btn" class="btn btn-primary" role="button" style="background-color: black;border-color: black;">了解更多</a>
-         <a href="#" id="btn-lg" class="btn btn-primary btn-lg" role="button" style="background-color: black;border-color: black;">了解更多</a>
+          <h2 class="title">OPPO Find N <br> 全新折叠旗舰</h2>
+          <h3 class="subtitle">从尝鲜，到常用</h3>
+          <a href="#" id="btn" class="btn" role="button" style="background-color: black;border-color: black;">了解更多</a>
+          <a href="#" id="btn-lg" class="btn btn-lg" role="button"
+            style="background-color: black;border-color: black;">了解更多</a>
         </div>
       </div>
       <div class="item">
@@ -83,7 +98,6 @@
           456
         </div>
       </div>
-
     </div>
 
     <!-- Controls -->
@@ -99,63 +113,114 @@
     </a>
   </div>
 
-  <!-- content -->
-  <div class="container">
-    <div class="page-header">
-      <h1 style="font-size: 42px;">更多产品 <a style="cursor: pointer;">查看其它产品</a> </h1>
-    </div>
-    <div class="row">
-      <div class="col-sm-12 col-lg-4">
-        <div class="row">
-          <div class="col-sm-6 col-lg-12">
-            <div class="thumbnail oppo-thumbnail">
-              <img
-                src="../oppo-web-ui/img/index-content-A96.webp"
-                alt="...">
-              <div class="caption">
-                <h3>小星环 OPPO A96<small>新品</small></h3>
-                <p>轻薄一点，轻快很多</p>
-                <p><a href="#" class="btn btn-primary" role="button">了解更多</a> </p>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-lg-12">
-            <div class="thumbnail oppo-thumbnail">
-                <img
-                  src="../oppo-web-ui/img/index-content-enco-air2.webp"
-                  alt="...">
-
-              <div class="caption">
-                <h3>OPPO Enco Air2<small>新品</small></h3>
-                <p>好声音，耳目一新</p>
-                <p><a href="#" class="btn btn-primary" role="button">了解更多</a> </p>
-              </div>
-            </div>
-          </div>
-        </div>
+  <!-- 内容 -->
+  <div class="newProdection">
+    <div class="container">
+      <div class="page-header">
+        <h1 style="font-size: 42px;">更多产品 <a style="cursor: pointer;">查看其它产品</a> </h1>
       </div>
+      <div class="content">
+        <div class="row">
+          <div class="col-sm-12 col-lg-4">
+            <div class="row">
+              <div class="col-sm-6 col-lg-12">
+                <a href="#">
+                  <div class="thumbnail oppo-thumbnail">
+                    <img src="../oppo-web-ui/img/index-content-A96.webp" alt="...">
+                    <div class="caption">
+                      <h3>小星环 OPPO A96<small>新品</small></h3>
+                      <p>轻薄一点，轻快很多</p>
+                      <p><a href="#" class="btn " role="button">了解更多</a> </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="col-sm-6 col-lg-12">
+                <a href="">
+                  <div class="thumbnail oppo-thumbnail">
+                    <img src="../oppo-web-ui/img/index-content-enco-air2.webp" alt="...">
 
-      <div class="col-sm-6 col-lg-7 col-lg-offset-1">
-        <div class="thumbnail oppo-thumbnail">
-          <img
-            src="../oppo-web-ui/img/index-content-reno7.webp"
-            alt="..." class="col-lg-7-img">
-          <div class="caption">
-            <h3>OPPO Reno7 新年版 <small>热销</small></h3>
-            <p>爱不释手红丝绒</p>
-            <p><a href="#" class="btn btn-primary" role="button">了解更多</a> </p>
+                    <div class="caption">
+                      <h3>OPPO Enco Air2<small>新品</small></h3>
+                      <p>好声音，耳目一新</p>
+                      <p><a href="#" class="btn" role="button">了解更多</a> </p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-7 col-lg-offset-1" >
+            <a href="">
+              <div class="thumbnail oppo-thumbnail">
+                <img src="../oppo-web-ui/img/index-content-reno7.webp" alt="..." id="newProductionRight">
+                <div class="caption">
+                  <h3>OPPO Reno7 新年版 <small>热销</small></h3>
+                  <p>爱不释手红丝绒</p>
+                  <p><a href="#" class="btn" role="button">了解更多</a> </p>
+                </div>
+              </div>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+
+  <!-- 内容2 -->
+  <div class="oppo-techology">
+    <div class="container">
+      <div class="page-header">
+        <h1 style="font-size: 42px;">OPPO科技</h1>
+      </div>
+      <div class="content">
+        <div class="row">
+
+          <div class="col-sm-8">
+            <a href="#">
+              <div class="thumbnail oppo-thumbnail" style="background-color: #f5f5f5;">
+                <img
+                  src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/marisilicon-x/middlebanner/marisilicon-x_middlebanner-1600x1068-pc.jpg.thumb.webp"
+                  alt="...">
+                <div class="caption">
+                  <h3>马里亚纳® MariSilicon X </h3>
+                  <p>OPPO 首个自研芯片，全球第一个 6nm 影像专用的 NPU 芯片</p>
+                  <p><a href="#" class="btn" role="button">了解更多</a> </p>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <div class="col-sm-4 ">
+            <a href="#">
+              <div class="thumbnail oppo-thumbnail" style="background-color: #f5f5f5;">
+                <!-- <img
+                  src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/technology/middlebanner/5g-middlebanner-1340x1786-v3-pc.jpg.thumb.webp"
+                  alt="..."> -->
+                <img
+                  src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/marisilicon-x/middlebanner/marisilicon-x_middlebanner-1600x1068-pc.jpg.thumb.webp"
+                  alt="..." class="img-responsive" onload="DrawImage(this)" style="height:406px; width: auto;">
+                <div class="caption">
+                  <h3>5G，连接身边的世界 </h3>
+                  <p>OPPO 相信 5G 不止是一种技术，更代表着无限可能</p>
+                  <p><a href="#" class="btn" role="button">了解更多</a> </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
   integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"
   integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
-<script src="js/swiper.min.js"></script>
-<script src="js/mac.min.js"></script>
+<script src="https://cdn.bootcss.com/salvattore/1.0.9/salvattore.min.js"></script>
+
+
 
 </html>

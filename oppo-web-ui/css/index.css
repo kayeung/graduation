@@ -15,9 +15,14 @@
     /* background-color: red; */
 }
 
-.clear {
-    clear: both;
+.btn {
+    border-radius: 0px !important;
+    color: white !important;
+    background-color: black !important;
+    border-color: black !important;
 }
+
+
 
 @font-face {
     font-family: 'OPPOSans';
@@ -45,7 +50,7 @@
 #oppo-navbar {
     background-color: transparent;
     border-color: transparent;
-
+    margin-bottom: 0;
 }
 
 .iconfont {
@@ -88,6 +93,7 @@ img {
 
 .oppo-carousel {
     display: block;
+    top: -50px;
 }
 
 .oppo-carousel,
@@ -201,6 +207,21 @@ img {
         line-height: 44px;
     }
 
+    .newProduction .col-lg-12 img {
+        object-fit: fill;
+        /* Do not scale the image */
+        object-position: center;
+        /* Center the image within the element */
+    }
+
+    #newProductionRight {
+        height: 647px;
+        object-fit: cover;
+        /* Do not scale the image */
+        object-position: center;
+        /* Center the image within the element */
+    }
+
     #btn {
         display: none;
     }
@@ -211,6 +232,16 @@ img {
 }
 
 /* content */
+.newProduction {
+    background-color: white;
+}
+
+.content a,
+.content a:hover {
+    color: black;
+    text-decoration: none;
+}
+
 .page-header {
     margin-top: 128px !important;
 }
@@ -234,7 +265,23 @@ img {
     border: 0px solid white !important;
 }
 
+.oppo-thumbnail:hover {
+    transform: scale(1.05);
+    transition: all 0.3s;
+}
+
 .thumbnail small {
     color: #2EC84E;
     margin-left: 10px;
+}
+
+.oppo-techology {
+    background-color: #f5f5f5;
+}
+
+.oppo-techology .col-sm-4 img {
+    object-fit: cover;
+    /* Do not scale the image */
+    object-position: center;
+    /* Center the image within the element */
 }
