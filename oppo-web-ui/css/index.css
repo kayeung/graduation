@@ -148,6 +148,17 @@ img {
     display: none;
 }
 
+@media (min-width: 1px) and (max-width:768px) {
+    #oppo-thumbnail-right {
+        max-height: 389.81px;
+        width: 100vw;
+        object-fit: fill;
+        /* Do not scale the image */
+        object-position: center;
+        /* Center the image within the element */
+    }
+}
+
 @media (min-width: 768px) and (max-width: 991.98px) {
     .carousel-content {
         top: 29%;
@@ -165,6 +176,12 @@ img {
         font-size: 14px;
         line-height: 20px;
     }
+
+    #oppo-thumbnail-right {
+        height: 308.38px;
+        width: auto;
+    }
+
 }
 
 
@@ -184,7 +201,11 @@ img {
         margin: 10px 0;
         font-size: 18px;
         line-height: 28px;
+    }
 
+    #oppo-thumbnail-right {
+        height: 406.27px;
+        width: auto;
     }
 }
 
@@ -228,6 +249,16 @@ img {
 
     #btn-lg {
         display: inline-block;
+    }
+
+    #oppo-thumbnail-right {
+        max-height: 495.28px;
+        width: auto;
+    }
+
+    #oppo-thumbnail-right {
+        height: 495.28px;
+        width: auto;
     }
 }
 
@@ -284,4 +315,75 @@ img {
     /* Do not scale the image */
     object-position: center;
     /* Center the image within the element */
+}
+
+/* footer */
+.footer {
+    padding-top: 36px;
+}
+
+.footer .container {
+    padding: 32px 15px;
+}
+
+dl {
+    height: 203px;
+    margin-bottom: 20px;
+}
+
+dt {
+    font-size: 16px;
+    line-height: 28px;
+    padding-bottom: 12px;
+    font-family: 'OPPOSans-M';
+}
+
+dd a {
+    font-family: 'OPPOSans-R';
+    font-size: 12px;
+    line-height: 24px;
+    color: #0000008f;
+    margin-bottom: 10px;
+}
+
+.contect {
+    /* position: relative; */
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08) ;
+}
+
+.contect #contect-icon {
+    font-size: 30px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.contect #contect-detail {
+    display: inline-block;
+    line-height: 30px;
+    font-size: 18px;
+    vertical-align: text-bottom;
+    margin-bottom: 3px;
+}
+
+#contect, .link a {
+    color: #0000008f!important;
+    text-decoration: none!important;
+}
+
+.link{
+    left: -25px;
+    padding-top: 32px;
+}
+.link li{
+    margin-right: 14px;
+    list-style-type: none;
+    float: left;
+}
+.link li a{
+    font-size: 12px;
+    line-height: 23px;
+}
+.copyright{
+    display: block;
 }

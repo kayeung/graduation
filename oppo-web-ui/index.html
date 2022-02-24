@@ -13,20 +13,20 @@
   <!-- <script src="../oppo-web-ui/js/iconfont.js"></script> -->
   <script
     src="https://at.alicdn.com/t/font_3187659_m9vtsaarabh.js?spm=a313x.7781069.1998910419.74&file=font_3187659_m9vtsaarabh.js"></script>
-    <!-- jQThumb缩略图插件 -->
-<script src="../oppo-web-ui/js/jqthumb.min.js"></script>
-<script>
-  //处理缩略图
-  function DrawImage(hotimg) {
-    $(hotimg).jqthumb({
-      width: '80%',//宽度
-      height: '50px',//高度
-      position : { y: '50%', x: '50%'},//从图片的中间开始产生缩略图
-      zoom: '1',//缩放比例
-      method: 'auto'//提交方法，用于不一样的浏览器环境，默认为‘auto’
-    });
-  }
-</script>
+  <!-- jQThumb缩略图插件 -->
+  <script src="../oppo-web-ui/js/jqthumb.min.js"></script>
+  <script>
+    //处理缩略图
+    function DrawImage(hotimg) {
+      $(hotimg).jqthumb({
+        width: '80%',//宽度
+        height: '50px',//高度
+        position: { y: '50%', x: '50%' },//从图片的中间开始产生缩略图
+        zoom: '1',//缩放比例
+        method: 'auto'//提交方法，用于不一样的浏览器环境，默认为‘auto’
+      });
+    }
+  </script>
 </head>
 
 <body class="body">
@@ -151,7 +151,7 @@
             </div>
           </div>
 
-          <div class="col-sm-6 col-lg-7 col-lg-offset-1" >
+          <div class="col-sm-6 col-lg-7 col-lg-offset-1">
             <a href="">
               <div class="thumbnail oppo-thumbnail">
                 <img src="../oppo-web-ui/img/index-content-reno7.webp" alt="..." id="newProductionRight">
@@ -200,8 +200,8 @@
                   src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/technology/middlebanner/5g-middlebanner-1340x1786-v3-pc.jpg.thumb.webp"
                   alt="..."> -->
                 <img
-                  src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/marisilicon-x/middlebanner/marisilicon-x_middlebanner-1600x1068-pc.jpg.thumb.webp"
-                  alt="..." class="img-responsive" onload="DrawImage(this)" style="height:406px; width: auto;">
+                  src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/technology/middlebanner/5g-middlebanner-1340x1786-v3-pc.jpg.thumb.webp"
+                  alt="..." class="img-responsive" onload="DrawImage(this)" id="oppo-thumbnail-right">
                 <div class="caption">
                   <h3>5G，连接身边的世界 </h3>
                   <p>OPPO 相信 5G 不止是一种技术，更代表着无限可能</p>
@@ -214,6 +214,88 @@
       </div>
     </div>
   </div>
+
+  <!-- footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 col-md-3 col-lg-2">
+          <dl>
+            <dt>推荐产品</dt>
+            <dd><a href="#">Find N</a></dd>
+            <dd><a href="#">Find X3 系列</a></dd>
+            <dd><a href="#">Reno7 系列</a></dd>
+            <dd><a href="#">A96</a></dd>
+            <dd><a href="#">K9x</a></dd>
+            <dd><a href="#">Watch Free</a></dd>
+            <dd><a href="#">查看全部手机</a></dd>
+          </dl>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+          <dl>
+            <dt>购买渠道</dt>
+            <dd><a href="#">线下体验店</a></dd>
+            <dd><a href="#">OPPO商城</a></dd>
+            <dd><a href="#">官方授权网点</a></dd>
+          </dl>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+          <dl>
+            <dt>探索精彩OPPO</dt>
+            <dd><a href="#">关于OPPO</a></dd>
+            <dd><a href="#">新闻中心</a></dd>
+            <dd><a href="#">OPPO社区</a></dd>
+            <dd><a href="#">加入我们</a></dd>
+            <dd><a href="#">知识产权</a></dd>
+            <dd><a href="#">可持续发展报告</a></dd>
+            <dd><a href="#">安全隐私</a></dd>
+          </dl>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+          <dl>
+            <dt>商务合作</dt>
+            <dd><a href="#">企业业务</a></dd>
+            <dd><a href="#">开放平台</a></dd>
+            <dd><a href="#">廉洁合规</a></dd>
+          </dl>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+          <dl>
+            <dt>服务与支持</dt>
+            <dd><a href="#">联系我们</a></dd>
+            <dd><a href="#">服务网点查询</a></dd>
+            <dd><a href="#">ColorOS</a></dd>
+            <dd><a href="#">云服务</a></dd>
+            <dd><a href="#">以旧换新</a></dd>
+            <dd><a href="#">安全响应中心</a></dd>
+          </dl>
+        </div>
+        <div class="col-sm-4 col-md-3 col-lg-2">
+          <dl>
+            <dt>应用与下载</dt>
+            <dd><a href="#">OPPO商城APP</a></dd>
+            <dd><a href="#">预置软件公示</a></dd>
+            <dd><a href="#">LOG专业调色文档</a></dd>
+          </dl>
+        </div>
+      </div>
+      <div class="contect">
+        <a id="contect" href="#">
+          <span id="contect-icon" class="glyphicon glyphicon-education"></span>
+          <div id="contect-detail">2018级数字媒体技术1班 欧嘉洋</div>
+        </a>
+      </div>
+      <ul class="link">
+        <li><a href="#">隐私政策</a></li>
+        <li><a href="#">用户协议</a></li>
+        <li><a href="#">法律信息</a></li>
+        <li><a href="#">知识产权</a></li>
+        <li class="copyright"><a href="#">© 2021 - 2022 版权所有 粤ICP备XXXXXXXX号</a></li>
+      </ul>
+      <div class="clearfix"></div>
+    </div>
+
+  </footer>
 </body>
 <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"
   integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
