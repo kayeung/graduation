@@ -23,7 +23,6 @@
 }
 
 
-
 @font-face {
     font-family: 'OPPOSans';
     src: url('../../ttf/OPPOSans-M.svg#OPPOSans-H') format('svg'),
@@ -327,7 +326,7 @@ img {
 }
 
 .footer-no-mobile dl {
-    height: 203px !important;
+    height: 210px !important;
     margin-bottom: 20px;
 }
 
@@ -343,6 +342,10 @@ dd a {
     font-size: 12px;
     line-height: 24px;
     color: #0000008f;
+}
+
+.footer-mobile dd a{
+    display: block;
     margin-bottom: 10px;
 }
 
@@ -367,7 +370,8 @@ dd a {
 }
 
 #contect,
-.link a {
+.link a,
+.footer-no-mobile a:hover {
     color: #0000008f !important;
     text-decoration: none !important;
 }
@@ -410,6 +414,7 @@ dd a {
     .footer-no-mobile {
         display: none;
     }
+
 }
 
 @media only screen and (min-width:768.1px) {
@@ -420,4 +425,5 @@ dd a {
     .footer-no-mobile {
         display: inline;
     }
+
 }
