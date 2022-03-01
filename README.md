@@ -1,2 +1,3 @@
 # graduation
-前端bootstrap+jQuery
+前台 Bootstrap + JQuery
+后台 Vue + Vue-Router + VueX + ElementUI + Axios + Express.js
