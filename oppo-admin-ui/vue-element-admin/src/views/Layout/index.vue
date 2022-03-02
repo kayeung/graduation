@@ -9,7 +9,7 @@
 
 <script>
 import Menu from "./Menu.vue";
-import Content from "./content.vue";
+import Content from "./Content.vue";
 export default {
   components: {
     Menu,
@@ -31,6 +31,7 @@ export default {
   }
   .content {
     margin-left: 200px;
+    flex: 1;
   }
 }
 </style>

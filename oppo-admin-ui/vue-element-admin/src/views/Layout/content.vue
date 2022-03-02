@@ -1,6 +1,9 @@
 <template>
   <div>
-      <h2>内容</h2>
+      <div class="header">顶部</div>
+      <div class="content">
+        <router-view/>
+      </div>
   </div>
 </template>
 
@@ -10,6 +13,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.header{
+  height: 56px;
+  background: skyblue;
+}
 </style>
