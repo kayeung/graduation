@@ -1,9 +1,14 @@
 <template>
   <div class="layout">
     <!-- 左侧 -->
-    <Menu class="menu" />
+    <Menu class="menu" :isCollapse="isCollapse" />
     <!-- 右侧 -->
-    <Content class="content" />
+    <Content
+      class="content"
+      :class="{ isActive: isCollapse }"
+      @changeCollapse="changeCollapse"
+      :isCollapse="isCollapse"
+    />
   </div>
 </template>
 
@@ -15,6 +20,16 @@ export default {
     Menu,
     Content,
   },
+  data() {
+    return {
+      isCollapse: false,
+    };
+  },
+  methods: {
+    changeCollapse() {
+      this.isCollapse = !this.isCollapse;
+    },
+  },
 };
 </script>
 
@@ -22,7 +37,7 @@ export default {
 .layout {
   display: flex;
   .menu {
-    width: 200px;
+    // width: 200px;
     min-height: 500px;
     background: rgb(48, 65, 86);
     position: fixed;
@@ -32,6 +47,9 @@ export default {
   .content {
     margin-left: 200px;
     flex: 1;
+  }
+  .isActive {
+    margin-left: 64px;
   }
 }
 </style>

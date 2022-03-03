@@ -9,8 +9,9 @@
       text-color="rgb(191,203,217)"
       active-text-color="rgb(64,158,255)"
       router
+      :collapse="isCollapse"
     >
-      <el-menu-item>
+      <el-menu-item disabled>
         <span slot="title">OPPO 后台管理系统</span>
       </el-menu-item>
       <el-menu-item index="/">
@@ -27,22 +28,32 @@
 
 <script>
 export default {
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
-  }
+  props: ["isCollapse"],
+  data() {
+    return {
+      // isCollapse: false,
+    };
+  },
+  methods: {
+    handleOpen(key, keyPath) {
+      console.log(key, keyPath);
+    },
+    handleClose(key, keyPath) {
+      console.log(key, keyPath);
+    },
+  },
+};
 </script>
 
 <style lang='less' scoped>
-.el-menu{
+.el-menu {
   border-right: 0;
-  .is-active{
-    background: rgb(31, 45, 61)!important;
+  .is-active {
+    background: rgb(31, 45, 61) !important;
   }
+}
+.el-menu-vertical-demo:not(.el-menu--collapse) {
+  width: 200px;
+  min-height: 400px;
 }
 </style>
