@@ -7,6 +7,7 @@ import Login from '../views/Login/Login.vue'
 //异步
 const FrontPage = () => import('../views/FrontPage/FrontPage.vue')
 
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -22,7 +23,7 @@ const routes = [
       {
         path: '/frontpage',
         name: 'FrontPage',
-        component:FrontPage
+        component: FrontPage,
       }
     ]
   },
