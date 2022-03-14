@@ -22,6 +22,10 @@
         <i class="el-icon-menu"></i>
         <span slot="title">首页管理</span>
       </el-menu-item>
+      <el-menu-item index="/goods">
+        <i class="el-icon-menu"></i>
+        <span slot="title">产品管理</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>

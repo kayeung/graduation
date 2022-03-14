@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "vue-element-admin"
+		},
+		{
+			"path": "..\\..\\work\\oppo-admin-ui\\vue-ego"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "oppo-web-ui"
+	}
+}

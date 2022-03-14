@@ -6,6 +6,7 @@ import Login from '../views/Login/Login.vue'
 
 //异步
 const FrontPage = () => import('../views/FrontPage/FrontPage.vue')
+const Goods = () => import('../views/Goods/Goods.vue')
 
 
 Vue.use(VueRouter)
@@ -24,6 +25,11 @@ const routes = [
         path: '/frontpage',
         name: 'FrontPage',
         component: FrontPage,
+      },
+      {
+        path: '/goods',
+        name: 'Goods',
+        component: Goods,
       }
     ]
   },

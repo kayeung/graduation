@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import './assets/css/reset.css'
+import api from './api/index'
+
+Vue.prototype.$api=api;
 
 Vue.config.productionTip = false
 
