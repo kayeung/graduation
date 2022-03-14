@@ -1,9 +1,9 @@
 <template>
-<!--目前的bug：对话框点击footer的取消无法隐藏窗口  -->
+  <!--目前的bug：对话框点击确定后无法再次点击按钮打开  -->
   <el-dialog
     title="添加"
     :visible.sync="dialogVisible"
-    width="30%"
+    width="50%"
     :before-close="handleClose"
   >
     <el-form ref="form" :model="form" label-width="80px">
@@ -30,45 +30,81 @@
         </el-upload>
       </el-form-item>
       <el-form-item label="产品描述">
-        <el-input v-model="form.link"></el-input>
+        <wangeditor @sendEditor='sendEditor' />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button @click="handleClose">取 消</el-button>
-      <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      <el-button type="primary" @click="onSubmit">确 定</el-button>
     </span>
   </el-dialog>
 </template>
 
 <script>
 import base from "../../api/base";
+import wangeditor from '../Goods/wangeditor.vue'
 export default {
   props: ["dialogVisible"],
+  components:{
+    wangeditor,
+  },
   data() {
     return {
       dialogVisible: false,
       uploadUrl: base.uploadUrl,
       fileList: [],
       form: {
-        title: "",
-        subtitle: "",
-        imgUrl: "",
-        link: "",
+        classification:'',
+        goodName:'',
+        model:'',
+        height:'',
+        width:'',
+        thickness:'',
+        weight:'',
+        ram_rom:'',
+        ramType:'',
+        romSpe:'',
+        screenSize:'',
+        screenRatio:'',
+        resolution:'',
+        refreshRate:'',
+        touchRate:'',
+        pixelDensity:'',
+        cameraRear:'',
+        cameraFront:'',
+        cpu:'',
+        gpu:'',
+        battery:'',
+        fastCharge:'',
+        sensors:'',
+        wlan:'',
+        bluetooth:'',
+        usbInterface:'',
+        earphoneJack:'',
+        nfc:'',
+        gps:'',
+        frequencyAntenna:'',
+        otherLocation:'',
       },
     };
   },
   methods: {
+    /***
+     * 接收wangEditor数据
+     */
+    sendEditor(val){
+      // this.goodsform.descs=val;
+    },
     handleClose(done) {
       this.$confirm("确认关闭？")
         .then((_) => {
           done();
-          this.dialogVisible = false;
           this.$emit("isCloseDialog");
         })
         .catch((_) => {});
     },
     onSubmit() {
       console.log("submit!");
+      this.$emit("isCloseDialog");
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);

@@ -118,6 +118,7 @@ export default {
 .contect {
   margin: 20px;
   background: white;
+  padding: 20px;
 }
 .add {
   float: right;
