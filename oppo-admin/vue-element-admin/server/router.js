@@ -119,5 +119,29 @@ router.post('/upload', upload.single('file'), function (req, res, next) {
     res.json({ res_code: '0', name: file.originalname, url: file.path });
 });
 
+/**
+ * 类目选择
+ * 接口说明：接口不同的参数cid返回不同的类目数据 后台接受变量：id
+ */
+ router.get("/selectItemCategoryByParentId",(req,res) =>{
+    const id = req.query.id || 1;
+    const sql = "select * from category where id=?";
+    const arr = [id];
+    sqlFn(sql,arr,result =>{
+        if(result.length > 0){
+            res.send({
+                status:200,
+                result
+            })
+        }else{
+            res.send({
+                status:500,
+                msg:"暂无数据"
+            })
+        }
+    })
+})
+
+
 
 module.exports = router

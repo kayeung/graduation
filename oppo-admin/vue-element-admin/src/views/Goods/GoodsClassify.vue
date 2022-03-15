@@ -10,11 +10,11 @@
       </el-menu-item>
       <el-menu-item index="3">
         <i class="el-icon-document"></i>
-        <span slot="title">平板折叠屏</span>
+        <span slot="title">平板</span>
       </el-menu-item>
       <el-menu-item index="4">
         <i class="el-icon-setting"></i>
-        <span slot="title">智能家居</span>
+        <span slot="title">折叠屏</span>
       </el-menu-item>
     </el-menu>
   </div>

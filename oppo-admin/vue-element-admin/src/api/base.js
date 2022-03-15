@@ -8,9 +8,10 @@
  */
 
 const base = {
-    host:'http://localhost:9090',//基础域名
-    test:'/api/api/test',//测试
-    uploadUrl:'/api/api/upload',//图片上传 post请求
+    host: 'http://localhost:9090',//基础域名
+    test: '/api/api/test',//测试
+    uploadUrl: '/api/api/upload',//图片上传 post请求
+    selectCategory: '/api/api/selectItemCategoryByParentId',//类目选择
 }
 
 export default base;

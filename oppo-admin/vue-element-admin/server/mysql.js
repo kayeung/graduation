@@ -6,7 +6,7 @@ const client = mysql.createConnection({
     host:'localhost',//数据域名 地址
     user:'root',//数据库名称
     password:'',//数据库密码 xampp集成
-    database:'ego',
+    database:'oppo-database',
     // port:3306,
 })
 

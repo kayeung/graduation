@@ -15,7 +15,14 @@
      },
      getTest(){
          return axios.get(base.test)
-     }
+     },
+     /***
+      * 获取类目选择
+      * {id:cid}
+      */
+      getSelectCategory(param){
+          return axios.get(base.selectCategory,{param})
+      }
  }
  
  export default api
