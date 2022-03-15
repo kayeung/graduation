@@ -29,7 +29,7 @@ export default {
   methods: {
     loadNode(node, resolve) {
       //resolve()成功的返回数据结果
-      // console.log('node',node);
+      // console.log("node", node);
       if (node.level === 0) {
         //进入页面 获取第一层的tree数据
         this.$api.getSelectCategory().then((res) => {
@@ -39,11 +39,11 @@ export default {
       }
       if (node.level >= 1) {
         //请求当前的点击tree下面的数据
-        this.$api
-          .getSelectCategory({
+        this.$api.getSelectCategory({
             id: node.data.cid,
           })
           .then((res) => {
+            // console.log("二级tree", res.data);
             if (res.data.status === 200) {
               return resolve(res.data.result);
             } else {

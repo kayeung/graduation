@@ -2,7 +2,7 @@
  * 请求方法
  */
  import axios from "axios"
- import base from "./base"
+ import base from "../api/base"
  
  const api = {
      /**
@@ -20,8 +20,8 @@
       * 获取类目选择
       * {id:cid}
       */
-      getSelectCategory(param){
-          return axios.get(base.selectCategory,{param})
+      getSelectCategory(params){
+          return axios.get(base.selectCategory,{params})
       }
  }
  
