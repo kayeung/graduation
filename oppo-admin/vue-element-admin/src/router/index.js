@@ -7,6 +7,9 @@ import Login from '../views/Login/Login.vue'
 //异步
 const FrontPage = () => import('../views/FrontPage/FrontPage.vue')
 const Goods = () => import('../views/Goods/Goods.vue')
+const GoodsContent = () => import('../views/Goods/GoodsContent.vue')
+const GoodsClassify = () =>import('../views/Goods/GoodsClassify.vue')
+const GoodsTree = () =>import('../views/Goods/GoodsTree.vue')
 
 
 Vue.use(VueRouter)
@@ -30,6 +33,23 @@ const routes = [
         path: '/goods',
         name: 'Goods',
         component: Goods,
+        children: [
+          {
+            path: '/goodscontent',
+            name: 'GoodsContent',
+            component: GoodsContent,
+          },
+          {
+            path:'/goodsclassify',
+            name:'GoodsClassify',
+            component:GoodsClassify,
+          },
+          {
+            path:'/goodstree',
+            name:'GoodsTree',
+            component:GoodsTree,
+          }
+        ]
       }
     ]
   },

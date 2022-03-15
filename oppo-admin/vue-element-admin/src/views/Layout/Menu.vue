@@ -11,7 +11,7 @@
       router
       :collapse="isCollapse"
     >
-      <el-menu-item disabled>
+      <el-menu-item>
         <span slot="title">OPPO 后台管理系统</span>
       </el-menu-item>
       <el-menu-item index="/">

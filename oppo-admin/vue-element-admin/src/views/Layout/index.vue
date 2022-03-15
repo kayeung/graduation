@@ -9,6 +9,10 @@
       @changeCollapse="changeCollapse"
       :isCollapse="isCollapse"
     />
+    <div class="footerTxt" :class="{ footerActive: isCollapse }">
+      <span style="font-weight: bold"> Copyright © 2021-2022 OJY</span> All
+      rights reserved.
+    </div>
   </div>
 </template>
 
@@ -49,6 +53,20 @@ export default {
     flex: 1;
   }
   .isActive {
+    margin-left: 64px;
+  }
+  .footerTxt {
+    width: 100%;
+    border-top: 1px solid #d2d6de;
+    font-size: 14px;
+    line-height: 16px;
+    position: fixed;
+    bottom: 0;
+    background: white;
+    padding: 5px 15px;
+    margin-left: 200px;
+  }
+  .footerActive {
     margin-left: 64px;
   }
 }
