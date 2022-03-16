@@ -2,19 +2,219 @@
   <el-dialog
     title="添加"
     :visible.sync="dialogVisible"
-    width="80%"
+    width="85%"
     :before-close="handleClose"
   >
     <el-form ref="form" :model="form" label-width="80px">
-      <el-form-item label="类目选择">
-        <el-button type="primary" @click="innerVisible = true">选择</el-button>
-      </el-form-item>
-      <el-form-item label="名称">
-        <el-input type="text" v-model="form.goodName"></el-input>
-      </el-form-item>
-      <el-form-item label="型号">
-        <el-input type="text" v-model="form.model"></el-input>
-      </el-form-item>
+      <el-row>
+        <el-col :span="8">
+          <el-form-item label="类目选择">
+            <el-button type="primary" @click="innerVisible = true"
+              >选择</el-button
+            >
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="名称">
+            <el-input type="text" v-model="form.goodName"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="型号">
+            <el-input type="text" v-model="form.model"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 尺寸重量 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="尺寸重量"> </el-form-item>
+        </el-col>
+        <el-col :span="5">
+          <el-form-item label="高">
+            <el-input type="text" v-model="form.model">
+              <template slot="append">mm</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="5" :offset="1">
+          <el-form-item label="宽">
+            <el-input type="text" v-model="form.model">
+              <template slot="append">mm</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="5" :offset="1">
+          <el-form-item label="厚">
+            <el-input type="text" v-model="form.model">
+              <template slot="append">mm</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="5" :offset="1">
+          <el-form-item label="重">
+            <el-input type="text" v-model="form.model">
+              <template slot="append">g</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 存储 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="存储"> </el-form-item>
+        </el-col>
+        <!-- 多选时高度会撑爆，与下一行之间无空隙 -->
+        <el-col :span="5" :offset="1">
+          <div class="block">
+            <span class="demonstration">容量</span>
+            <el-cascader
+              :options="options"
+              :props="props"
+              clearable
+            ></el-cascader>
+          </div>
+        </el-col>
+        <!-- BUG
+            0 下面两个选择之后不会显示真实选项
+            1 重复选择无效，且下拉内容字体颜色非黑
+             -->
+        <el-col :span="5">
+          <el-form-item label="RAM规格">
+            <el-select v-model="ramValue" placeholder="请选择">
+              <el-option
+                v-for="item in ramOptions"
+                :key="item.ramValue"
+                :label="item.label"
+                :value="item.ramValue"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="5" :offset="1">
+          <el-form-item label="ROM规格">
+            <el-select v-model="romValue" placeholder="请选择">
+              <el-option
+                v-for="item in romOptions"
+                :key="item.romValue"
+                :label="item.label"
+                :value="item.romValue"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 显示 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="显示"> </el-form-item>
+        </el-col>
+        <el-col :span="23">
+          <el-row>
+            <el-col :span="6">
+              <el-form-item label="尺寸">
+                <el-input type="text" v-model="form.model">
+                  <template slot="append">寸</template>
+                </el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="3">
+              <el-form-item label="屏占比">
+                <el-input type="text" v-model="form.model">
+                  <template slot="append">%</template>
+                </el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="3">
+              <el-form-item label="分辨率">
+                <el-input type="text" v-model="form.model"></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="刷新率">
+                <el-input type="text" v-model="form.model">
+                  <template slot="append">Hz</template>
+                </el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="3">
+              <el-form-item label="采样率">
+                <el-input type="text" v-model="form.model">
+                  <template slot="append">Hz</template>
+                </el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6" :offset="3">
+              <el-form-item label="像素密度">
+                <el-input type="text" v-model="form.model">
+                  <template slot="append">PPI</template>
+                </el-input>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-col>
+      </el-row>
+      <!-- 影像系统 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="影像系统"> </el-form-item>
+        </el-col>
+        <el-col :span="11">
+          <el-form-item label="后置">
+            <el-input type="textarea" v-model="form.goodName"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="11" :offset="1">
+          <el-form-item label="前置">
+            <el-input type="textarea" v-model="form.model"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 处理平台 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="处理平台"> </el-form-item>
+        </el-col>
+        <el-col :span="11">
+          <el-form-item label="CPU">
+            <el-input type="text" v-model="form.goodName"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="11" :offset="1">
+          <el-form-item label="GPU">
+            <el-input type="text" v-model="form.model"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 电池 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="电池"> </el-form-item>
+        </el-col>
+        <el-col :span="11">
+          <el-form-item label="容量">
+            <el-input type="text" v-model="form.model">
+              <template slot="append">mAh</template>
+            </el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="23" :offset="1">
+          <el-form-item label="快充协议">
+            <el-checkbox-group v-model="chargeList">
+              <el-checkbox label="80W SUPERVOOC"></el-checkbox>
+              <el-checkbox label="SUPERVOOC 2.0"></el-checkbox>
+              <el-checkbox label="SUPERVOOC"></el-checkbox>
+              <el-checkbox label="VOOC 3.0"></el-checkbox>
+              <el-checkbox label="PD（9V/2A）"></el-checkbox>
+              <el-checkbox label="QC（9V/2A）"></el-checkbox>
+              <el-checkbox label="50W AIRVOOC"></el-checkbox>
+              <el-checkbox label="10W 反向充电"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-col>
+      </el-row>
       <el-form-item label="图片">
         <el-upload
           class="upload-demo"
@@ -55,6 +255,7 @@
 import base from "../../api/base";
 import wangeditor from "../Goods/wangeditor.vue";
 import GoodsTree from "../Goods/GoodsTree.vue";
+
 export default {
   props: ["dialogVisible"],
   components: {
@@ -100,6 +301,103 @@ export default {
         frequencyAntenna: "",
         otherLocation: "",
       },
+      //容量多选
+      props: { multiple: true },
+      options: [
+        {
+          value: 1,
+          label: "东南",
+          children: [
+            {
+              value: 2,
+              label: "上海",
+              children: [
+                { value: 3, label: "普陀" },
+                { value: 4, label: "黄埔" },
+                { value: 5, label: "徐汇" },
+              ],
+            },
+            {
+              value: 7,
+              label: "江苏",
+              children: [
+                { value: 8, label: "南京" },
+                { value: 9, label: "苏州" },
+                { value: 10, label: "无锡" },
+              ],
+            },
+            {
+              value: 12,
+              label: "浙江",
+              children: [
+                { value: 13, label: "杭州" },
+                { value: 14, label: "宁波" },
+                { value: 15, label: "嘉兴" },
+              ],
+            },
+          ],
+        },
+        {
+          value: 17,
+          label: "西北",
+          children: [
+            {
+              value: 18,
+              label: "陕西",
+              children: [
+                { value: 19, label: "西安" },
+                { value: 20, label: "延安" },
+              ],
+            },
+            {
+              value: 21,
+              label: "新疆维吾尔族自治区",
+              children: [
+                { value: 22, label: "乌鲁木齐" },
+                { value: 23, label: "克拉玛依" },
+              ],
+            },
+          ],
+        },
+      ],
+      //RAM规格
+      ramOptions: [
+        {
+          value: "选项1",
+          label: "LPDDR5",
+        },
+        {
+          value: "选项2",
+          label: "LPDDR4X",
+        },
+        {
+          value: "选项3",
+          label: "LPDDR4",
+        },
+      ],
+      ramValue: "",
+      //ROM规格
+      romOptions: [
+        {
+          value: "选项1",
+          label: "UFS3.1",
+        },
+        {
+          value: "选项2",
+          label: "UFS3.0",
+        },
+        {
+          value: "选项3",
+          label: "UFS2.1",
+        },
+        {
+          value: "选项4",
+          label: "eMMC5.1",
+        },
+      ],
+      romValue: "",
+      //快充类型
+      chargeList: []
     };
   },
   methods: {

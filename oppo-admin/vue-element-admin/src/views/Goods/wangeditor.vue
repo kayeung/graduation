@@ -15,7 +15,7 @@ export default {
       this.$emit('sendEditor',newHtml);
     };
     // 配置触发 onchange 的时间频率，默认为 200ms
-    this.editor.config.onchangeTimeout = 1000; // 修改为 500ms
+    this.editor.config.onchangeTimeout = 1000; // 修改为 1000ms
     this.editor.create();
   },
 };
