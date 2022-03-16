@@ -5,7 +5,7 @@
     width="85%"
     :before-close="handleClose"
   >
-    <el-form ref="form" :model="form" label-width="80px">
+    <el-form ref="form" :model="form" label-width="85px">
       <el-row>
         <el-col :span="8">
           <el-form-item label="类目选择">
@@ -215,6 +215,38 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 感应器 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="内置感应器"> </el-form-item>
+        </el-col>
+        <el-col :span="22">
+          <el-form-item label="">
+            <el-checkbox-group v-model="chargeList">
+              <el-checkbox label="地磁传感器"></el-checkbox>
+              <el-checkbox label="环境光传感器"></el-checkbox>
+              <el-checkbox label="色温传感器"></el-checkbox>
+              <el-checkbox label="接近传感器"></el-checkbox>
+              <el-checkbox label="加速度传感器"></el-checkbox>
+              <el-checkbox label="重力传感器"></el-checkbox>
+              <el-checkbox label="陀螺仪"></el-checkbox>
+              <el-checkbox label="后置光谱传感器"></el-checkbox>
+              <el-checkbox label="支持计步功能"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 数据功能 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="数据功能"> </el-form-item>
+        </el-col>
+        <el-col :span="10">
+          <el-radio v-model="isDoubleSIM" label="0">不支持</el-radio>
+          <el-radio v-model="isDoubleSIM" label="1">支持</el-radio>
+        </el-col>
+      </el-row>
+
       <el-form-item label="图片">
         <el-upload
           class="upload-demo"
@@ -397,7 +429,9 @@ export default {
       ],
       romValue: "",
       //快充类型
-      chargeList: []
+      chargeList: [],
+      //是否双卡
+      isDoubleSIM: "1",
     };
   },
   methods: {
