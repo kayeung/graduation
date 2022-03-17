@@ -75,18 +75,14 @@
             ></el-cascader>
           </div>
         </el-col>
-        <!-- BUG
-            0 下面两个选择之后不会显示真实选项
-            1 重复选择无效，且下拉内容字体颜色非黑
-             -->
         <el-col :span="5">
           <el-form-item label="RAM规格">
             <el-select v-model="ramValue" placeholder="请选择">
               <el-option
                 v-for="item in ramOptions"
-                :key="item.ramValue"
+                :key="item.value"
                 :label="item.label"
-                :value="item.ramValue"
+                :value="item.value"
               >
               </el-option>
             </el-select>
@@ -97,9 +93,9 @@
             <el-select v-model="romValue" placeholder="请选择">
               <el-option
                 v-for="item in romOptions"
-                :key="item.romValue"
+                :key="item.value"
                 :label="item.label"
-                :value="item.romValue"
+                :value="item.value"
               >
               </el-option>
             </el-select>
@@ -222,7 +218,7 @@
         </el-col>
         <el-col :span="22">
           <el-form-item label="">
-            <el-checkbox-group v-model="chargeList">
+            <el-checkbox-group v-model="sensorList">
               <el-checkbox label="地磁传感器"></el-checkbox>
               <el-checkbox label="环境光传感器"></el-checkbox>
               <el-checkbox label="色温传感器"></el-checkbox>
@@ -236,14 +232,86 @@
           </el-form-item>
         </el-col>
       </el-row>
+      <!-- 蜂窝网络 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="蜂窝网络"> </el-form-item>
+        </el-col>
+        <el-col :span="5">
+          <el-form-item label="是否双卡">
+            <el-radio v-model="isDoubleSIM" label="1">支持</el-radio>
+            <el-radio v-model="isDoubleSIM" label="0">不支持</el-radio>
+          </el-form-item>
+        </el-col>
+        <el-col :span="10">
+          <el-form-item label="SIM类型">
+            <el-select v-model="value_SIM" placeholder="请选择">
+              <el-option
+                v-for="item in options_SIM"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+      </el-row>
       <!-- 数据功能 -->
       <el-row>
         <el-col :span="1">
           <el-form-item label="数据功能"> </el-form-item>
         </el-col>
-        <el-col :span="10">
-          <el-radio v-model="isDoubleSIM" label="0">不支持</el-radio>
-          <el-radio v-model="isDoubleSIM" label="1">支持</el-radio>
+        <el-col :span="11">
+          <el-form-item label="蓝牙">
+            <el-input type="text" v-model="form.goodName"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="11" :offset="1">
+          <el-form-item label="数据接口">
+            <el-select v-model="interfaceValue" placeholder="请选择">
+              <el-option
+                v-for="item in interfaceOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value"
+              >
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </el-col>
+                <el-col :span="11" :offset="1">
+          <el-form-item label="耳机插孔">
+            <el-input type="text" v-model="form.goodName"></el-input>
+          </el-form-item>
+        </el-col>
+        <el-col :span="11" :offset="1">
+          <el-form-item label="NFC">
+            <el-input type="text" v-model="form.model"></el-input>
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <!-- 定位功能 -->
+      <el-row>
+        <el-col :span="1">
+          <el-form-item label="内置感应器"> </el-form-item>
+        </el-col>
+        <el-col :span="21">
+          <el-form-item label="卫星定位">
+            <el-checkbox-group v-model="locateList">
+              <el-checkbox label="内置 GPS"></el-checkbox>
+              <el-checkbox label="支持 A-GPS"></el-checkbox>
+              <el-checkbox label="北斗"></el-checkbox>
+              <el-checkbox label="GLONASS"></el-checkbox>
+              <el-checkbox label="GALILEO"></el-checkbox>
+              <el-checkbox label="QZSS"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </el-col>
+        <el-col :span="23" :offset="1">
+          <el-form-item label="其他功能">
+            <el-input type="textarea" v-model="form.goodName"></el-input>
+          </el-form-item>
         </el-col>
       </el-row>
 
@@ -430,8 +498,44 @@ export default {
       romValue: "",
       //快充类型
       chargeList: [],
+      //内置感应器
+      sensorList:[],
       //是否双卡
       isDoubleSIM: "1",
+      //SIM类型
+      options_SIM: [
+        {
+          value: "选项1",
+          label: "Nano-SIM",
+        },
+        {
+          value: "选项2",
+          label: "Micro-SIM",
+        },
+        {
+          value: "选项3",
+          label: "Mini-SIM",
+        },
+        {
+          value: "选项4",
+          label: "Standard-SIM",
+        },
+      ],
+      value_SIM: "Nano-SIM",
+      //数据接口
+      interfaceOptions: [
+        {
+          value: "选项1",
+          label: "Type-c",
+        },
+        {
+          value: "选项2",
+          label: "Micro-USB",
+        },
+      ],
+      interfaceValue: "Type-c",
+      //卫星定位
+      locateList:[],
     };
   },
   methods: {
