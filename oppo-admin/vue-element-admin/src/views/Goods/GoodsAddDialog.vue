@@ -32,28 +32,28 @@
         </el-col>
         <el-col :span="5">
           <el-form-item label="高">
-            <el-input type="text" v-model="form.model">
+            <el-input type="text" v-model="form.height">
               <template slot="append">mm</template>
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="5" :offset="1">
           <el-form-item label="宽">
-            <el-input type="text" v-model="form.model">
+            <el-input type="text" v-model="form.width">
               <template slot="append">mm</template>
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="5" :offset="1">
           <el-form-item label="厚">
-            <el-input type="text" v-model="form.model">
+            <el-input type="text" v-model="form.thickness">
               <template slot="append">mm</template>
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="5" :offset="1">
           <el-form-item label="重">
-            <el-input type="text" v-model="form.model">
+            <el-input type="text" v-model="form.weight">
               <template slot="append">g</template>
             </el-input>
           </el-form-item>
@@ -72,12 +72,14 @@
               :options="options"
               :props="props"
               clearable
+              v-model="form.ram_rom"
+              separator="+"
             ></el-cascader>
           </div>
         </el-col>
         <el-col :span="5">
           <el-form-item label="RAM规格">
-            <el-select v-model="ramValue" placeholder="请选择">
+            <el-select v-model="form.ramType" placeholder="请选择">
               <el-option
                 v-for="item in ramOptions"
                 :key="item.value"
@@ -90,7 +92,7 @@
         </el-col>
         <el-col :span="5" :offset="1">
           <el-form-item label="ROM规格">
-            <el-select v-model="romValue" placeholder="请选择">
+            <el-select v-model="form.romSpe" placeholder="请选择">
               <el-option
                 v-for="item in romOptions"
                 :key="item.value"
@@ -111,40 +113,40 @@
           <el-row>
             <el-col :span="6">
               <el-form-item label="尺寸">
-                <el-input type="text" v-model="form.model">
+                <el-input type="text" v-model="form.screenSize">
                   <template slot="append">寸</template>
                 </el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="3">
               <el-form-item label="屏占比">
-                <el-input type="text" v-model="form.model">
+                <el-input type="text" v-model="form.screenRatio">
                   <template slot="append">%</template>
                 </el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="3">
               <el-form-item label="分辨率">
-                <el-input type="text" v-model="form.model"></el-input>
+                <el-input type="text" v-model="form.resolution"></el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6">
               <el-form-item label="刷新率">
-                <el-input type="text" v-model="form.model">
+                <el-input type="text" v-model="form.refreshRate">
                   <template slot="append">Hz</template>
                 </el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="3">
               <el-form-item label="采样率">
-                <el-input type="text" v-model="form.model">
+                <el-input type="text" v-model="form.touchRate">
                   <template slot="append">Hz</template>
                 </el-input>
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="3">
               <el-form-item label="像素密度">
-                <el-input type="text" v-model="form.model">
+                <el-input type="text" v-model="form.pixelDensity">
                   <template slot="append">PPI</template>
                 </el-input>
               </el-form-item>
@@ -159,12 +161,12 @@
         </el-col>
         <el-col :span="11">
           <el-form-item label="后置">
-            <el-input type="textarea" v-model="form.goodName"></el-input>
+            <el-input type="textarea" v-model="form.cameraRear"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="11" :offset="1">
           <el-form-item label="前置">
-            <el-input type="textarea" v-model="form.model"></el-input>
+            <el-input type="textarea" v-model="form.cameraFront"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -175,12 +177,12 @@
         </el-col>
         <el-col :span="11">
           <el-form-item label="CPU">
-            <el-input type="text" v-model="form.goodName"></el-input>
+            <el-input type="text" v-model="form.cpu"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="11" :offset="1">
           <el-form-item label="GPU">
-            <el-input type="text" v-model="form.model"></el-input>
+            <el-input type="text" v-model="form.gpu"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -191,14 +193,14 @@
         </el-col>
         <el-col :span="11">
           <el-form-item label="容量">
-            <el-input type="text" v-model="form.model">
+            <el-input type="text" v-model="form.battery">
               <template slot="append">mAh</template>
             </el-input>
           </el-form-item>
         </el-col>
         <el-col :span="23" :offset="1">
           <el-form-item label="快充协议">
-            <el-checkbox-group v-model="chargeList">
+            <el-checkbox-group v-model="form.fastChargeList">
               <el-checkbox label="80W SUPERVOOC"></el-checkbox>
               <el-checkbox label="SUPERVOOC 2.0"></el-checkbox>
               <el-checkbox label="SUPERVOOC"></el-checkbox>
@@ -218,7 +220,7 @@
         </el-col>
         <el-col :span="22">
           <el-form-item label="">
-            <el-checkbox-group v-model="sensorList">
+            <el-checkbox-group v-model="form.sensorsList">
               <el-checkbox label="地磁传感器"></el-checkbox>
               <el-checkbox label="环境光传感器"></el-checkbox>
               <el-checkbox label="色温传感器"></el-checkbox>
@@ -239,13 +241,13 @@
         </el-col>
         <el-col :span="5">
           <el-form-item label="是否双卡">
-            <el-radio v-model="isDoubleSIM" label="1">支持</el-radio>
-            <el-radio v-model="isDoubleSIM" label="0">不支持</el-radio>
+            <el-radio v-model="form.isDoubleSIM" label="1">支持</el-radio>
+            <el-radio v-model="form.isDoubleSIM" label="0">不支持</el-radio>
           </el-form-item>
         </el-col>
         <el-col :span="10">
           <el-form-item label="SIM类型">
-            <el-select v-model="value_SIM" placeholder="请选择">
+            <el-select v-model="form.type_SIM" placeholder="请选择">
               <el-option
                 v-for="item in options_SIM"
                 :key="item.value"
@@ -264,12 +266,12 @@
         </el-col>
         <el-col :span="11">
           <el-form-item label="蓝牙">
-            <el-input type="text" v-model="form.goodName"></el-input>
+            <el-input type="text" v-model="form.bluetooth"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="11" :offset="1">
           <el-form-item label="数据接口">
-            <el-select v-model="interfaceValue" placeholder="请选择">
+            <el-select v-model="form.usbInterface" placeholder="请选择">
               <el-option
                 v-for="item in interfaceOptions"
                 :key="item.value"
@@ -280,14 +282,14 @@
             </el-select>
           </el-form-item>
         </el-col>
-                <el-col :span="11" :offset="1">
+        <el-col :span="11" :offset="1">
           <el-form-item label="耳机插孔">
-            <el-input type="text" v-model="form.goodName"></el-input>
+            <el-input type="text" v-model="form.earphoneJack"></el-input>
           </el-form-item>
         </el-col>
         <el-col :span="11" :offset="1">
           <el-form-item label="NFC">
-            <el-input type="text" v-model="form.model"></el-input>
+            <el-input type="text" v-model="form.nfc"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -298,7 +300,7 @@
         </el-col>
         <el-col :span="21">
           <el-form-item label="卫星定位">
-            <el-checkbox-group v-model="locateList">
+            <el-checkbox-group v-model="form.gpsList">
               <el-checkbox label="内置 GPS"></el-checkbox>
               <el-checkbox label="支持 A-GPS"></el-checkbox>
               <el-checkbox label="北斗"></el-checkbox>
@@ -310,7 +312,7 @@
         </el-col>
         <el-col :span="23" :offset="1">
           <el-form-item label="其他功能">
-            <el-input type="textarea" v-model="form.goodName"></el-input>
+            <el-input type="textarea" v-model="form.otherLocation"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
@@ -390,72 +392,75 @@ export default {
         cpu: "",
         gpu: "",
         battery: "",
-        fastCharge: "",
-        sensors: "",
-        wlan: "",
+        fastChargeList: [],
+        sensorsList: [],
+        isDoubleSIM: "1",
+        type_SIM: "Nano-SIM",
         bluetooth: "",
-        usbInterface: "",
+        usbInterface: "Type-c",
         earphoneJack: "",
         nfc: "",
-        gps: "",
-        frequencyAntenna: "",
+        gpsList: [],
         otherLocation: "",
       },
       //容量多选
-      props: { multiple: true },
+      props: { multiple: true, label:'label' },
       options: [
         {
-          value: 1,
-          label: "东南",
+          value: 6,
+          label: "6GB",
           children: [
             {
-              value: 2,
-              label: "上海",
-              children: [
-                { value: 3, label: "普陀" },
-                { value: 4, label: "黄埔" },
-                { value: 5, label: "徐汇" },
-              ],
+              value: 64,
+              label: "64GB",
             },
             {
-              value: 7,
-              label: "江苏",
-              children: [
-                { value: 8, label: "南京" },
-                { value: 9, label: "苏州" },
-                { value: 10, label: "无锡" },
-              ],
+              value: 128,
+              label: "128GB",
             },
             {
-              value: 12,
-              label: "浙江",
-              children: [
-                { value: 13, label: "杭州" },
-                { value: 14, label: "宁波" },
-                { value: 15, label: "嘉兴" },
-              ],
+              value: 256,
+              label: "256GB",
             },
           ],
         },
         {
-          value: 17,
-          label: "西北",
+          value: 8,
+          label: "8GB",
           children: [
             {
-              value: 18,
-              label: "陕西",
-              children: [
-                { value: 19, label: "西安" },
-                { value: 20, label: "延安" },
-              ],
+              value: 128,
+              label: "128GB",
             },
             {
-              value: 21,
-              label: "新疆维吾尔族自治区",
-              children: [
-                { value: 22, label: "乌鲁木齐" },
-                { value: 23, label: "克拉玛依" },
-              ],
+              value: 256,
+              label: "256GB",
+            },
+            {
+              value: 512,
+              label: "512GB",
+            },
+          ],
+        },
+        {
+          value: 12,
+          label: "12GB",
+          children: [
+            {
+              value: 128,
+              label: "128GB",
+            },
+            {
+              value: 256,
+              label: "256GB",
+            },
+            {
+              value: 512,
+              label: "512GB",
+            },
+            {
+              value: 1024,
+              label: "1TB",
             },
           ],
         },
@@ -475,7 +480,6 @@ export default {
           label: "LPDDR4",
         },
       ],
-      ramValue: "",
       //ROM规格
       romOptions: [
         {
@@ -495,13 +499,6 @@ export default {
           label: "eMMC5.1",
         },
       ],
-      romValue: "",
-      //快充类型
-      chargeList: [],
-      //内置感应器
-      sensorList:[],
-      //是否双卡
-      isDoubleSIM: "1",
       //SIM类型
       options_SIM: [
         {
@@ -516,10 +513,6 @@ export default {
           value: "选项3",
           label: "Mini-SIM",
         },
-        {
-          value: "选项4",
-          label: "Standard-SIM",
-        },
       ],
       value_SIM: "Nano-SIM",
       //数据接口
@@ -533,9 +526,6 @@ export default {
           label: "Micro-USB",
         },
       ],
-      interfaceValue: "Type-c",
-      //卫星定位
-      locateList:[],
     };
   },
   methods: {
@@ -554,7 +544,7 @@ export default {
         .catch((_) => {});
     },
     onSubmit() {
-      console.log("submit!");
+      console.log(this.form);
       this.$emit("isCloseDialog");
     },
     handleRemove(file, fileList) {
