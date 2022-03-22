@@ -1,5 +1,4 @@
 <template>
-<!-- 处理了登陆成功，账号密码错误情况，但数据库未建用户表 -->
   <div>
     <div class="login-box">
       <h3 class="title">登陆界面</h3>
@@ -11,7 +10,6 @@
         label-width="60px"
         class="demo-ruleForm"
       >
-        <div>{{ info }}</div>
         <el-form-item label="账号" prop="username">
           <el-input
             type="text"
@@ -39,6 +37,7 @@
 
 <script>
 import jwt from "jwt-decode";
+import {mapMutations} from 'vuex'
 export default {
   data() {
     var validateUser = (rule, value, callback) => {
@@ -57,7 +56,6 @@ export default {
     };
     return {
       loginForm: {
-        info: "",
         username: "",
         password: "",
       },
@@ -68,6 +66,7 @@ export default {
     };
   },
   methods: {
+    ...mapMutations('loginModule',['setUser']),
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -83,9 +82,19 @@ export default {
               console.log("--------", res.data);
               if (res.data.status === 200) {
                 console.log(jwt(res.data.data));
+                //登陆成功 1.存储登录信息  2.跳转网页  3.顶部区域显示用户信息  4.持久化
+                let obj={
+                  user:jwt(res.data.data),
+                  token:res.data.data
+                }
+                this.setUser(obj)
+                //存储本地
+                localStorage.setItem('user',JSON.stringify(obj))
+                //跳转
+                this.$router.push('/')
               } else {
                 //账号或者密码错误
-                this.info = "账号或者密码错误";
+                this.$message.error('账号或者密码错误');
               }
             });
         } else {
