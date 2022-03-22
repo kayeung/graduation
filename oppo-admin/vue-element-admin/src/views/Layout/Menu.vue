@@ -26,6 +26,10 @@
         <i class="el-icon-menu"></i>
         <span slot="title">产品管理</span>
       </el-menu-item>
+      <el-menu-item index="/linksmanage">
+        <i class="el-icon-menu"></i>
+        <span slot="title">链接管理</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>

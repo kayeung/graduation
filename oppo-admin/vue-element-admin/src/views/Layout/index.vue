@@ -10,7 +10,7 @@
       :isCollapse="isCollapse"
     />
     <div class="footerTxt" :class="{ footerActive: isCollapse }">
-      <span style="font-weight: bold"> Copyright © 2021-2022 OJY</span> All
+      <span style="font-weight: bold"> Copyright © 2021-2022 <a href="https://kayeung.github.io"> KAYEUNG BLOG </a></span> All
       rights reserved.
     </div>
   </div>
@@ -50,6 +50,7 @@ export default {
   }
   .content {
     margin-left: 200px;
+    margin-bottom: 27px;
     flex: 1;
   }
   .isActive {

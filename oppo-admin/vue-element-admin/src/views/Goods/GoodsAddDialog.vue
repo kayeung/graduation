@@ -353,7 +353,7 @@
         </el-col>
       </el-row>
 
-      <el-form-item label="图片">
+      <el-form-item label="封面 图片">
         <el-upload
           class="upload-demo"
           :action="uploadUrl"

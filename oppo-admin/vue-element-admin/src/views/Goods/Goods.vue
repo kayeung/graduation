@@ -1,7 +1,13 @@
 <template>
   <div class="layout">
-    <GoodsClassify class="classify" />
-    <GoodsContent class="contect" />
+    <el-row>
+      <el-col :span="4"> 
+        <GoodsClassify class="classify" />
+      </el-col>
+      <el-col :span="20"> 
+        <GoodsContent class="contect" />
+      </el-col>
+    </el-row>
   </div>
 </template>
 
@@ -18,9 +24,9 @@ export default {
 
 <style lang="less" scoped>
 .layout {
-  display: flex;
+  // display: flex;
   .classify {
-    width: 200px;
+    // width: 200px;
     margin: 20px 0 20px 20px;
     background: white;
     padding: 5px;
@@ -29,7 +35,6 @@ export default {
     margin: 20px;
     background: white;
     padding: 20px;
-    max-width: 81.5%;
     height: 80vh;
   }
 }

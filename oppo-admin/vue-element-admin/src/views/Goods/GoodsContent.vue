@@ -19,23 +19,30 @@
       ref="multipleTable"
       :data="tableData"
       tooltip-effect="dark"
-      style="width: 100%"
       @selection-change="handleSelectionChange"
       border
     >
-      <el-table-column type="selection" width="55" align="center">
+      <el-table-column type="selection" width="45" align="center">
       </el-table-column>
-      <el-table-column prop="title" label="标题" width="200" align="center">
+      <el-table-column prop="classification" label="系列"  align="center">
       </el-table-column>
       <el-table-column
-        prop="subtitle"
-        label="副标题"
+        prop="goodName"
+        label="产品名称"
         align="center"
-        width="600"
+        
         show-overflow-tooltip
       >
       </el-table-column>
-      <el-table-column label="图片" width="220" align="center">
+      <el-table-column
+      prop="model"
+        label="型号"
+        width="100"
+        align="center"
+        show-overflow-tooltip
+      >
+      </el-table-column>
+      <el-table-column label="产品图" width="220" align="center">
         <template slot-scope="scope">
           <div class="block">
             <span class="demonstration"></span>
@@ -47,13 +54,7 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="链接" align="center" show-overflow-tooltip>
-        <template slot-scope="scope">
-          <el-link :href="scope.row.link" target="_blank" icon="el-icon-link"
-            ><span>{{ scope.row.link }}</span></el-link
-          >
-        </template>
-      </el-table-column>
+
       <el-table-column label="操作" width="180" align="center">
         <el-row>
           <el-button type="primary" size="mini" icon="el-icon-edit"
@@ -75,21 +76,21 @@ export default {
   components: {
     GoodsAddDialog,
   },
-   data() {
+  data() {
     return {
       dialogVisible: false,
       tableData: [
         {
-          title: "OPPO Find X5 系列",
-          subtitle: "一帧影像，动用两块芯片。",
+          classification: "OPPO Find 系列",
+          goodName: "Find X5 Pro",
           img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/find-x5-pro/topbanner/find-x5-pro-topbanner-pc-v3.jpeg.thumb.webp",
-          link: "https://www.oppo.com/cn/smartphones/series-find-x/find-x5-pro/",
+          model: "IN2022",
         },
         {
-          title: "OPPO Enco X2",
-          subtitle: "听见音乐心跳",
-          img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/enco-x2/topbanner/enco-x2-topbanner_2880x1440_black.jpg.thumb.webp",
-          link: "https://www.oppo.com/cn/accessories/oppo-enco-x2/",
+          classification: "OPPO Pad",
+          goodName: "OPPO Pad",
+          img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/accessories/pad/topbanner/pad-topbanner-pc-v4.jpg.thumb.webp",
+          model: "CH2021",
         },
       ],
       multipleSelection: [],
@@ -111,8 +112,8 @@ export default {
     isCloseDialog() {
       this.dialogVisible = !this.dialogVisible;
     },
-  }
-}
+  },
+};
 </script>
 
 <style lan="less" scoped>
