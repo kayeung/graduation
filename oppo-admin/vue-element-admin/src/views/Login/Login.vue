@@ -70,7 +70,6 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          console.log("校验通过！", this.loginForm);
           let { username, password } = this.loginForm;
           //请求登录接口
           this.$api
@@ -79,7 +78,6 @@ export default {
               password,
             })
             .then((res) => {
-              console.log("--------", res.data);
               if (res.data.status === 200) {
                 console.log(jwt(res.data.data));
                 //登陆成功 1.存储登录信息  2.跳转网页  3.顶部区域显示用户信息  4.持久化

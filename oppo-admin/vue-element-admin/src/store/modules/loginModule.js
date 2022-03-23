@@ -12,7 +12,7 @@ export default {
             state.userinfo = payload;
         },
         // 清空
-        clearUse(state){
+        clearUser(state){
             state.userinfo={
                 user:'',
                 token:''
