@@ -382,7 +382,7 @@
 
 <script>
 import base from "../../api/base";
-import wangeditor from "../Goods/wangeditor.vue";
+import wangeditor from "../../components/wangeditor.vue";
 import GoodsTree from "../Goods/GoodsTree.vue";
 
 export default {

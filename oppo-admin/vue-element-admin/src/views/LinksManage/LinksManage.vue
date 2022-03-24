@@ -1,15 +1,26 @@
 <template>
-  <div>
-      <h2>LinkManage</h2>
+  <div class="contect">
+    <el-tabs type="border-card">
+      <el-tab-pane label="顶部导航栏">顶部导航栏</el-tab-pane>
+      <el-tab-pane label="页脚">
+        <linksManageList />
+      </el-tab-pane>
+    </el-tabs>
   </div>
 </template>
 
 <script>
+import linksManageList from '../../components/linksManageList.vue'
 export default {
-
-}
+  components:{
+    linksManageList,
+  }
+};
 </script>
 
-<style>
-
+<style lang="less" scoped>
+.contect {
+  margin: 20px;
+  background: white;
+}
 </style>
