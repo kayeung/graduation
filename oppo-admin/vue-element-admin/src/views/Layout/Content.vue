@@ -9,7 +9,7 @@
       <i v-else @click="changeMenu" class="iconfont icon-left-indent"></i>
 
       <div class="user">
-        欢迎：{{userinfo.user.username}}
+        欢迎：{{userinfo.user.userName}}
         <i class="iconfont icon-tuichubianji-copy" @click="loginout" style="cursor:pointer;margin-left:10px;font-size:22px;"></i>
       </div>
     </div>
