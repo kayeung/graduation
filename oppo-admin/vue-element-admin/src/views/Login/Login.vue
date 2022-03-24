@@ -10,10 +10,10 @@
         label-width="60px"
         class="demo-ruleForm"
       >
-        <el-form-item label="账号" prop="username">
+        <el-form-item label="账号" prop="userName">
           <el-input
             type="text"
-            v-model="loginForm.username"
+            v-model="loginForm.userName"
             autocomplete="off"
           ></el-input>
         </el-form-item>
@@ -56,11 +56,11 @@ export default {
     };
     return {
       loginForm: {
-        username: "",
+        userName: "",
         password: "",
       },
       rules: {
-        username: [{ validator: validateUser, trigger: "blur" }],
+        userName: [{ validator: validateUser, trigger: "blur" }],
         password: [{ validator: validatePass, trigger: "blur" }],
       },
     };
@@ -70,11 +70,11 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          let { username, password } = this.loginForm;
+          let { userName, password } = this.loginForm;
           //请求登录接口
           this.$api
             .getLogin({
-              username,
+              userName,
               password,
             })
             .then((res) => {
