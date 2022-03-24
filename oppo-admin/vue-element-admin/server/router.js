@@ -39,9 +39,9 @@ router.get('/test', (req, res) => {
  * 注册
  */
 router.post("/register", (req, res) => {
-    const { userName, password, email } = req.body;
+    const { username, password, email } = req.body;
     const sql = "insert into user values(null,?,?,?)";
-    const arr = [userName, password, email]
+    const arr = [username, password, email]
     sqlFn(sql, arr, result => {
         if (result.affectedRows > 0) {
             res.send({
@@ -66,17 +66,17 @@ router.post("/register", (req, res) => {
 
 /**
  * 登录
- * 接受字段：userName, password
+ * 接受字段：username, password
  */
 router.post("/login", (req, res) => {
-    const { userName, password } = req.body;
+    const { username, password } = req.body;
     //请求数据库
-    const sql = "select * from user where userName=? and password=?";
-    const arr = [userName, password];
+    const sql = "select * from user where username=? and password=?";
+    const arr = [username, password];
     sqlFn(sql, arr, result => {
         if (result.length > 0) {
             let token = jwt.sign({
-                userName: result[0].userName,
+                username: result[0].username,
                 id: result[0].id
             }, config.jwtSecert, {
                 expiresIn: 20 * 1
