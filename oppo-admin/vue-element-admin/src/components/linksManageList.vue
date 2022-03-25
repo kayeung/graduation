@@ -1,15 +1,15 @@
 <template>
-  <!-- bug：现希望添加子节点时自动展开对应的树，但如今找不到展开的属性 -->
+  <!-- bug：点击删除按钮后未能减少一行 -->
   <div>
     <el-table
+      ref="linksTable"
       :data="footerTable"
       style="width: 100%"
       row-key="id"
       border
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
-      @node-click="checkNode"
     >
-      <el-table-column prop="title" label="栏目" width="180" > </el-table-column>
+      <el-table-column prop="title" label="栏目" width="180"> </el-table-column>
       <el-table-column prop="label" label="标签" width="180">
         <template slot-scope="scope">
           <el-input
@@ -50,7 +50,7 @@
             icon="el-icon-warning"
             icon-color="red"
             title="真的要删除吗？"
-            @confirm="deleteContent(scope.$index, scope.row.id)"
+            @confirm="deleteNode(scope)"
           >
             <el-button
               type="danger"
@@ -338,29 +338,36 @@ export default {
     editContent(scope) {
       scope.row.isEditting = !scope.row.isEditting;
     },
-    deleteContent(index, id) {
-      console.log(id);
+    deleteNode(node) {
+      console.log(this.$refs.linksTable);
+      //this.remove(node);
     },
     submitEdit(scope) {
       scope.row.isEditting = !scope.row.isEditting;
+      //this.$api.
     },
     //追加子节点
     append(scope) {
       console.log("parent:", scope);
-      const newChild = {
-        id: scope.id * 10 + scope.children.length + 1,
-        title: scope.title,
-        label: "",
-        link: "",
-        isEditting: true,
-      };
-      if (!scope.children) {
-        this.$set(scope, "children", []);
+      if (scope.children.length >= 7) {
+        this.$message({
+          message: '无法添加，单个栏目最多只能7条链接！',
+          type: 'warning'
+        });
+      } else {
+        this.$refs.linksTable.toggleRowExpansion(scope, true); //展开子树
+        const newChild = {
+          id: scope.id * 10 + scope.children.length + 1,
+          title: scope.title,
+          label: "",
+          link: "",
+          isEditting: true,
+        };
+        if (!scope.children) {
+          this.$set(scope, "children", []);
+        }
+        scope.children.push(newChild);
       }
-      scope.children.push(newChild);
-    },
-    checkNode(data) {
-      console.log(data);
     },
   },
 };
