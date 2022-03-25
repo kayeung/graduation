@@ -1,6 +1,5 @@
 <template>
-  <!-- 目前点击按钮可改变对应行的输入框状态，但存在bug：需要二次点击按钮才生效，
-        因为第一次点击是选中此行，第二次才能修改此行的输入框属性 -->
+  <!-- bug：现希望添加子节点时自动展开对应的树，但如今找不到展开的属性 -->
   <div>
     <el-table
       :data="footerTable"
@@ -8,8 +7,9 @@
       row-key="id"
       border
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+      @node-click="checkNode"
     >
-      <el-table-column prop="title" label="栏目" width="180"> </el-table-column>
+      <el-table-column prop="title" label="栏目" width="180" > </el-table-column>
       <el-table-column prop="label" label="标签" width="180">
         <template slot-scope="scope">
           <el-input
@@ -28,30 +28,50 @@
           ></el-input
         ></template>
       </el-table-column>
-      <el-table-column label="操作" width="180" align="center">
+      <el-table-column label="操作" width="180" align="left">
         <template slot-scope="scope">
           <el-button
             type="primary"
             size="mini"
             icon="el-icon-edit"
-            @click="editContent(scope.$index, scope.store.states.currentRow)"
+            @click="editContent(scope)"
+            v-if="!scope.row.isEditting"
             >编辑</el-button
           >
-          <!-- <el-button
-            type="primary"
-            size="mini"
-            icon="el-icon-edit"
-            cell-mouse-enter="setCurrentRow(scope.$index)"
-            >编辑</el-button
-          > -->
           <el-button
-            type="danger"
+            type="success"
             size="mini"
-            icon="el-icon-delete"
-            @click="deleteContent(scope.$index, scope.row.id)"
-            >删除</el-button
-          ></template
-        >
+            icon="el-icon-check"
+            v-else
+            @click="submitEdit(scope)"
+            >提交</el-button
+          >
+          <el-popconfirm
+            icon="el-icon-warning"
+            icon-color="red"
+            title="真的要删除吗？"
+            @confirm="deleteContent(scope.$index, scope.row.id)"
+          >
+            <el-button
+              type="danger"
+              size="mini"
+              icon="el-icon-delete"
+              slot="reference"
+              style="margin-left: 10px"
+              v-if="scope.row.id / 10 >= 1"
+              >删除</el-button
+            >
+          </el-popconfirm>
+          <el-button
+            type="info"
+            size="mini"
+            icon="el-icon-plus"
+            v-if="scope.row.id / 10 < 1"
+            @click="() => append(scope.row)"
+            style="margin-left: 10px"
+            >添加</el-button
+          >
+        </template>
       </el-table-column>
     </el-table>
   </div>
@@ -315,36 +335,32 @@ export default {
     };
   },
   methods: {
-    // load(tree, treeNode, resolve) {
-    //   setTimeout(() => {
-    //     resolve([
-    //       {
-    //         id: 31,
-    //         title: "应用与下载",
-    //         label: "OPPO商城APP",
-    //         link: "https://oppo.com",
-    //       },
-    //       {
-    //         id: 32,
-    //         title: "应用与下载",
-    //         label: "预置软件公示",
-    //         link: "https://oppo.com",
-    //       },
-    //       {
-    //         id: 33,
-    //         title: "应用与下载",
-    //         label: "LOG专业调色文档",
-    //         link: "https://oppo.com",
-    //       },
-    //     ]);
-    //   }, 1000);
-    // },
-    editContent(index, row) {
-      console.log("index:",index,"currentRow:",row);
-      row.isEditting = !row.isEditting;
+    editContent(scope) {
+      scope.row.isEditting = !scope.row.isEditting;
     },
     deleteContent(index, id) {
       console.log(id);
+    },
+    submitEdit(scope) {
+      scope.row.isEditting = !scope.row.isEditting;
+    },
+    //追加子节点
+    append(scope) {
+      console.log("parent:", scope);
+      const newChild = {
+        id: scope.id * 10 + scope.children.length + 1,
+        title: scope.title,
+        label: "",
+        link: "",
+        isEditting: true,
+      };
+      if (!scope.children) {
+        this.$set(scope, "children", []);
+      }
+      scope.children.push(newChild);
+    },
+    checkNode(data) {
+      console.log(data);
     },
   },
 };
