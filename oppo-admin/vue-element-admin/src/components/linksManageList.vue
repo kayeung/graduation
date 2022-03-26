@@ -8,6 +8,7 @@
       row-key="id"
       border
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
+      
     >
       <el-table-column prop="title" label="栏目" width="180"> </el-table-column>
       <el-table-column prop="label" label="标签" width="180">
@@ -50,7 +51,7 @@
             icon="el-icon-warning"
             icon-color="red"
             title="真的要删除吗？"
-            @confirm="deleteNode(scope)"
+            @confirm="() => remove(scope,scope.$index)"
           >
             <el-button
               type="danger"
@@ -338,9 +339,10 @@ export default {
     editContent(scope) {
       scope.row.isEditting = !scope.row.isEditting;
     },
-    deleteNode(node) {
-      console.log(this.$refs.linksTable);
+    remove(scope,data) {
+      console.log(scope.store.states.data[parseInt((scope.row.id)/10)-1].children[(scope.row.id%10)-1]);
       //this.remove(node);
+      // scope.store.states.data[parseInt((scope.row.id)/10)-1].children[(scope.row.id%10)-1].splice();
     },
     submitEdit(scope) {
       scope.row.isEditting = !scope.row.isEditting;
