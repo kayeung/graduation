@@ -353,7 +353,7 @@
         </el-col>
       </el-row>
 
-      <el-form-item label="封面 图片">
+      <el-form-item label="图片">
         <el-upload
           class="upload-demo"
           :action="uploadUrl"
@@ -369,7 +369,7 @@
           </div>
         </el-upload>
       </el-form-item>
-      <el-form-item label="产品描述">
+      <el-form-item label="备注">
         <wangeditor @sendEditor="sendEditor" />
       </el-form-item>
     </el-form>

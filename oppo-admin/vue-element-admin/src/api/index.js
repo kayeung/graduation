@@ -10,7 +10,7 @@ const api = {
     /**
      * 登录接口
      */
-    getLogin(params){  //params={username:'',password:''}
+    getLogin(params){  //params={userName:'',password:''}
        return axios.post(base.login,qs.stringify(params)) 
     },
     /**
