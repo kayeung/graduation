@@ -48,7 +48,7 @@ export default {
 .header {
   line-height: 56px;
   height: 56px;
-  background: skyblue;
+  background: rgb(120, 200, 249);
   color: white;
   .iconfont {
     font-size: 24px;
