@@ -1,12 +1,19 @@
 <template>
   <div class="contect">
-    <el-tabs type="border-card">
-      <el-tab-pane label="轮播图">
-        <FPContentList /> 
-      </el-tab-pane>
-      <el-tab-pane label="更多产品"><FPContentList /></el-tab-pane>
-      <el-tab-pane label="OPPO科技"><FPContentList /></el-tab-pane>
-    </el-tabs>
+    <el-row>
+      <el-col :span="23">
+        <el-tabs type="border-card">
+          <el-tab-pane label="轮播图">
+            <FPContentList />
+          </el-tab-pane>
+          <el-tab-pane label="更多产品"><FPContentList /></el-tab-pane>
+          <el-tab-pane label="OPPO科技"><FPContentList /></el-tab-pane>
+        </el-tabs>
+      </el-col>
+      <el-col :span="1">
+      </el-col>
+
+    </el-row>
   </div>
 </template>
 
@@ -22,6 +29,6 @@ export default {
 <style lang="less" scoped>
 .contect {
   margin: 20px;
-  background: white;
+  background: #f5f5f5;
 }
 </style>

@@ -1,9 +1,9 @@
 <template>
   <div class="contect">
     <el-tabs type="border-card">
-      <el-tab-pane label="顶部导航栏">顶部导航栏</el-tab-pane>
+      <el-tab-pane label="顶部导航栏"><linksManageList :status="nav" /></el-tab-pane>
       <el-tab-pane label="页脚">
-        <linksManageList />
+        <linksManageList :status="footer" />
       </el-tab-pane>
     </el-tabs>
   </div>

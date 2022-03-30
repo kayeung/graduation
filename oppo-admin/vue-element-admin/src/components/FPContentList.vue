@@ -60,7 +60,6 @@
       ref="multipleTable"
       :data="tableData"
       tooltip-effect="dark"
-      style="width: 100%"
       @selection-change="handleSelectionChange"
       border
     >
@@ -72,11 +71,11 @@
         prop="subtitle"
         label="副标题"
         align="center"
-        width="600"
+        width="250"
         show-overflow-tooltip
       >
       </el-table-column>
-      <el-table-column label="图片" width="220" align="center">
+      <el-table-column label="图片" width="200" align="center">
         <template slot-scope="scope">
           <div class="block">
             <span class="demonstration"></span>
