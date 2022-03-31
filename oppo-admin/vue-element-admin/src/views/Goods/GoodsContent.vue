@@ -17,25 +17,30 @@
     <!-- 表格主体 -->
     <el-table
       ref="multipleTable"
-      :data="tableData"
+      :data="
+        this.status == 'flod'
+          ? flodTable
+          : this.status == 'pad'
+          ? padTable
+          : phoneTable
+      "
       tooltip-effect="dark"
       @selection-change="handleSelectionChange"
       border
     >
       <el-table-column type="selection" width="45" align="center">
       </el-table-column>
-      <el-table-column prop="classification" label="系列"  align="center">
+      <el-table-column prop="classification" label="系列" align="center">
       </el-table-column>
       <el-table-column
         prop="goodName"
         label="产品名称"
         align="center"
-        
         show-overflow-tooltip
       >
       </el-table-column>
       <el-table-column
-      prop="model"
+        prop="model"
         label="型号"
         width="100"
         align="center"
@@ -76,20 +81,44 @@ export default {
   components: {
     GoodsAddDialog,
   },
-  created(){
-    this.status=this.$route.params.status;
-    console.log("-----",this.$route);
-  },
   data() {
     return {
       dialogVisible: false,
-      status:"",
-      tableData: [
+      status: "",
+      phoneTable: [
         {
           classification: "OPPO Find 系列",
           goodName: "Find X5 Pro",
           img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/find-x5-pro/topbanner/find-x5-pro-topbanner-pc-v3.jpeg.thumb.webp",
           model: "IN2022",
+        },
+        {
+          classification: "OPPO Pad",
+          goodName: "OPPO Pad",
+          img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/accessories/pad/topbanner/pad-topbanner-pc-v4.jpg.thumb.webp",
+          model: "CH2021",
+        },
+      ],
+      padTable: [
+        {
+          classification: "OPPO Pad",
+          goodName: "OPPO Pad",
+          img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/accessories/pad/topbanner/pad-topbanner-pc-v4.jpg.thumb.webp",
+          model: "CH2021",
+        },
+        {
+          classification: "OPPO Pad",
+          goodName: "OPPO Pad",
+          img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/accessories/pad/topbanner/pad-topbanner-pc-v4.jpg.thumb.webp",
+          model: "CH2021",
+        },
+      ],
+      flodTable: [
+        {
+          classification: "flod",
+          goodName: "OPPO Find N",
+          img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/accessories/pad/topbanner/pad-topbanner-pc-v4.jpg.thumb.webp",
+          model: "CH2021",
         },
         {
           classification: "OPPO Pad",
@@ -117,6 +146,14 @@ export default {
     isCloseDialog() {
       this.dialogVisible = !this.dialogVisible;
     },
+    setParams(val) {
+      //获取url传过来的参数
+      this.status = val.params.status;
+      console.log("status:", this.status);
+    },
+  },
+  watch: {
+    $route: "setParams", //监控url里参数的变化
   },
 };
 </script>

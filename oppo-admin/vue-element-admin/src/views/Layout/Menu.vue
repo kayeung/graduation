@@ -22,6 +22,17 @@
         <i class="el-icon-menu"></i>
         <span slot="title">首页管理</span>
       </el-menu-item>
+      <!-- <el-submenu index="">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>产品管理</span>
+        </template>
+        <el-menu-item-group>
+          <el-menu-item index="/goodscontent&phone">智能手机</el-menu-item>
+          <el-menu-item index="/goodscontent&pad">平板</el-menu-item>
+          <el-menu-item index="/goodscontent&flod">折叠屏</el-menu-item>
+        </el-menu-item-group>
+      </el-submenu> -->
       <el-menu-item index="/goods">
         <i class="el-icon-menu"></i>
         <span slot="title">产品管理</span>

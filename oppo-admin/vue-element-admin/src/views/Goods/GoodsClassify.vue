@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-menu default-active="/goodscontent" class="el-menu-vertical-demo">
+    <el-menu default-active="/goodscontent&phone" class="el-menu-vertical-demo" router>
       <el-menu-item text-color="#ffffff" >
         <span slot="title" >产品分类</span>
       </el-menu-item>
@@ -12,7 +12,7 @@
         <i class="el-icon-document"></i>
         <span slot="title">平板</span>
       </el-menu-item>
-      <el-menu-item index="4">
+      <el-menu-item index="/goodscontent&flod">
         <i class="el-icon-setting"></i>
         <span slot="title">折叠屏</span>
       </el-menu-item>

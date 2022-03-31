@@ -42,7 +42,6 @@ const routes = [
         children: [
           {
             path: '/goodscontent&:status',
-            name: 'GoodsContent',
             component: GoodsContent,
           },
           {
