@@ -76,9 +76,14 @@ export default {
   components: {
     GoodsAddDialog,
   },
+  created(){
+    this.status=this.$route.params.status;
+    console.log("-----",this.$route);
+  },
   data() {
     return {
       dialogVisible: false,
+      status:"",
       tableData: [
         {
           classification: "OPPO Find 系列",
