@@ -71,7 +71,7 @@ import { mapMutations } from "vuex";
 export default {
   data() {
     var validateCode = (rule, value, callback) => {
-      var num = this.showNum.join("");
+      var num = this.showNum.join(""); //将字符数组转换成字符串
       if (value === "") {
         callback(new Error("请输入验证码"));
       } else {

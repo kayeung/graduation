@@ -1,8 +1,5 @@
 <template>
-  <!-- bug：当左侧导航栏折叠再展开，宽度没有恢复，仍是折叠时的宽度
-     待完善功能：接收参数，判断显示哪个部分的内容 
-     添加功能做到图片上传
-     -->
+  <!-- 添加功能做到图片上传-->
   <div>
     <!-- 添加按钮 -->
     <el-button
@@ -58,7 +55,13 @@
     <!-- 表格主体 -->
     <el-table
       ref="multipleTable"
-      :data="tableData"
+      :data="
+        this.status == '0'
+          ? carouselTable
+          : this.status == '1'
+          ? moreTable
+          : techTable
+      "
       tooltip-effect="dark"
       @selection-change="handleSelectionChange"
       border
@@ -71,7 +74,7 @@
         prop="subtitle"
         label="副标题"
         align="center"
-        width="250"
+        
         show-overflow-tooltip
       >
       </el-table-column>
@@ -111,6 +114,7 @@
 <script>
 import base from "../api/base";
 export default {
+  props: ["status"],
   data() {
     return {
       dialogVisible: false,
@@ -122,7 +126,7 @@ export default {
         imgUrl: "",
         link: "",
       },
-      tableData: [
+      carouselTable: [
         {
           title: "OPPO Find X5 系列",
           subtitle: "一帧影像，动用两块芯片。",
@@ -132,6 +136,34 @@ export default {
         {
           title: "OPPO Enco X2",
           subtitle: "听见音乐心跳",
+          img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/enco-x2/topbanner/enco-x2-topbanner_2880x1440_black.jpg.thumb.webp",
+          link: "https://www.oppo.com/cn/accessories/oppo-enco-x2/",
+        },
+      ],
+      moreTable: [
+        {
+          title: "小星环 OPPO A96",
+          subtitle: "轻薄一点，轻快很多",
+          img: "../oppo-web-ui/img/index-content-A96.webp",
+          link: "https://www.oppo.com/cn/smartphones/series-find-x/find-x5-pro/",
+        },
+        {
+          title: "OPPO Reno7 新年版",
+          subtitle: "爱不释手红丝绒",
+          img: "../oppo-web-ui/img/index-content-reno7.webp",
+          link: "https://www.oppo.com/cn/accessories/oppo-enco-x2/",
+        },
+      ],
+      techTable: [
+        {
+          title: "马里亚纳® MariSilicon X ",
+          subtitle: "OPPO 首个自研芯片，全球第一个 6nm 影像专用的 NPU 芯片",
+          img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/find-x5-pro/topbanner/find-x5-pro-topbanner-pc-v3.jpeg.thumb.webp",
+          link: "https://www.oppo.com/cn/smartphones/series-find-x/find-x5-pro/",
+        },
+        {
+          title: "5G，连接身边的世界",
+          subtitle: "OPPO 相信 5G 不止是一种技术，更代表着无限可能",
           img: "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/enco-x2/topbanner/enco-x2-topbanner_2880x1440_black.jpg.thumb.webp",
           link: "https://www.oppo.com/cn/accessories/oppo-enco-x2/",
         },

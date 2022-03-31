@@ -1,12 +1,11 @@
 <template>
   <!-- bug：
   0.删除未能少一行的解决方法：到时与接口对接时，在进行删除操作后才重新获取数据，即可实现少一行的效果
-  1.导航栏表格的内容会影响到页脚表格的显示效果
    -->
   <div>
     <el-table
       ref="linksTable"
-      :data="this.status == 'fotter' ? footerTable : navTable"
+      :data="this.status == '1' ? footerTable : navTable"
       style="width: 100%"
       row-key="id"
       border
@@ -87,7 +86,7 @@ export default {
       footerTable: [
         {
           id: 1,
-          title: "推荐产品",
+          title: "推荐产品22222",
           label: "推荐产品",
           link: "#",
           isEditting: false,
@@ -339,7 +338,7 @@ export default {
       navTable: [
         {
           id: 1,
-          title: "这里是导航栏",
+          title: "这里是导航栏11111",
           label: "这里是导航栏",
           link: "#",
           isEditting: false,
@@ -590,9 +589,9 @@ export default {
       ],
     };
   },
-  mounted: {},
   methods: {
     editContent(scope) {
+      console.log(scope);
       scope.row.isEditting = !scope.row.isEditting;
     },
     remove(scope, data) {
