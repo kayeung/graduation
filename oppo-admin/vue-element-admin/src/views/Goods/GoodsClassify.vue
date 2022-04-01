@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-menu default-active="/goodscontent&phone" class="el-menu-vertical-demo" router>
+    <el-menu default-active="/goodscontent&phone" class="el-menu-vertical-demo" router id="menu">
       <el-menu-item text-color="#ffffff" >
         <span slot="title" >产品分类</span>
       </el-menu-item>
@@ -24,5 +24,8 @@
 export default {};
 </script>
 
-<style>
+<style lang="less" scpoed>
+#menu{
+  border: 1px solid white;
+}
 </style>

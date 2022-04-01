@@ -9,8 +9,12 @@
       <i v-else @click="changeMenu" class="iconfont icon-left-indent"></i>
 
       <div class="user">
-        欢迎：{{userinfo.user.userName}}
-        <i class="iconfont icon-tuichubianji-copy" @click="loginout" style="cursor:pointer;margin-left:10px;font-size:22px;"></i>
+        欢迎：{{ userinfo.user.userName }}
+        <i
+          class="iconfont icon-tuichubianji-copy"
+          @click="loginout"
+          style="cursor: pointer; margin-left: 10px; font-size: 22px"
+        ></i>
       </div>
     </div>
     <div class="content">
@@ -20,26 +24,26 @@
 </template>
 
 <script>
-import {mapState,mapMutations} from 'vuex'
+import { mapState, mapMutations } from "vuex";
 export default {
   props: ["isCollapse"],
-  computed:{
-    ...mapState('loginModule',['userinfo'])
+  computed: {
+    ...mapState("loginModule", ["userinfo"]),
   },
   methods: {
-    ...mapMutations('loginModule',['clearUser']),
+    ...mapMutations("loginModule", ["clearUser"]),
     changeMenu() {
       this.$emit("changeCollapse");
     },
-    loginout(){
+    loginout() {
       //退出登录
       //清空vuex数据
-      this.clearUser()
+      this.clearUser();
       //清空本地存储
-      localStorage.removeItem('user')
+      localStorage.removeItem("user");
       //返回登录
-      this.$router.push('/login')
-    }
+      this.$router.push("/login");
+    },
   },
 };
 </script>

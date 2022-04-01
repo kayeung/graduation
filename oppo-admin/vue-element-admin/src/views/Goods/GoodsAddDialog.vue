@@ -268,7 +268,7 @@
           <el-form-item label="蜂窝网络"> </el-form-item>
         </el-col>
         <el-col :span="11">
-          <el-form-item label="双卡双待" prop="isDoubleSIM">
+          <el-form-item label="双卡" prop="isDoubleSIM">
             <el-radio v-model="form.isDoubleSIM" label="1">支持</el-radio>
             <el-radio v-model="form.isDoubleSIM" label="0">不支持</el-radio>
           </el-form-item>
@@ -335,7 +335,7 @@
           <el-form-item label="内置感应器"> </el-form-item>
         </el-col>
         <el-col :span="21">
-          <el-form-item label="卫星定位" prop="gpsList">
+          <el-form-item label="定位" prop="gpsList">
             <el-checkbox-group v-model="form.gpsList">
               <el-checkbox label="内置 GPS"></el-checkbox>
               <el-checkbox label="支持 A-GPS"></el-checkbox>

@@ -28,8 +28,8 @@
       @selection-change="handleSelectionChange"
       border
     >
-      <el-table-column type="selection" width="45" align="center">
-      </el-table-column>
+      <!-- <el-table-column type="selection" width="45" align="center">
+      </el-table-column> -->
       <el-table-column prop="classification" label="系列" align="center">
       </el-table-column>
       <el-table-column
@@ -127,7 +127,7 @@ export default {
           model: "CH2021",
         },
       ],
-      multipleSelection: [],
+      // multipleSelection: [],
     };
   },
   methods: {
