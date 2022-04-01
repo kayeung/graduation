@@ -1,5 +1,5 @@
 <template>
-  <!-- 0.目前对话框标题名已能父子组件互传，现做到使用监听器监听按了编辑按钮后对应行的数据的变化  
+  <!-- 0.点击编辑按钮可获得已存在的数据  
   -->
   <div>
     <!-- 添加按钮 -->
@@ -61,18 +61,20 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" width="180" align="center">
+        <template slot-scope="scope">
         <el-row>
           <el-button
             type="primary"
             size="mini"
             icon="el-icon-edit"
-            @click="handleEdit"
+            @click="handleEdit(scope.row)"
             >编辑</el-button
           >
           <el-button type="danger" size="mini" icon="el-icon-delete"
             >删除</el-button
           >
         </el-row>
+        </template>
       </el-table-column>
     </el-table>
   </div>

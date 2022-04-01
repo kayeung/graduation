@@ -107,7 +107,7 @@ export default {
   watch:{
       rowData(val){
           console.log("监听数据",val);
-
+          this.form=val;
       }
   }
 };
