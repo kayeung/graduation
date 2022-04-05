@@ -7,14 +7,14 @@
       width="30%"
       :before-close="handleClose"
     >
-      <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="标题">
-          <el-input v-model="form.subtitle"></el-input>
+      <el-form ref="form" :model="form" label-width="80px" :rules="rules">
+        <el-form-item label="标题" prop="title">
+          <el-input v-model="form.title"></el-input>
         </el-form-item>
-        <el-form-item label="副标题">
+        <el-form-item label="副标题" prop="subtitle">
           <el-input type="textarea" v-model="form.subtitle"></el-input>
         </el-form-item>
-        <el-form-item label="图片">
+        <el-form-item label="图片" prop="cover">
           <el-upload
             class="upload-demo"
             :action="uploadUrl"
@@ -23,6 +23,7 @@
             :file-list="fileList"
             list-type="picture"
             :on-success="successUpload"
+            limit="1"
           >
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">
@@ -30,12 +31,12 @@
             </div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="链接">
+        <el-form-item label="链接" prop="link">
           <el-input v-model="form.link"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="handleClose">确 定</el-button>
+        <el-button type="primary" @click="onSubmit">确 定</el-button>
       </span>
     </el-dialog>
   </div>
@@ -64,19 +65,31 @@ export default {
       form: {
         title: "",
         subtitle: "",
+        // pictureUrl: require('../../server/upload/bz.jpg'),
         pictureUrl: "",
         link: "",
+      },
+      rules: {
+        title: [{ required: true, message: "请输入标题", trigger: "blur" }],
+        subtitle: [
+          { required: true, message: "请输入副标题", trigger: "blur" },
+        ],
+        cover: [{ required: true, message: "请上传图片", trigger: "blur" }],
+        link: [{ required: true, message: "请输入页面链接", trigger: "blur" }],
       },
     };
   },
   methods: {
-    handleClose(done) {
-      this.$confirm("确认关闭？")
-        .then((_) => {
-          done();
-          this.dialogVisible = false;
-        })
-        .catch((_) => {});
+    handleClose() {
+      // 1.关闭弹窗 2.清空表单
+      this.dialogVisible = false;
+      this.$refs.form.resetFields();
+      this.form = {
+        title: "",
+        subtitle: "",
+        pictureUrl: "",
+        link: "",
+      };
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -101,15 +114,29 @@ export default {
     //   return isLegalPic && isLt2M;
     // },
     onSubmit() {
-      console.log("submit!");
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          console.log("表单已输入的信息：", this.form);
+          let { title, subtitle, pictureUrl, link } = this.form;
+          // 判断确定按钮的类型：新增？修改？
+          if (this.dialogTitle==="添加") {
+            console.log("添加商品");
+          } else {
+            console.log("修改商品");
+          }
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
   },
-  watch:{
-      rowData(val){
-          console.log("监听数据",val);
-          this.form=val;
-      }
-  }
+  watch: {
+    rowData(val) {
+      console.log("监听数据", val);
+      this.form = val;
+    },
+  },
 };
 </script>
 

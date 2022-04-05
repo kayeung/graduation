@@ -1,6 +1,5 @@
 <template>
-  <!-- 0.点击编辑按钮可获得已存在的数据  
-  -->
+  <!-- 完成首页管理的编辑功能（未有添加和编辑的api）  -->
   <div>
     <!-- 添加按钮 -->
     <el-button
@@ -19,7 +18,7 @@
     />
     <!-- 表格主体 -->
     <el-table
-      ref="multipleTable"
+      ref="FPTable"
       :data="
         this.status == '0'
           ? carouselTable
@@ -82,7 +81,7 @@
 
 <script>
 import base from "../api/base";
-import goodDialog from "../components/goodDialog.vue";
+import goodDialog from "./FPDialog.vue";
 export default {
   props: ["status"],
   components: {
@@ -146,7 +145,7 @@ export default {
     handleEdit(row) {
       this.dialogTitle = "编辑";
       this.$refs.dialog.dialogVisible = true;
-      this.rowData = row;
+      this.rowData = {...row};//防止重复点击相同行，watch不到数据
     },
   },
 };

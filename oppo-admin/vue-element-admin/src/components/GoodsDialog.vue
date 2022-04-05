@@ -1,8 +1,8 @@
 <template>
   <el-dialog
-    title="添加新品"
+    :title="dialogTitle"
     :visible.sync="dialogVisible"
-    width="85%"
+    width="90%"
     :before-close="handleClose"
   >
     <el-form
@@ -247,7 +247,7 @@
           <el-form-item label="内置感应器"> </el-form-item>
         </el-col>
         <el-col :span="22">
-          <el-form-item label="" prop="sensorsList">
+          <el-form-item label="传感器" prop="sensorsList">
             <el-checkbox-group v-model="form.sensorsList">
               <el-checkbox label="地磁传感器"></el-checkbox>
               <el-checkbox label="环境光传感器"></el-checkbox>
@@ -353,49 +353,76 @@
         </el-col>
       </el-row>
 
-      <el-form-item label="图片">
+      <el-form-item label="封面图" prop="uploadPic">
         <el-upload
           class="upload-demo"
           :action="uploadUrl"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
-          :file-list="fileList"
+          :file-list="coverList"
+          list-type="picture"
+          :on-success="successUpload"
+          limit="1"
+        >
+          <el-button size="small" type="primary">点击上传</el-button>
+          <div slot="tip" class="el-upload__tip">
+            只能上传jpg/png/webp文件，且不超过500kb
+          </div>
+        </el-upload>
+      </el-form-item>
+
+      <el-form-item label="详情图" prop="uploadPic">
+        <el-upload
+          class="upload-demo"
+          :action="uploadUrl"
+          :on-preview="handlePreview"
+          :on-remove="handleRemove"
+          :file-list="picList"
           list-type="picture"
           :on-success="successUpload"
         >
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">
-            只能上传jpg/png文件，且不超过500kb
+            只能上传jpg/png/webp文件，且不超过500kb
           </div>
         </el-upload>
       </el-form-item>
+
       <el-form-item label="备注">
         <wangeditor @sendEditor="sendEditor" />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
-      <el-button  @click="resetForm">清 空</el-button>
+      <el-button @click="resetForm">清 空</el-button>
       <el-button type="primary" @click="onSubmit">确 定</el-button>
     </span>
   </el-dialog>
 </template>
 
 <script>
-import base from "../../api/base";
-import wangeditor from "../../components/wangeditor.vue";
-import GoodsTree from "../Goods/GoodsTree.vue";
+import base from "../api/base";
+import wangeditor from "./wangeditor.vue";
+import GoodsTree from "../views/Goods/GoodsTree.vue";
 
 export default {
-  props: ["dialogVisible"],
+  props: {
+    dialogTitle: {
+      type: String,
+      default: "添加新品",
+    },
+  },
+
   components: {
     wangeditor,
     GoodsTree,
   },
   data() {
     return {
-      innerVisible: false,
+      dialogVisible: false, //对话框可视
+      innerVisible: false, //类目选择对话框可视
       uploadUrl: base.uploadUrl,
-      fileList: [],
+      coverList: [], //上传封面图
+      picList: [], //上传详情图
       treeData: "",
       // 表单
       form: {
@@ -636,6 +663,7 @@ export default {
         otherLocation: [
           { required: true, message: "请输入更多的定位信息", trigger: "blur" },
         ],
+        uploadPic: [{ required: true, message: "请上传图片", trigger: "blur" }],
       },
     };
   },
@@ -650,17 +678,52 @@ export default {
       this.$confirm("确认关闭？")
         .then((_) => {
           done();
-          this.$emit("isCloseDialog");
+          // 1.关闭弹窗 2.清空表单
+          this.dialogVisible = false;
+          this.$refs.infoForm.resetFields();
+          this.form = {
+            classification: "",
+            goodName: "",
+            model: "",
+            height: "",
+            width: "",
+            thickness: "",
+            weight: "",
+            ram_rom: "",
+            ramType: "",
+            romSpe: "",
+            screenSize: "",
+            screenRatio: "",
+            resolution: "",
+            refreshRate: "",
+            touchRate: "",
+            pixelDensity: "",
+            cameraRear: "",
+            cameraFront: "",
+            cpu: "",
+            gpu: "",
+            battery: "",
+            fastChargeList: [],
+            sensorsList: [],
+            isDoubleSIM: "1",
+            type_SIM: "Nano-SIM",
+            bluetooth: "",
+            nfc: "",
+            earphoneJack: "3.5mm",
+            usbInterface: "Type-c",
+            gpsList: [],
+            otherLocation: "",
+          };
         })
         .catch((_) => {});
     },
     onSubmit() {
-      this.$refs['infoForm'].validate((isPass) => {
+      this.$refs["infoForm"].validate((isPass) => {
         if (isPass) {
           console.log(this.form);
           console.log("submit success");
           this.$emit("isCloseDialog");
-        }else{
+        } else {
           console.log("submit fail...");
         }
       });
@@ -697,10 +760,6 @@ export default {
       this.innerVisible = false;
       this.form.classification = this.treeData;
     },
-    //清空表单
-    resetForm(){
-      this.$refs['infoForm'].resetFields();
-    }
   },
 };
 </script>

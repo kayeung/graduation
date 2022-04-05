@@ -1,4 +1,5 @@
 <template>
+<!-- 已能互传标题及退出清空表单，编辑功能仍未能获取具体数据（需api配合） -->
   <div>
     <!-- 添加按钮 -->
     <el-button
@@ -6,13 +7,14 @@
       size="small"
       icon="el-icon-plus"
       class="add"
-      @click="dialogVisible = true"
+      @click="handleAdd"
       >添加</el-button
     >
     <!-- 点击添加按钮后的模态框 -->
     <GoodsAddDialog
       :dialogVisible="dialogVisible"
-      @isCloseDialog="isCloseDialog"
+      :dialogTitle="dialogTitle"
+      ref="dialog"
     />
     <!-- 表格主体 -->
     <el-table
@@ -62,7 +64,11 @@
 
       <el-table-column label="操作" width="180" align="center">
         <el-row>
-          <el-button type="primary" size="mini" icon="el-icon-edit"
+          <el-button
+            type="primary"
+            size="mini"
+            icon="el-icon-edit"
+            @click="handleEdit"
             >编辑</el-button
           >
           <el-button type="danger" size="mini" icon="el-icon-delete"
@@ -75,7 +81,7 @@
 </template>
 
 <script>
-import GoodsAddDialog from "../Goods/GoodsAddDialog.vue";
+import GoodsAddDialog from "../../components/GoodsDialog.vue";
 
 export default {
   components: {
@@ -84,7 +90,8 @@ export default {
   data() {
     return {
       dialogVisible: false,
-      status: "",
+      dialogTitle: "添加新品",
+      status: "", //目前选择的产品分类
       phoneTable: [
         {
           classification: "OPPO Find 系列",
@@ -131,25 +138,19 @@ export default {
     };
   },
   methods: {
-    toggleSelection(rows) {
-      if (rows) {
-        rows.forEach((row) => {
-          this.$refs.multipleTable.toggleRowSelection(row);
-        });
-      } else {
-        this.$refs.multipleTable.clearSelection();
-      }
-    },
-    handleSelectionChange(val) {
-      this.multipleSelection = val;
-    },
-    isCloseDialog() {
-      this.dialogVisible = !this.dialogVisible;
-    },
     setParams(val) {
       //获取url传过来的参数
       this.status = val.params.status;
       console.log("status:", this.status);
+    },
+    handleAdd() {
+      this.dialogTitle = "添加新品";
+      this.$refs.dialog.dialogVisible = true;
+    },
+    handleEdit(row) {
+      this.dialogTitle = "编辑产品";
+      this.$refs.dialog.dialogVisible = true;
+      // this.rowData = { ...row }; //防止重复点击相同行，watch不到数据
     },
   },
   watch: {
