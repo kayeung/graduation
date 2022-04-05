@@ -1,0 +1,429 @@
+/* 手机屏幕宽度
+    720px
+    1080px
+    1440px
+
+    电脑屏幕分辨率
+    1280x720
+    1920x1080
+    2560x1440
+    3840x2160
+
+*/
+.body {
+    font-family: 'OPPOSans';
+    /* background-color: red; */
+}
+
+.btn {
+    border-radius: 0px !important;
+    color: white !important;
+    background-color: black !important;
+    border-color: black !important;
+}
+
+
+@font-face {
+    font-family: 'OPPOSans';
+    src: url('../ttf/OPPOSans-M.svg#OPPOSans-H') format('svg'),
+        url('../ttf/OPPOSans-M.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'iconfont';
+    src: url('//at.alicdn.com/t/font_3187659_y5l5k2om4e.eot');
+    src: url('//at.alicdn.com/t/font_3187659_y5l5k2om4e.eot?#iefix') format('embedded-opentype'),
+        url('') format('woff'),
+        url('//at.alicdn.com/t/font_3187659_y5l5k2om4e.ttf') format('truetype'),
+        url('//at.alicdn.com/t/font_3187659_y5l5k2om4e.svg#iconfont') format('svg');
+}
+
+/* 导航条 */
+.navbar {
+    max-height: 50px;
+    color: #777777;
+}
+
+#oppo-navbar {
+    background-color: transparent;
+    border-color: transparent;
+    margin-bottom: 0;
+}
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 2rem;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #777777;
+    font-weight: 600;
+}
+
+.icon-brand {
+    width: 1em;
+    height: 0.3em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    font-size: 96px;
+}
+
+.navbar .navbar-header .navbar-brand {
+    padding: 12px 30px 18px 30px;
+}
+
+.icon {
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+    font-size: 20px;
+    color: #777777;
+}
+
+/* 轮播图 */
+img {
+    width: 100vw;
+}
+
+.oppo-carousel {
+    display: block;
+    top: -50px;
+}
+
+.oppo-carousel,
+.oppo-carousel .item {
+    height: auto;
+    overflow: hidden;
+}
+
+@media only screen and (min-width: 768px) {
+
+    .oppo-carousel,
+    .oppo-carousel .item {
+        height: 49vw;
+    }
+}
+
+.topbanner-vertical-img {
+    width: 100vw;
+    height: auto;
+}
+
+#carousel-control-left,
+#carousel-control-right {
+    background-image: none;
+}
+
+.carousel-content {
+    position: absolute;
+    right: 15%;
+    top: 10%;
+    left: 15%;
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: black;
+    text-align: left;
+    /* text-shadow: 0 1px 2px rgb(0 0 0 / 60%); */
+}
+
+.carousel-content .title {
+    font-size: 36px;
+    line-height: 46px;
+}
+
+.carousel-content .subtitle {
+    margin: 10px 0;
+    font-size: 18px;
+    line-height: 28px;
+}
+
+#btn-lg {
+    display: none;
+}
+
+@media (min-width: 1px) and (max-width:768px) {
+    #oppo-thumbnail-right {
+        max-height: 389.81px;
+        width: 100vw;
+        object-fit: fill;
+        /* Do not scale the image */
+        object-position: center;
+        /* Center the image within the element */
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .carousel-content {
+        top: 29%;
+    }
+
+    .carousel-content .title {
+        font-size: 26px;
+        line-height: 32px;
+        font-family: 'OPPOSans-M';
+        margin-bottom: 0;
+    }
+
+    .carousel-content .subtitle {
+        margin: 10px 0;
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    #oppo-thumbnail-right {
+        height: 308.38px;
+        width: auto;
+    }
+
+}
+
+
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .carousel-content {
+        top: 32%;
+    }
+
+    .carousel-content .title {
+        font-size: 36px;
+        line-height: 42px;
+        font-family: 'OPPOSans-M';
+        margin-bottom: 0;
+    }
+
+    .carousel-content .subtitle {
+        margin: 10px 0;
+        font-size: 18px;
+        line-height: 28px;
+    }
+
+    #oppo-thumbnail-right {
+        height: 406.27px;
+        width: auto;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .carousel-content {
+        top: 30%;
+    }
+
+    .carousel-content .title {
+        font-size: 48px;
+        line-height: 68px;
+        font-family: 'OPPOSans-M';
+        font-weight: 520;
+        margin-bottom: 0;
+    }
+
+    .carousel-content .subtitle {
+        margin-bottom: 20px;
+        font-size: 28px;
+        line-height: 44px;
+    }
+
+    .newProduction .col-lg-12 img {
+        object-fit: fill;
+        /* Do not scale the image */
+        object-position: center;
+        /* Center the image within the element */
+    }
+
+    #newProductionRight {
+        height: 647px;
+        object-fit: cover;
+        /* Do not scale the image */
+        object-position: center;
+        /* Center the image within the element */
+    }
+
+    #btn {
+        display: none;
+    }
+
+    #btn-lg {
+        display: inline-block;
+    }
+
+    #oppo-thumbnail-right {
+        max-height: 495.28px;
+        width: auto;
+    }
+
+    #oppo-thumbnail-right {
+        height: 495.28px;
+        width: auto;
+    }
+}
+
+/* content */
+.newProduction {
+    background-color: white;
+}
+
+.content a,
+.content a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.page-header {
+    margin-top: 128px !important;
+}
+
+.page-header a {
+    float: right;
+    font-size: 18px;
+    font-weight: lighter;
+    color: black;
+    border-bottom: 1px solid black;
+    margin: 12px 0;
+}
+
+.page-header a:hover,
+.page-header a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.oppo-thumbnail {
+    border: 0px solid white !important;
+}
+
+.oppo-thumbnail:hover {
+    transform: scale(1.05);
+    transition: all 0.3s;
+}
+
+.thumbnail small {
+    color: #2EC84E;
+    margin-left: 10px;
+}
+
+.oppo-techology {
+    background-color: #f5f5f5;
+}
+
+.oppo-techology .col-sm-4 img {
+    object-fit: cover;
+    /* Do not scale the image */
+    object-position: center;
+    /* Center the image within the element */
+}
+
+/* footer */
+.footer {
+    padding-top: 36px;
+}
+
+.footer .container {
+    padding: 32px 15px;
+}
+
+.footer-no-mobile dl {
+    height: 210px !important;
+    margin-bottom: 20px;
+}
+
+dt {
+    font-size: 16px;
+    line-height: 28px;
+    padding-bottom: 12px;
+    font-family: 'OPPOSans-M';
+}
+
+dd a {
+    font-family: 'OPPOSans-R';
+    font-size: 12px;
+    line-height: 24px;
+    color: #0000008f;
+}
+
+.footer-mobile dd a{
+    display: block;
+    margin-bottom: 10px;
+}
+
+.contect {
+    /* position: relative; */
+    padding: 32px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.contect #contect-icon {
+    font-size: 30px;
+    margin-right: 10px;
+    display: inline-block;
+}
+
+.contect #contect-detail {
+    display: inline-block;
+    line-height: 30px;
+    font-size: 18px;
+    vertical-align: text-bottom;
+    margin-bottom: 3px;
+}
+
+#contect,
+.link a,
+.footer-no-mobile a:hover {
+    color: #0000008f !important;
+    text-decoration: none !important;
+}
+
+.link {
+    left: -25px;
+    padding-top: 32px;
+}
+
+.link li {
+    margin-right: 14px;
+    list-style-type: none;
+    float: left;
+}
+
+.link li a {
+    font-size: 12px;
+    line-height: 23px;
+}
+
+.copyright {
+    display: block;
+}
+
+.panel-heading,
+.panel-body {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.panel a:hover {
+    text-decoration: none;
+}
+
+@media only screen and (max-width:768px) {
+    .footer-mobile {
+        display: inline;
+    }
+
+    .footer-no-mobile {
+        display: none;
+    }
+
+}
+
+@media only screen and (min-width:768.1px) {
+    .footer-mobile {
+        display: none;
+    }
+
+    .footer-no-mobile {
+        display: inline;
+    }
+
+}
