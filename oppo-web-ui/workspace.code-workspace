@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "..\\oppo-admin"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "oppo-web-ui"
+	}
+}

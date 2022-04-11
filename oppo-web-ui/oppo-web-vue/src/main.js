@@ -5,6 +5,13 @@ import store from './store'
 import $ from 'jquery'
 import './assets/css/bootstrap.min.css'
 import './assets/js/bootstrap.min'
+import {Menu,Submenu,MenuItem,MenuItemGroup,} from 'element-ui';
+
+
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItem)
+Vue.use(MenuItemGroup)
 
 Vue.config.productionTip = false
 

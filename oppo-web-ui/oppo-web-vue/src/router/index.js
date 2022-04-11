@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Index from '../views/index.vue'
 import Goods from '../views/Goods/goods.vue'
 
+
 Vue.use(VueRouter)
 
 const routes = [{
