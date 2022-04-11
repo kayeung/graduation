@@ -8,16 +8,19 @@
     >
       <div class="container">
         <el-menu
-          :default-active="activeIndex"
+          default-active="/gooddetail"
           class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
           router
         >
-          <el-menu-item index="1">概览</el-menu-item>
-          <el-menu-item index="2">参数</el-menu-item>
+          <el-menu-item index="/gooddetail">概览</el-menu-item>
+          <el-menu-item index="/goodspecs">参数</el-menu-item>
         </el-menu>
       </div>
+    </div>
+    <div class="content container">
+      <router-view />
     </div>
     <Footer />
   </div>
@@ -36,9 +39,7 @@ export default {
     GoodDetail,
   },
   data() {
-    return {
-      activeIndex: "1",
-    };
+    return {};
   },
   methods: {
     handleSelect(key, keyPath) {

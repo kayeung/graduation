@@ -21,7 +21,7 @@
           <h2 class="title">OPPO Find N <br> 全新折叠旗舰</h2>
           <h3 class="subtitle">从尝鲜，到常用</h3>
           <a href="#" id="btn" class="btn" role="button" style="background-color: black;border-color: black;">了解更多</a>
-          <a href="/goods" id="btn-lg" class="btn btn-lg" role="button"
+          <a href="/gooddetail" id="btn-lg" class="btn btn-lg" role="button"
             style="background-color: black;border-color: black;">了解更多</a>
         </div>
       </div>
@@ -33,7 +33,7 @@
           <h2 class="title">OPPO Find X5 系列</h2>
           <h3 class="subtitle">一帧影像，动用两块芯片。</h3>
           <a href="#" id="btn" class="btn" role="button" style="background-color: black;border-color: black;">了解更多</a>
-          <a href="/goods" id="btn-lg" class="btn btn-lg" role="button"
+          <a href="/gooddetail" id="btn-lg" class="btn btn-lg" role="button"
             style="background-color: black;border-color: black;">了解更多</a>
         </div>
       </div>

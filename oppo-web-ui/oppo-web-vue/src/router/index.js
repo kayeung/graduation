@@ -2,6 +2,9 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Index from '../views/index.vue'
 import Goods from '../views/Goods/goods.vue'
+import GoodDetail from '../views/Goods/goodDetail.vue'
+
+const GoodSpecs = () => import('../views/Goods/goodSpecs.vue')
 
 
 Vue.use(VueRouter)
@@ -11,7 +14,15 @@ const routes = [{
   component: Index,
 }, {
   path: '/goods',
-  component: Goods
+  component: Goods,
+  children: [{
+    path: '/gooddetail',
+    component: GoodDetail,
+  }, {
+    path: '/goodspecs',
+    component: GoodSpecs,
+  }
+  ]
 }
 ]
 
