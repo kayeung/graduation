@@ -14,8 +14,9 @@
           @select="handleSelect"
           router
         >
-          <el-menu-item index="/gooddetail">概览</el-menu-item>
+          <div class="goodName">OPPO Find N</div>
           <el-menu-item index="/goodspecs">参数</el-menu-item>
+          <el-menu-item index="/gooddetail">概览</el-menu-item>
         </el-menu>
       </div>
     </div>
@@ -29,14 +30,10 @@
 <script>
 import Navbar from "../../components/navbar.vue";
 import Footer from "../../components/footer.vue";
-import GoodSpecs from "../Goods/goodSpecs.vue";
-import GoodDetail from "../Goods/goodDetail.vue";
 export default {
   components: {
     Navbar,
     Footer,
-    GoodSpecs,
-    GoodDetail,
   },
   data() {
     return {};
@@ -52,5 +49,13 @@ export default {
 <style lang='less' scoped>
 .el-menu--horizontal {
   border-bottom: 0px;
+}
+.el-menu-item {
+  float: right;
+}
+.goodName {
+  height: 60px;
+  line-height: 60px;
+  float: left;
 }
 </style>
