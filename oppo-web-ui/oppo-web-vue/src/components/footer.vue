@@ -8,60 +8,60 @@
         <div class="col-sm-4 col-md-3 col-lg-2" id="sm-footer">
           <dl>
             <dt>推荐产品</dt>
-            <dd><a href="#">Find N</a></dd>
-            <dd><a href="#">Find X3 系列</a></dd>
-            <dd><a href="#">Reno7 系列</a></dd>
-            <dd><a href="#">A96</a></dd>
-            <dd><a href="#">K9x</a></dd>
-            <dd><a href="#">Watch Free</a></dd>
-            <dd><a href="#">查看全部手机</a></dd>
+            <dd><router-link to="/">Find N</router-link></dd>
+            <dd><router-link to="/">Find X3 系列</router-link></dd>
+            <dd><router-link to="/">Reno7 系列</router-link></dd>
+            <dd><router-link to="/">A96</router-link></dd>
+            <dd><router-link to="/">K9x</router-link></dd>
+            <dd><router-link to="/">Watch Free</router-link></dd>
+            <dd><router-link to="/">查看全部手机</router-link></dd>
           </dl>
         </div>
         <div class="col-sm-4 col-md-3 col-lg-2">
           <dl>
             <dt>购买渠道</dt>
-            <dd><a href="#">线下体验店</a></dd>
-            <dd><a href="#">OPPO商城</a></dd>
-            <dd><a href="#">官方授权网点</a></dd>
+            <dd><router-link to="/">线下体验店</router-link></dd>
+            <dd><router-link to="/">OPPO商城</router-link></dd>
+            <dd><router-link to="/">官方授权网点</router-link></dd>
           </dl>
         </div>
         <div class="col-sm-4 col-md-3 col-lg-2">
           <dl>
             <dt>探索精彩OPPO</dt>
-            <dd><a href="#">关于OPPO</a></dd>
-            <dd><a href="#">新闻中心</a></dd>
-            <dd><a href="#">OPPO社区</a></dd>
-            <dd><a href="#">加入我们</a></dd>
-            <dd><a href="#">知识产权</a></dd>
-            <dd><a href="#">可持续发展报告</a></dd>
-            <dd><a href="#">安全隐私</a></dd>
+            <dd><router-link to="/">关于OPPO</router-link></dd>
+            <dd><router-link to="/">新闻中心</router-link></dd>
+            <dd><router-link to="/">OPPO社区</router-link></dd>
+            <dd><router-link to="/">加入我们</router-link></dd>
+            <dd><router-link to="/">知识产权</router-link></dd>
+            <dd><router-link to="/">可持续发展报告</router-link></dd>
+            <dd><router-link to="/">安全隐私</router-link></dd>
           </dl>
         </div>
         <div class="col-sm-4 col-md-3 col-lg-2">
           <dl>
             <dt>商务合作</dt>
-            <dd><a href="#">企业业务</a></dd>
-            <dd><a href="#">开放平台</a></dd>
-            <dd><a href="#">廉洁合规</a></dd>
+            <dd><router-link to="/">企业业务</router-link></dd>
+            <dd><router-link to="/">开放平台</router-link></dd>
+            <dd><router-link to="/">廉洁合规</router-link></dd>
           </dl>
         </div>
         <div class="col-sm-4 col-md-3 col-lg-2">
           <dl>
             <dt>服务与支持</dt>
-            <dd><a href="#">联系我们</a></dd>
-            <dd><a href="#">服务网点查询</a></dd>
-            <dd><a href="#">ColorOS</a></dd>
-            <dd><a href="#">云服务</a></dd>
-            <dd><a href="#">以旧换新</a></dd>
-            <dd><a href="#">安全响应中心</a></dd>
+            <dd><router-link to="/">联系我们</router-link></dd>
+            <dd><router-link to="/">服务网点查询</router-link></dd>
+            <dd><router-link to="/">ColorOS</router-link></dd>
+            <dd><router-link to="/">云服务</router-link></dd>
+            <dd><router-link to="/">以旧换新</router-link></dd>
+            <dd><router-link to="/">安全响应中心</router-link></dd>
           </dl>
         </div>
         <div class="col-sm-4 col-md-3 col-lg-2">
           <dl>
             <dt>应用与下载</dt>
-            <dd><a href="#">OPPO商城APP</a></dd>
-            <dd><a href="#">预置软件公示</a></dd>
-            <dd><a href="#">LOG专业调色文档</a></dd>
+            <dd><router-link to="/">OPPO商城APP</router-link></dd>
+            <dd><router-link to="/">预置软件公示</router-link></dd>
+            <dd><router-link to="/">LOG专业调色文档</router-link></dd>
           </dl>
         </div>
       </div>
@@ -81,13 +81,13 @@
           <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
             <div class="panel-body">
               <dl>
-                <dd><a href="#">Find N</a></dd>
-                <dd><a href="#">Find X3 系列</a></dd>
-                <dd><a href="#">Reno7 系列</a></dd>
-                <dd><a href="#">A96</a></dd>
-                <dd><a href="#">K9x</a></dd>
-                <dd><a href="#">Watch Free</a></dd>
-                <dd><a href="#">查看全部手机</a></dd>
+                <dd><router-link to="/">Find N</router-link></dd>
+                <dd><router-link to="/">Find X3 系列</router-link></dd>
+                <dd><router-link to="/">Reno7 系列</router-link></dd>
+                <dd><router-link to="/">A96</router-link></dd>
+                <dd><router-link to="/">K9x</router-link></dd>
+                <dd><router-link to="/">Watch Free</router-link></dd>
+                <dd><router-link to="/">查看全部手机</router-link></dd>
               </dl>
             </div>
           </div>
@@ -104,9 +104,9 @@
           <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
             <div class="panel-body">
               <dl>
-                <dd><a href="#">线下体验店</a></dd>
-                <dd><a href="#">OPPO商城</a></dd>
-                <dd><a href="#">官方授权网点</a></dd>
+                <dd><router-link to="/">线下体验店</router-link></dd>
+                <dd><router-link to="/">OPPO商城</router-link></dd>
+                <dd><router-link to="/">官方授权网点</router-link></dd>
               </dl>
             </div>
           </div>
@@ -123,13 +123,13 @@
           <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
             <div class="panel-body">
               <dl>
-                <dd><a href="#">关于OPPO</a></dd>
-                <dd><a href="#">新闻中心</a></dd>
-                <dd><a href="#">OPPO社区</a></dd>
-                <dd><a href="#">加入我们</a></dd>
-                <dd><a href="#">知识产权</a></dd>
-                <dd><a href="#">可持续发展报告</a></dd>
-                <dd><a href="#">安全隐私</a></dd>
+                <dd><router-link to="/">关于OPPO</router-link></dd>
+                <dd><router-link to="/">新闻中心</router-link></dd>
+                <dd><router-link to="/">OPPO社区</router-link></dd>
+                <dd><router-link to="/">加入我们</router-link></dd>
+                <dd><router-link to="/">知识产权</router-link></dd>
+                <dd><router-link to="/">可持续发展报告</router-link></dd>
+                <dd><router-link to="/">安全隐私</router-link></dd>
               </dl>
             </div>
           </div>
@@ -146,9 +146,9 @@
           <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
             <div class="panel-body">
               <dl>
-                <dd><a href="#">企业业务</a></dd>
-                <dd><a href="#">开放平台</a></dd>
-                <dd><a href="#">廉洁合规</a></dd>
+                <dd><router-link to="/">企业业务</router-link></dd>
+                <dd><router-link to="/">开放平台</router-link></dd>
+                <dd><router-link to="/">廉洁合规</router-link></dd>
               </dl>
             </div>
           </div>
@@ -165,12 +165,12 @@
           <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
             <div class="panel-body">
               <dl>
-                <dd><a href="#">联系我们</a></dd>
-                <dd><a href="#">服务网点查询</a></dd>
-                <dd><a href="#">ColorOS</a></dd>
-                <dd><a href="#">云服务</a></dd>
-                <dd><a href="#">以旧换新</a></dd>
-                <dd><a href="#">安全响应中心</a></dd>
+                <dd><router-link to="/">联系我们</router-link></dd>
+                <dd><router-link to="/">服务网点查询</router-link></dd>
+                <dd><router-link to="/">ColorOS</router-link></dd>
+                <dd><router-link to="/">云服务</router-link></dd>
+                <dd><router-link to="/">以旧换新</router-link></dd>
+                <dd><router-link to="/">安全响应中心</router-link></dd>
               </dl>
             </div>
           </div>
@@ -187,9 +187,9 @@
           <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
             <div class="panel-body">
               <dl>
-                <dd><a href="#">OPPO商城APP</a></dd>
-                <dd><a href="#">预置软件公示</a></dd>
-                <dd><a href="#">LOG专业调色文档</a></dd>
+                <dd><router-link to="/">OPPO商城APP</router-link></dd>
+                <dd><router-link to="/">预置软件公示</router-link></dd>
+                <dd><router-link to="/">LOG专业调色文档</router-link></dd>
               </dl>
             </div>
           </div>
@@ -197,17 +197,17 @@
       </div>
 
       <div class="contect">
-        <a id="contect" href="#">
+        <router-link to="/" id="contect">
           <span id="contect-icon" class="glyphicon glyphicon-education"></span>
           <div id="contect-detail">2018级数字媒体技术1班 欧嘉洋</div>
-        </a>
+        </router-link>
       </div>
       <ul class="link">
-        <li><a href="#">隐私政策</a></li>
-        <li><a href="#">用户协议</a></li>
-        <li><a href="#">法律信息</a></li>
-        <li><a href="#">知识产权</a></li>
-        <li class="copyright"><a href="#">© 2021 - 2022 版权所有 粤ICP备XXXXXXXX号</a></li>
+        <li><router-link to="/">隐私政策</router-link></li>
+        <li><router-link to="/">用户协议</router-link></li>
+        <li><router-link to="/">法律信息</router-link></li>
+        <li><router-link to="/">知识产权</router-link></li>
+        <li class="copyright"><router-link to="/">© 2021 - 2022 版权所有 粤ICP备XXXXXXXX号</router-link></li>
       </ul>
       <div class="clearfix"></div>
     </div>

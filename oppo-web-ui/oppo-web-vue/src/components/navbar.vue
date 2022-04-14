@@ -16,31 +16,31 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">
+          <router-link to="/" class="navbar-brand">
             <svg class="icon-brand" aria-hidden="true">
               <use xlink:href="#icon-oppo"></use>
             </svg>
-          </a>
+          </router-link>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><a href="#">手机 </a></li>
-            <li><a href="#">智能硬件</a></li>
-            <li><a href="#">官方商城</a></li>
-            <li><a href="#">关于OPPO</a></li>
-            <li><a href="#">ColorOS</a></li>
-            <li><a href="#">服务</a></li>
+            <li><router-link to="/">手机 </router-link></li>
+            <li><router-link to="/">智能硬件</router-link></li>
+            <li><router-link to="/">官方商城</router-link></li>
+            <li><router-link to="/">关于OPPO</router-link></li>
+            <li><router-link to="/">ColorOS</router-link></li>
+            <li><router-link to="/">服务</router-link></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <!-- <li><a href="#"><span class="iconfont">&#xe6d4;</span></a></li>
-          <li><a href="#"><span class="iconfont">&#xe6b1;</span></a></li> -->
+            <!-- <li><router-link to="/"><span class="iconfont">&#xe6d4;</span></router-link></li>
+          <li><router-link to="/"><span class="iconfont">&#xe6b1;</span></router-link></li> -->
             <li>
-              <a href="#"><span class="glyphicon glyphicon-search"></span></a>
+              <router-link to="/"><span class="glyphicon glyphicon-search"></span></router-link>
             </li>
             <li>
-              <a href="#"><span class="glyphicon glyphicon-user"></span></a>
+              <router-link to="/"><span class="glyphicon glyphicon-user"></span></router-link>
             </li>
           </ul>
         </div>
