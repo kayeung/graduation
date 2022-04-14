@@ -20,8 +20,8 @@
         </el-menu>
       </div>
     </div>
-    <div class="content container">
-      <router-view />
+    <div class="content">
+        <router-view />
     </div>
     <Footer />
   </div>

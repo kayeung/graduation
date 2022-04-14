@@ -1,6 +1,10 @@
 <template>
   <div>
-      <h2>goodDetaillllllllll</h2>
+    <div class="img-box">
+        <img src="https://www.oppo.com/content/dam/oppo/product-asset-library/k/k9-pro/v2/assets/kv-bg2-1920.webp" alt="">
+        <img src="https://www.oppo.com/content/dam/oppo/product-asset-library/a/a36/v5/assets/pc/1920_kv@3x.jpg" alt="">
+    </div>
+    
   </div>
 </template>
 
@@ -10,6 +14,10 @@ export default {
 }
 </script>
 
-<style>
+<style lang="less" scoped>
+.img-box img{
+  width: 100%;
+  height: auto;
+}
 
 </style>
