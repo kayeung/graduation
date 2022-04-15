@@ -1,4 +1,5 @@
 <template>
+<!-- bug:跨域代理失败，一直是localhost:8080 -->
   <div class="page">
     <div style="height: 24vh"></div>
     <div class="login-box">
@@ -6,7 +7,7 @@
         <img src="../../assets/images/finder.png" width="96px" height="96px" />
       </div>
 
-      <h3 class="title" style="cursor:default">后台管理系统</h3>
+      <h3 class="title" style="cursor: default">后台管理系统</h3>
 
       <el-form
         :model="loginForm"
@@ -89,6 +90,10 @@ export default {
         userName: "",
         password: "",
         verifyCode: "",
+      },
+      submitLoginForm: {
+        userName: "",
+        password: "",
       },
       rules: {
         userName: [{ required: true, message: "请输入账号" }],
@@ -175,35 +180,59 @@ export default {
         context.stroke();
       }
     },
+    //本地服务器后端提交
+    // submitForm() {
+    //   this.$refs.loginForm.validate((valid) => {
+    //     if (valid) {
+    //       let { userName, password } = this.loginForm;
+    //       //请求登录接口
+    //       this.$api
+    //         .getLogin({
+    //           userName,
+    //           password,
+    //         })
+    //         .then((res) => {
+    //           if (res.data.status === 200) {
+    //             console.log(jwt(res.data.data));
+    //             //登陆成功 1.存储登录信息  2.跳转网页  3.顶部区域显示用户信息  4.持久化
+    //             let obj = {
+    //               user: jwt(res.data.data),
+    //               token: res.data.data,
+    //             };
+    //             this.setUser(obj);
+    //             //存储本地
+    //             localStorage.setItem("user", JSON.stringify(obj));
+    //             //跳转
+    //             this.$router.push("/");
+    //           } else {
+    //             //账号或者密码错误
+    //             this.resetForm("loginForm");
+    //             this.reflash();
+    //             this.$message.error("账号或者密码错误");
+    //           }
+    //         });
+    //     } else {
+    //       return false;
+    //     }
+    //   });
+    // },
 
+    //IDEA后端
     submitForm() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          let { userName, password } = this.loginForm;
-          //请求登录接口
+          let obj = {
+            userName: this.loginForm.userName,
+            password: this.loginForm.password,
+          };
+          console.log("JSON:", JSON.stringify(obj));
           this.$api
-            .getLogin({
-              userName,
-              password,
-            })
+            .getLogin(obj)
             .then((res) => {
-              if (res.data.status === 200) {
-                console.log(jwt(res.data.data));
-                //登陆成功 1.存储登录信息  2.跳转网页  3.顶部区域显示用户信息  4.持久化
-                let obj = {
-                  user: jwt(res.data.data),
-                  token: res.data.data,
-                };
-                this.setUser(obj);
-                //存储本地
-                localStorage.setItem("user", JSON.stringify(obj));
-                //跳转
-                this.$router.push("/");
+              if (res.success == true) {
+                console.log("success");
               } else {
-                //账号或者密码错误
-                this.resetForm("loginForm");
-                this.reflash();
-                this.$message.error("账号或者密码错误");
+                console.log("fail");
               }
             });
         } else {
