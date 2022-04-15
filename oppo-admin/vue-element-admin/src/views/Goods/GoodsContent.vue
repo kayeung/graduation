@@ -27,7 +27,6 @@
           : phoneTable
       "
       tooltip-effect="dark"
-      @selection-change="handleSelectionChange"
       border
     >
       <!-- <el-table-column type="selection" width="45" align="center">

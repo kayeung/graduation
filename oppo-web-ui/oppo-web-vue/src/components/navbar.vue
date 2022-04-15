@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nav class="navbar navbar-default navbar-static-top" id="oppo-navbar">
+    <nav class="navbar navbar-default navbar-default navbar-static-top" id="oppo-navbar">
       <div class="container-fluid container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">

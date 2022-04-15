@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-menu
-      default-active="/frontpage"
+      :default-active="activeIndex"
       class="el-menu-vertical-demo"
       @open="handleOpen"
       @close="handleClose"
@@ -35,8 +35,13 @@ export default {
   props: ["isCollapse"],
   data() {
     return {
+      activeIndex: "/frontpage",
       // isCollapse: false,
     };
+  },
+  mounted() {
+    console.log("route1:",this.$route);
+    this.activeIndex = this.$route.path;
   },
   methods: {
     handleOpen(key, keyPath) {

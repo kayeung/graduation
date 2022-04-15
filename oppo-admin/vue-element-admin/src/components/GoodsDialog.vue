@@ -362,7 +362,7 @@
           :file-list="coverList"
           list-type="picture"
           :on-success="successUpload"
-          limit="1"
+          :limit="1"
         >
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">
@@ -680,40 +680,7 @@ export default {
           done();
           // 1.关闭弹窗 2.清空表单
           this.dialogVisible = false;
-          this.$refs.infoForm.resetFields();
-          this.form = {
-            classification: "",
-            goodName: "",
-            model: "",
-            height: "",
-            width: "",
-            thickness: "",
-            weight: "",
-            ram_rom: "",
-            ramType: "",
-            romSpe: "",
-            screenSize: "",
-            screenRatio: "",
-            resolution: "",
-            refreshRate: "",
-            touchRate: "",
-            pixelDensity: "",
-            cameraRear: "",
-            cameraFront: "",
-            cpu: "",
-            gpu: "",
-            battery: "",
-            fastChargeList: [],
-            sensorsList: [],
-            isDoubleSIM: "1",
-            type_SIM: "Nano-SIM",
-            bluetooth: "",
-            nfc: "",
-            earphoneJack: "3.5mm",
-            usbInterface: "Type-c",
-            gpsList: [],
-            otherLocation: "",
-          };
+          this.resetForm();
         })
         .catch((_) => {});
     },
@@ -759,6 +726,43 @@ export default {
     showTreeData() {
       this.innerVisible = false;
       this.form.classification = this.treeData;
+    },
+    //清空表单
+    resetForm() {
+      this.$refs.infoForm.resetFields();
+      this.form = {
+        classification: "",
+        goodName: "",
+        model: "",
+        height: "",
+        width: "",
+        thickness: "",
+        weight: "",
+        ram_rom: "",
+        ramType: "",
+        romSpe: "",
+        screenSize: "",
+        screenRatio: "",
+        resolution: "",
+        refreshRate: "",
+        touchRate: "",
+        pixelDensity: "",
+        cameraRear: "",
+        cameraFront: "",
+        cpu: "",
+        gpu: "",
+        battery: "",
+        fastChargeList: [],
+        sensorsList: [],
+        isDoubleSIM: "1",
+        type_SIM: "Nano-SIM",
+        bluetooth: "",
+        nfc: "",
+        earphoneJack: "3.5mm",
+        usbInterface: "Type-c",
+        gpsList: [],
+        otherLocation: "",
+      };
     },
   },
 };

@@ -8,7 +8,7 @@
     >
       <div class="container">
         <el-menu
-          default-active="/gooddetail"
+          :default-active="activeIndex"
           class="el-menu-demo"
           mode="horizontal"
           @select="handleSelect"
@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="content">
-        <router-view />
+      <router-view />
     </div>
     <Footer />
   </div>
@@ -35,8 +35,14 @@ export default {
     Navbar,
     Footer,
   },
+
   data() {
-    return {};
+    return {
+      activeIndex: "/goodspecs",
+    };
+  },
+  mounted() {
+    this.activeIndex = this.$route.path;
   },
   methods: {
     handleSelect(key, keyPath) {
