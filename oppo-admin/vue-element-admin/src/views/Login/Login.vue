@@ -229,7 +229,7 @@ export default {
           this.$api
             .getLogin(obj)
             .then((res) => {
-              if (res.success == true) {
+              if (res.data.success === true) {
                 console.log("success");
               } else {
                 console.log("fail");
