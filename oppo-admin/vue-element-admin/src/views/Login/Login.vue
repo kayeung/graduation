@@ -1,5 +1,5 @@
 <template>
-<!-- bug:跨域代理失败，一直是localhost:8080 -->
+  <!-- bug:可接收后端返回的token，但首页右上角的用户名仍为空 -->
   <div class="page">
     <div style="height: 24vh"></div>
     <div class="login-box">
@@ -90,10 +90,6 @@ export default {
         userName: "",
         password: "",
         verifyCode: "",
-      },
-      submitLoginForm: {
-        userName: "",
-        password: "",
       },
       rules: {
         userName: [{ required: true, message: "请输入账号" }],
@@ -225,16 +221,26 @@ export default {
             userName: this.loginForm.userName,
             password: this.loginForm.password,
           };
-          console.log("JSON:", JSON.stringify(obj));
-          this.$api
-            .getLogin(obj)
-            .then((res) => {
-              if (res.data.success === true) {
-                console.log("success");
-              } else {
-                console.log("fail");
-              }
-            });
+          this.$api.getLogin(obj).then((res) => {
+            if (res.data.success === true) {
+              console.log("data:", jwt(res.data.data));
+              //  登陆成功 1.存储登录信息  2.跳转网页  3.顶部区域显示用户信息  4.持久化
+              let obj = {
+                user: jwt(res.data.data).sub,
+                token: res.data.data,
+              };
+              this.setUser(obj);
+              // 存储本地
+              localStorage.setItem("user", JSON.stringify(obj));
+              // 跳转
+              this.$router.push("/");
+            } else {
+              // 密码错误
+              this.resetForm("loginForm");
+              this.reflash();
+              this.$message.error("账号或密码错误");
+            }
+          });
         } else {
           return false;
         }
