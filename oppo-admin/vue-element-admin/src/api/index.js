@@ -35,12 +35,30 @@ const qs = require('querystring')
 
 const api = {
     /**
- * 登录接口
- */
-    getLogin(params) {  //params={userName:'',password:''}
-        console.log("getLogin:",params);
+     * 登录接口
+     * @param {userName,password} params 
+     * @returns 
+     */
+    getLogin(params) {  
         return axios.post(base.login, params)
     },
+    /**
+     * 新增首页信息接口
+     * @param {title,subtitle,pictureUrl, link} params 
+     * @returns 
+     */
+    addHomePage(params){ 
+        return axios.post(base.addHomePage,params)
+    },
+    /**
+     * 图片上传
+     * @param {file} file 
+     * @returns 
+     */
+    uploadPic(file){
+        return axios.post(base.uploadPic,file)
+    }
+
 }
 
 export default api
