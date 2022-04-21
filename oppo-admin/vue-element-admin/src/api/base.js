@@ -13,6 +13,7 @@ const base = {
     login: '/api/user/login',//登录接口
     addHomePage: '/api/home/add',//新增首页信息
     uploadPic:'/api/home/fileoss',//图片上传
+    categoryList:'/api/category/list',//获取分类列表
 }
 
 export default base;

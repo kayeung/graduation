@@ -12,7 +12,14 @@
 
  -->
   <div>
-    <el-tree :props="props" :load="loadNode" lazy accordion @node-click="nodeCLick"> </el-tree>
+    <el-tree
+      :props="props"
+      :load="loadNode"
+      lazy
+      accordion
+      @node-click="nodeCLick"
+    >
+    </el-tree>
   </div>
 </template>
 
@@ -54,10 +61,10 @@ export default {
           });
       }
     },
-    nodeCLick(data,node){
-      console.log(data,node);
+    nodeCLick(data, node) {
+      console.log(data, node);
       //传递选中数据
-      this.$emit("sendTreeData",data);
+      this.$emit("sendTreeData", data);
     },
   },
 };
