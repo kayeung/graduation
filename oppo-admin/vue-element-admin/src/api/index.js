@@ -43,12 +43,19 @@ const api = {
         return axios.post(base.login, params)
     },
     /**
-     * 新增首页信息接口
+     * 新增首页信息
      * @param {title,subtitle,pictureUrl, link} params 
      * @returns 
      */
     addHomePage(params){ 
         return axios.post(base.addHomePage,params)
+    },
+    /**
+     * 获取首页信息
+     * @returns 
+     */
+    getHomeList(){
+        return axios.post(base.homeList)
     },
     /**
      * 图片上传
