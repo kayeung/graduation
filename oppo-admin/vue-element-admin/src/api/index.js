@@ -58,11 +58,13 @@ const api = {
     uploadPic(file){
         return axios.post(base.uploadPic,file)
     },
-    /***
+    /**
      * 获取分类列表
+     * @param {id} id 
+     * @returns 
      */
-    getCategoryList(){
-        return axios.post(base.categoryList)
+    getCategoryList(id){
+        return axios.post(base.categoryList,id)
     },
 
 }

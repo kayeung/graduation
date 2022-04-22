@@ -38,27 +38,26 @@ export default {
     loadNode(node, resolve) {
       //resolve()成功的返回数据结果
       // console.log("node", node);
+      let params = new URLSearchParams();
       if (node.level === 0) {
+        params.append("id", 1);
         //进入页面 获取第一层的tree数据
-        this.$api.getSelectCategory().then((res) => {
-          console.log(res.data);
-          return resolve(res.data.result);
+        this.$api.getCategoryList(params).then((res) => {
+          // console.log("一级：",res.data);
+          return resolve(res.data.data);
         });
       }
       if (node.level >= 1) {
+        params.set("id", node.data.cid);
         //请求当前的点击tree下面的数据
-        this.$api
-          .getSelectCategory({
-            id: node.data.cid,
-          })
-          .then((res) => {
-            // console.log("二级tree", res.data);
-            if (res.data.status === 200) {
-              return resolve(res.data.result);
-            } else {
-              return resolve([]);
-            }
-          });
+        this.$api.getCategoryList(params).then((res) => {
+          // console.log("二级tree", res);
+          if (res.status === 200) {
+            return resolve(res.data.data);
+          } else {
+            return resolve([]);
+          }
+        });
       }
     },
     nodeCLick(data, node) {
