@@ -64,6 +64,19 @@ export default {
         return {};
       },
     },
+    status: {
+      type: Number,
+    },
+  },
+  mounted() {
+    let that = this;
+    if (this.status == "0") {
+      that.tableName = "home_page";
+    } else if (this.status == "1") {
+      that.tableName = "more_product_pagee";
+    } else if (this.status == "2") {
+      that.tableName = "technology_page";
+    }
   },
   data() {
     var validateUploadPic = (rule, value, callback) => {
@@ -75,6 +88,7 @@ export default {
     };
     return {
       dialogVisible: false,
+      tableName: "",
       fileList: [],
       uploadPic: base.uploadPic,
       form: {
@@ -88,7 +102,9 @@ export default {
         subtitle: [
           { required: true, message: "请输入副标题", trigger: "blur" },
         ],
-        pic: [{  required: true, validator: validateUploadPic, trigger: "blur" }],
+        pic: [
+          { required: true, validator: validateUploadPic, trigger: "blur" },
+        ],
         link: [{ required: true, message: "请输入页面链接", trigger: "blur" }],
       },
     };
@@ -116,7 +132,7 @@ export default {
       this.$message.warning("最多只能添加1张图片！");
     },
     beforeUpload(file) {
-      if (file.size / 1024  > 500) {
+      if (file.size / 1024 > 500) {
         this.$message({
           message: "上传文件大小不能超过 500 KB!",
           type: "error",
@@ -146,6 +162,7 @@ export default {
             subtitle: this.form.subtitle,
             pictureUrl: this.form.pictureUrl,
             link: this.form.link,
+            tableName: this.tableName,
           };
           // 判断确定按钮的类型：新增？修改？
           if (this.dialogTitle === "添加") {

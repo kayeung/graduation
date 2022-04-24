@@ -52,10 +52,11 @@ const api = {
     },
     /**
      * 获取首页信息
+     * @param {tableName} param
      * @returns 
      */
-    getHomeList(){
-        return axios.post(base.homeList)
+    getHomeList(param){
+        return axios.post(base.homeList,param)
     },
     /**
      * 图片上传

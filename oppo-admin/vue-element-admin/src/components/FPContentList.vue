@@ -9,11 +9,22 @@
       @click="handleAdd"
       >添加</el-button
     >
-    <goodDialog
+    <span
+      class="add"
+      style="
+        color: #909399;
+        font-size: 12px;
+        line-height: 32px;
+        margin-right: 5px;
+      "
+      >(最多3条记录)</span
+    >
+    <FPDialog
       :dialogVisible="dialogVisible"
       :dialogTitle="dialogTitle"
       ref="dialog"
       :rowData="rowData"
+      :status=this.status
     />
     <!-- 表格主体 -->
     <el-table
@@ -23,7 +34,9 @@
           ? carouselTable
           : this.status == '1'
           ? moreTable
-          : techTable
+          : this.status == '2'
+          ? techTable
+          : xx
       "
       tooltip-effect="dark"
       border
@@ -79,17 +92,35 @@
 </template>
 
 <script>
-import goodDialog from "./FPDialog.vue";
+import FPDialog from "./FPDialog.vue";
 export default {
   props: ["status"],
   components: {
-    goodDialog,
+    FPDialog,
   },
   mounted() {
     let that = this;
-    this.$api.getHomeList().then((res) => {
+    let params = new URLSearchParams();
+    // console.log("status:", this.status);
+    params.append(
+      "tableName",
+      this.status == "0"
+        ? "home_page"
+        : this.status == "1"
+        ? "more_product_page"
+        : this.status == "2"
+        ? "technology_page"
+        : ""
+    );
+    this.$api.getHomeList(params).then((res) => {
       console.log("res.data:", res.data);
-      that.carouselTable = res.data.data;
+      if (this.status == "0") {
+        that.carouselTable = res.data.data;
+      } else if (this.status == "1") {
+        that.moreTable = res.data.data;
+      } else if (this.status == "2") {
+        that.techTable = res.data.data;
+      }
     });
   },
   data() {
@@ -99,29 +130,25 @@ export default {
       rowData: {}, //当前行的数据对象
       carouselTable: [],
       moreTable: [],
-      techTable: [
-        {
-          title: "马里亚纳® MariSilicon X ",
-          subtitle: "OPPO 首个自研芯片，全球第一个 6nm 影像专用的 NPU 芯片",
-          pictureUrl:
-            "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/find-x5-pro/topbanner/find-x5-pro-topbanner-pc-v3.jpeg.thumb.webp",
-          link: "https://www.oppo.com/cn/smartphones/series-find-x/find-x5-pro/",
-        },
-        {
-          title: "5G，连接身边的世界",
-          subtitle: "OPPO 相信 5G 不止是一种技术，更代表着无限可能",
-          pictureUrl:
-            "https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/enco-x2/topbanner/enco-x2-topbanner_2880x1440_black.jpg.thumb.webp",
-          link: "https://www.oppo.com/cn/accessories/oppo-enco-x2/",
-        },
-      ],
+      techTable: [],
       // multipleSelection: [],
     };
   },
   methods: {
     handleAdd() {
       this.dialogTitle = "添加";
-      this.$refs.dialog.dialogVisible = true;
+      if (this.status == "0" && this.carouselTable.length < 3) {
+        this.$refs.dialog.dialogVisible = true;
+      } else if (this.status == "1" && this.moreTable.length < 3) {
+        this.$refs.dialog.dialogVisible = true;
+      } else if (this.status == "2" && this.techTable.length < 3) {
+        this.$refs.dialog.dialogVisible = true;
+      } else {
+        this.$message({
+          message: "无法添加，记录量已达最大值！",
+          type: "warning",
+        });
+      }
     },
     handleEdit(row) {
       this.dialogTitle = "编辑";
