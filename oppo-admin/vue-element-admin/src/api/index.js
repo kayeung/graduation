@@ -59,12 +59,20 @@ const api = {
         return axios.post(base.homePageList, param)
     },
     /**
-     * 
-     * @param {id} id 
+     *  删除首页信息
+     * @param {id} param
      * @returns 
      */
-    removeHomePage(id) {
-        return axios.post(base.removeHomePage, id)
+    removeHomePage(param) {
+        return axios.post(base.removeHomePage, param)
+    },
+    /**
+     * 编辑首页信息
+     * @param {"id", "link", "pictureUrl","subtitle","tableName","title"} params 
+     * @returns 
+     */
+    editHomePage(params) {
+        return axios.post(base.editHomePage, params)
     },
     /**
      * 图片上传
@@ -76,11 +84,11 @@ const api = {
     },
     /**
      * 获取分类列表
-     * @param {id} id 
+     * @param {id} param 
      * @returns 
      */
-    getCategoryList(id) {
-        return axios.post(base.categoryList, id)
+    getCategoryList(param) {
+        return axios.post(base.categoryList, param)
     },
 
 }

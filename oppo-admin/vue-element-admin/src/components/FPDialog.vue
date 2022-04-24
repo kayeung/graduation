@@ -1,4 +1,6 @@
 <template>
+<!-- bug:只有轮播图可以成功编辑，另外两个标签在编辑时tableName为NULL
+          估计是因为tableName冲突了，可以通过获取点击标签页事件，动态更改tableName -->
   <div>
     <!-- 点击添加按钮后的模态框 -->
     <el-dialog
@@ -30,6 +32,11 @@
           >
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">
+              <span v-if="this.dialogTitle == '编辑'"
+                >如无需修改图片请<span style="color: #f56c6c"
+                  >不要</span
+                >点击上传按钮！<br
+              /></span>
               只能上传jpg/png/webp文件，且文件大小不能超过<span
                 style="color: #f56c6c; font-size: 14px"
               >
@@ -157,16 +164,16 @@ export default {
       console.log("表单已输入的信息：", this.form);
       this.$refs.form.validate((valid) => {
         if (valid) {
-          let obj = {
-            title: this.form.title,
-            subtitle: this.form.subtitle,
-            pictureUrl: this.form.pictureUrl,
-            link: this.form.link,
-            tableName: this.tableName,
-          };
           // 判断确定按钮的类型：新增？修改？
           if (this.dialogTitle === "添加") {
-            this.$api.addHomePage(obj).then((res) => {
+            let addObj = {
+              title: this.form.title,
+              subtitle: this.form.subtitle,
+              pictureUrl: this.form.pictureUrl,
+              link: this.form.link,
+              tableName: this.tableName,
+            };
+            this.$api.addHomePage(addObj).then((res) => {
               if (res.data.success === true) {
                 this.$message({
                   message: "添加成功！",
@@ -179,7 +186,26 @@ export default {
               }
             });
           } else {
-            console.log("修改商品");
+            let editObj = {
+              id: this.form.id,
+              title: this.form.title,
+              subtitle: this.form.subtitle,
+              pictureUrl: this.form.pictureUrl,
+              link: this.form.link,
+              tableName: this.tableName,
+            };
+            this.$api.editHomePage(editObj).then((res) => {
+              if (res.data.success === true) {
+                this.$message({
+                  message: "修改成功！",
+                  type: "success",
+                });
+                this.handleClose();
+                this.$emit("finished");
+              } else {
+                this.$message.error("修改失败！");
+              }
+            });
           }
         } else {
           console.log("error submit!!");

@@ -15,6 +15,7 @@ const base = {
     homePageList: '/api/home/list',//获取首页信息
     uploadPic: '/api/home/fileoss',//图片上传
     removeHomePage: '/api/home/delete',//删除首页信息
+    editHomePage: '/api/home/edit',//修改首页信息
     categoryList: '/api/category/list',//获取分类列表
 }
 
