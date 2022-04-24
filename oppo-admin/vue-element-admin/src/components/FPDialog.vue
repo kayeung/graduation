@@ -173,6 +173,7 @@ export default {
                   type: "success",
                 });
                 this.handleClose();
+                this.$emit("finished");
               } else {
                 this.$message.error("添加失败！");
               }

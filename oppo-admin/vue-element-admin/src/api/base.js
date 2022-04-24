@@ -12,9 +12,10 @@ const base = {
     host: 'http://localhost:8001',//基础域名
     login: '/api/user/login',//登录接口
     addHomePage: '/api/home/add',//新增首页信息
-    homeList:'/api/home/list',//获取首页信息
-    uploadPic:'/api/home/fileoss',//图片上传
-    categoryList:'/api/category/list',//获取分类列表
+    homePageList: '/api/home/list',//获取首页信息
+    uploadPic: '/api/home/fileoss',//图片上传
+    removeHomePage: '/api/home/delete',//删除首页信息
+    categoryList: '/api/category/list',//获取分类列表
 }
 
 export default base;

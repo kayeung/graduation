@@ -24,7 +24,8 @@
       :dialogTitle="dialogTitle"
       ref="dialog"
       :rowData="rowData"
-      :status=this.status
+      :status="this.status"
+      @finished="refreshTable"
     />
     <!-- 表格主体 -->
     <el-table
@@ -81,8 +82,20 @@
               @click="handleEdit(scope.row)"
               >编辑</el-button
             >
-            <el-button type="danger" size="mini" icon="el-icon-delete"
-              >删除</el-button
+            <el-popconfirm
+              icon="el-icon-warning"
+              icon-color="red"
+              title="真的要删除吗？"
+              @confirm="() => remove(scope.row)"
+            >
+              <el-button
+                type="danger"
+                size="mini"
+                icon="el-icon-delete"
+                slot="reference"
+                style="margin-left: 10px"
+                >删除</el-button
+              ></el-popconfirm
             >
           </el-row>
         </template>
@@ -99,29 +112,7 @@ export default {
     FPDialog,
   },
   mounted() {
-    let that = this;
-    let params = new URLSearchParams();
-    // console.log("status:", this.status);
-    params.append(
-      "tableName",
-      this.status == "0"
-        ? "home_page"
-        : this.status == "1"
-        ? "more_product_page"
-        : this.status == "2"
-        ? "technology_page"
-        : ""
-    );
-    this.$api.getHomeList(params).then((res) => {
-      console.log("res.data:", res.data);
-      if (this.status == "0") {
-        that.carouselTable = res.data.data;
-      } else if (this.status == "1") {
-        that.moreTable = res.data.data;
-      } else if (this.status == "2") {
-        that.techTable = res.data.data;
-      }
-    });
+    this.refreshTable();
   },
   data() {
     return {
@@ -135,6 +126,31 @@ export default {
     };
   },
   methods: {
+    refreshTable() {
+      let that = this;
+      let params = new URLSearchParams();
+      // console.log("status:", this.status);
+      params.append(
+        "tableName",
+        this.status == "0"
+          ? "home_page"
+          : this.status == "1"
+          ? "more_product_page"
+          : this.status == "2"
+          ? "technology_page"
+          : ""
+      );
+      this.$api.getHomePageList(params).then((res) => {
+        console.log("res.data:", res.data);
+        if (this.status == "0") {
+          that.carouselTable = res.data.data;
+        } else if (this.status == "1") {
+          that.moreTable = res.data.data;
+        } else if (this.status == "2") {
+          that.techTable = res.data.data;
+        }
+      });
+    },
     handleAdd() {
       this.dialogTitle = "添加";
       if (this.status == "0" && this.carouselTable.length < 3) {
@@ -154,6 +170,35 @@ export default {
       this.dialogTitle = "编辑";
       this.$refs.dialog.dialogVisible = true;
       this.rowData = { ...row }; //防止重复点击相同行，watch不到数据
+    },
+    remove(row) {
+      console.log("row:", row);
+      let obj = {
+        id: row.id,
+        tableName:
+          this.status == "0"
+            ? "home_page"
+            : this.status == "1"
+            ? "more_product_page"
+            : this.status == "2"
+            ? "technology_page"
+            : "",
+      };
+      this.$api.removeHomePage(obj).then((res) => {
+        console.log("delete:", res);
+        if (res.data.success === true) {
+          this.$message({
+            message: "删除成功！",
+            type: "success",
+          });
+          this.refreshTable();
+        } else {
+          this.$message({
+            message: "删除失败！",
+            type: "warning",
+          });
+        }
+      });
     },
   },
 };

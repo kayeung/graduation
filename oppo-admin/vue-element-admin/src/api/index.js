@@ -39,7 +39,7 @@ const api = {
      * @param {userName,password} params 
      * @returns 
      */
-    getLogin(params) {  
+    getLogin(params) {
         return axios.post(base.login, params)
     },
     /**
@@ -47,32 +47,40 @@ const api = {
      * @param {title,subtitle,pictureUrl, link} params 
      * @returns 
      */
-    addHomePage(params){ 
-        return axios.post(base.addHomePage,params)
+    addHomePage(params) {
+        return axios.post(base.addHomePage, params)
     },
     /**
      * 获取首页信息
      * @param {tableName} param
      * @returns 
      */
-    getHomeList(param){
-        return axios.post(base.homeList,param)
+    getHomePageList(param) {
+        return axios.post(base.homePageList, param)
+    },
+    /**
+     * 
+     * @param {id} id 
+     * @returns 
+     */
+    removeHomePage(id) {
+        return axios.post(base.removeHomePage, id)
     },
     /**
      * 图片上传
      * @param {file} file 
      * @returns 
      */
-    uploadPic(file){
-        return axios.post(base.uploadPic,file)
+    uploadPic(file) {
+        return axios.post(base.uploadPic, file)
     },
     /**
      * 获取分类列表
      * @param {id} id 
      * @returns 
      */
-    getCategoryList(id){
-        return axios.post(base.categoryList,id)
+    getCategoryList(id) {
+        return axios.post(base.categoryList, id)
     },
 
 }
