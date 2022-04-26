@@ -1,6 +1,4 @@
 <template>
-<!-- bug:只有轮播图可以成功编辑，另外两个标签在编辑时tableName为NULL
-          估计是因为tableName冲突了，可以通过获取点击标签页事件，动态更改tableName -->
   <div>
     <!-- 点击添加按钮后的模态框 -->
     <el-dialog
