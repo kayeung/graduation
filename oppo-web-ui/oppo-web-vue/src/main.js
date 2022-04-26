@@ -2,9 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import api from './api/index.js'
 import $ from 'jquery'
 import './assets/css/bootstrap.min.css'
 import './assets/js/bootstrap.min'
+
 import {Menu,Submenu,MenuItem,MenuItemGroup, Collapse,
   CollapseItem,} from 'element-ui';
 
@@ -15,6 +17,8 @@ Vue.use(MenuItem);
 Vue.use(MenuItemGroup);
 Vue.use(Collapse);
 Vue.use(CollapseItem);
+
+Vue.prototype.$api=api;
 
 Vue.config.productionTip = false
 
