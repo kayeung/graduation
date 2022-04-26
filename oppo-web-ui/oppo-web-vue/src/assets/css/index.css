@@ -178,7 +178,7 @@ img {
 
     #oppo-thumbnail-right {
         height: 308.38px;
-        width: auto;
+        width: 100%;
     }
 
 }
@@ -204,7 +204,7 @@ img {
 
     #oppo-thumbnail-right {
         height: 406.27px;
-        width: auto;
+        width: 100%;
     }
 }
 
@@ -252,12 +252,11 @@ img {
 
     #oppo-thumbnail-right {
         max-height: 495.28px;
-        width: auto;
+        width: 100%;
     }
 
     #oppo-thumbnail-right {
         height: 495.28px;
-        width: auto;
     }
 }
 

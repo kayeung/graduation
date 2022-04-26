@@ -1,4 +1,5 @@
 <template>
+  <!-- bug:oppo科技样式布局循环需要修改 -->
   <div class="body">
     <!-- 导航条 -->
     <Navbar />
@@ -199,7 +200,34 @@
         </div>
         <div class="content">
           <div class="row">
-            <div class="col-sm-8">
+            <!-- 下面这个div有问题，需求是数组长度为1时col-sm-12,为2时col-sm-8和col-sm-4 -->
+            <div
+              class="col-sm-6"
+              :class="item == 1 ? 'col-sm-4' : 'col-sm-8'"
+              v-for="item in techTable"
+              :key="item.id"
+            >
+              <div
+                class="thumbnail oppo-thumbnail"
+                style="background-color: #f5f5f5"
+              >
+                <img
+                  :src="item.pictureUrl"
+                  alt="..."
+                  class="img-responsive"
+                  id="oppo-thumbnail-right"
+                />
+                <div class="caption">
+                  <h3>{{ item.title }}</h3>
+                  <p>{{ item.subtitle }}</p>
+                  <p>
+                    <a :href="item.link" class="btn" role="button">了解更多</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div class="col-sm-8">
               <a href="#">
                 <div
                   class="thumbnail oppo-thumbnail"
@@ -217,16 +245,13 @@
                 </div>
               </a>
             </div>
-
-            <div class="col-sm-4">
+ 
+           <div class="col-sm-8">
               <a href="#">
                 <div
                   class="thumbnail oppo-thumbnail"
                   style="background-color: #f5f5f5"
                 >
-                  <!-- <img
-                  src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/technology/middlebanner/5g-middlebanner-1340x1786-v3-pc.jpg.thumb.webp"
-                  alt="..."> -->
                   <img
                     src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/technology/middlebanner/5g-middlebanner-1340x1786-v3-pc.jpg.thumb.webp"
                     alt="..."
@@ -240,8 +265,7 @@
                   </div>
                 </div>
               </a>
-            </div><!--end-->
-
+            </div> -->
           </div>
         </div>
       </div>
@@ -263,11 +287,18 @@ export default {
     Footer,
   },
   mounted() {
+    let that = this;
     let params = new URLSearchParams();
     params.append("tableName", "technology_page");
-    this.$api.getHomePageList(params).then((res)=>{
-      console.log("res.data:",res.data);
+    this.$api.getHomePageList(params).then((res) => {
+      that.techTable = res.data.data;
+      console.log("techTable", that.techTable);
     });
+  },
+  data() {
+    return {
+      techTable: [],
+    };
   },
 };
 </script>
