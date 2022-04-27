@@ -1,4 +1,6 @@
 <template>
+<!-- bug:1.目前轮播图不能轮播，手动点击按钮都不能切换图片，估计是使用了v-for导致bootstrap的js冲突了
+                  2.如果仍然解决不了1，就要考虑换用elementUI的走马灯（尽快决定！时间不多了！！！） -->
   <div class="body">
     <!-- 导航条 -->
     <Navbar />
@@ -20,8 +22,52 @@
         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
       </ol>
 
+      <!-- 轮播图 -->
+      <div
+        class="carousel-inner"
+        role="listbox"
+        v-for="(item, index) in homeTable"
+        :key="item.id"
+      >
+        <div class="item" :class="index == 0 ? 'active' : ''">
+          <img
+            src="../assets/images/find-N-vertical.webp"
+            class="img-responsive visible-xs-inline topbanner-vertical-img"
+            alt="..."
+          />
+          <img
+            :src="item.pictureUrl"
+            class="img-responsive hidden-xs"
+            alt="..."
+          />
+          <div class="carousel-content container">
+            <h2 class="title">
+              {{ item.title }}
+            </h2>
+            <h3 class="subtitle">{{ item.subtitle }}</h3>
+            <a
+              href="/gooddetail"
+              id="btn"
+              class="btn"
+              role="button"
+              style="background-color: black; border-color: black"
+              >了解更多</a
+            >
+            <!-- 手机版按钮 -->
+            <a
+              :href="item.link"
+              id="btn-lg"
+              class="btn btn-lg"
+              role="button"
+              style="background-color: black; border-color: black"
+              >了解更多</a
+            >
+          </div>
+        </div>
+      </div>
+
       <!-- Wrapper for slides -->
-      <div class="carousel-inner" role="listbox">
+      <!-- <div class="carousel-inner" role="listbox">
         <div class="item active">
           <img
             src="../assets/images/find-N-vertical.webp"
@@ -89,7 +135,7 @@
             >
           </div>
         </div>
-      </div>
+      </div> -->
 
       <!-- Controls -->
       <a
