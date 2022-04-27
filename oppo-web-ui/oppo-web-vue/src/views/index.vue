@@ -1,12 +1,53 @@
 <template>
-<!-- bug:1.目前轮播图不能轮播，手动点击按钮都不能切换图片，估计是使用了v-for导致bootstrap的js冲突了
-                  2.如果仍然解决不了1，就要考虑换用elementUI的走马灯（尽快决定！时间不多了！！！） -->
+  <!-- bug:1.轮播图背景为黑色时会遮住标题和副标题，可把字体换成灰色
+                    2.轮播图高度总比图片高度要高一点点，导致与下方模块的空白隔太多
+                    3.当屏幕宽度缩小到小于768px时，轮播图高度不够，无法完整显示竖向的图片（要完善媒体查询的值） -->
   <div class="body">
     <!-- 导航条 -->
     <Navbar />
-    <!-- 轮播图 -->
-
+    <!-- ElementUI轮播图 -->
+    <el-carousel indicator-position="none">
+      <el-carousel-item v-for="item in homeTable" :key="item.id">
+        <div class="item">
+          <img
+            src="../assets/images/find-N-vertical.webp"
+            class="img-responsive visible-xs-inline topbanner-vertical-img"
+            alt="..."
+          />
+          <img
+            :src="item.pictureUrl"
+            class="img-responsive hidden-xs"
+            alt="..."
+          />
+          <div class="carousel-content container">
+            <h2 class="title">
+              {{ item.title }}
+            </h2>
+            <h3 class="subtitle">{{ item.subtitle }}</h3>
+            <a
+              href="/gooddetail"
+              id="btn"
+              class="btn"
+              role="button"
+              style="background-color: black; border-color: black"
+              >了解更多</a
+            >
+            <!-- 手机版按钮 -->
+            <a
+              :href="item.link"
+              id="btn-lg"
+              class="btn btn-lg"
+              role="button"
+              style="background-color: black; border-color: black"
+              >了解更多</a
+            >
+          </div>
+        </div>
+      </el-carousel-item>
+    </el-carousel>
+    <!-- Bootstrap轮播图 -->
     <div
+      v-show="false"
       id="carousel-example-generic"
       class="carousel slide oppo-carousel"
       data-ride="carousel"
@@ -15,11 +56,12 @@
       <!-- Indicators -->
       <ol class="carousel-indicators">
         <li
+          v-for="(item, index) in homeTable"
+          :key="item.id"
           data-target="#carousel-example-generic"
-          data-slide-to="0"
-          class="active"
+          :data-slide-to="index"
+          :class="index == 0 ? 'active' : ''"
         ></li>
-        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
       </ol>
 
       <!-- 轮播图 -->
@@ -352,5 +394,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="less" scoped>
+/deep/ .el-carousel,/deep/ .el-carousel__container {
+  display: block;
+  top: -50px;
+  height: 49vw;
+}
 </style>
