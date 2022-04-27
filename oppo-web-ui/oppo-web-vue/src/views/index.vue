@@ -1,5 +1,5 @@
 <template>
-  <!-- bug:oppo科技样式布局循环需要修改 -->
+  <!-- 更多产品已做了3个产品时的布局，只有1个和3个的还没做-->
   <div class="body">
     <!-- 导航条 -->
     <Navbar />
@@ -121,7 +121,60 @@
       </a>
     </div>
 
-    <!-- 内容 -->
+    <!-- 更多产品 -->
+    <div class="newProdection">
+      <div class="container">
+        <div class="page-header">
+          <h1 style="font-size: 42px">
+            更多产品 <a style="cursor: pointer">查看其它产品</a>
+          </h1>
+        </div>
+        <div class="content">
+          <div class="row">
+            <div class="col-sm-12 col-lg-4">
+              <div class="row">
+                <div v-for="item in moreTable.slice(0, 2)" :key="item.id">
+                  <div class="col-sm-6 col-lg-12">
+                    <div class="thumbnail oppo-thumbnail">
+                      <img :src="item.pictureUrl" alt="..." />
+                      <div class="caption">
+                        <h3>{{ item.title }} <small>新品</small></h3>
+                        <p>{{ item.subtitle }}</p>
+                        <p>
+                          <a :href="item.link" class="btn" role="button"
+                        >了解更多</a
+                      >
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--row-->
+            </div>
+            <div v-for="item in moreTable.slice(2, 3)" :key="item.id">
+              <div class="col-sm-6 col-lg-7 col-lg-offset-1">
+                <div class="thumbnail oppo-thumbnail">
+                  <img
+                    :src="item.pictureUrl"
+                    alt="..."
+                    id="newProductionRight"
+                  />
+                  <div class="caption">
+                    <h3>{{ item.title }} <small>热销</small></h3>
+                    <p>{{ item.subtitle }}</p>
+                    <p><a :href="item.link"  class="btn" role="button">了解更多</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 
+    <!-- 更多产品 
     <div class="newProdection">
       <div class="container">
         <div class="page-header">
@@ -157,7 +210,6 @@
                         src="../assets/images/index-content-enco-air2.webp"
                         alt="..."
                       />
-
                       <div class="caption">
                         <h3>OPPO Enco Air2<small>新品</small></h3>
                         <p>好声音，耳目一新</p>
@@ -169,8 +221,8 @@
                   </a>
                 </div>
               </div>
+              
             </div>
-
             <div class="col-sm-6 col-lg-7 col-lg-offset-1">
               <a href="">
                 <div class="thumbnail oppo-thumbnail">
@@ -190,87 +242,56 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-    <!-- 内容2 -->
-    <div class="oppo-techology">
-      <div class="container">
-        <div class="page-header">
-          <h1 style="font-size: 42px">OPPO科技</h1>
-        </div>
-        <div class="content">
-          <div class="row">
-            <!-- 下面这个div有问题，需求是数组长度为1时col-sm-12,为2时col-sm-8和col-sm-4 -->
-            <div
-              class="col-sm-6"
-              :class="item == 1 ? 'col-sm-4' : 'col-sm-8'"
-              v-for="item in techTable"
-              :key="item.id"
-            >
+    <!-- OPPO科技 -->
+    <div v-show="!techTable.length == 0">
+      <div class="oppo-techology">
+        <div class="container">
+          <div class="page-header">
+            <h1 style="font-size: 42px">OPPO科技</h1>
+          </div>
+          <div class="content">
+            <div class="row">
               <div
-                class="thumbnail oppo-thumbnail"
-                style="background-color: #f5f5f5"
+                v-for="(item, index) in techTable"
+                :class="
+                  techTable.length == 1
+                    ? 'col-sm-12'
+                    : techTable.length == 3
+                    ? 'col-sm-4'
+                    : index == 1
+                    ? 'col-sm-4'
+                    : 'col-sm-8'
+                "
+                :key="item.id"
               >
-                <img
-                  :src="item.pictureUrl"
-                  alt="..."
-                  class="img-responsive"
-                  id="oppo-thumbnail-right"
-                />
-                <div class="caption">
-                  <h3>{{ item.title }}</h3>
-                  <p>{{ item.subtitle }}</p>
-                  <p>
-                    <a :href="item.link" class="btn" role="button">了解更多</a>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <!-- <div class="col-sm-8">
-              <a href="#">
                 <div
                   class="thumbnail oppo-thumbnail"
                   style="background-color: #f5f5f5"
                 >
                   <img
-                    src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/marisilicon-x/middlebanner/marisilicon-x_middlebanner-1600x1068-pc.jpg.thumb.webp"
-                    alt="..."
-                  />
-                  <div class="caption">
-                    <h3>马里亚纳® MariSilicon X</h3>
-                    <p>OPPO 首个自研芯片，全球第一个 6nm 影像专用的 NPU 芯片</p>
-                    <p><a href="#" class="btn" role="button">了解更多</a></p>
-                  </div>
-                </div>
-              </a>
-            </div>
- 
-           <div class="col-sm-8">
-              <a href="#">
-                <div
-                  class="thumbnail oppo-thumbnail"
-                  style="background-color: #f5f5f5"
-                >
-                  <img
-                    src="https://image.oppo.com/content/dam/oppo/common/mkt/v2-2/technology/middlebanner/5g-middlebanner-1340x1786-v3-pc.jpg.thumb.webp"
+                    :src="item.pictureUrl"
                     alt="..."
                     class="img-responsive"
                     id="oppo-thumbnail-right"
                   />
                   <div class="caption">
-                    <h3>5G，连接身边的世界</h3>
-                    <p>OPPO 相信 5G 不止是一种技术，更代表着无限可能</p>
-                    <p><a href="#" class="btn" role="button">了解更多</a></p>
+                    <h3>{{ item.title }}</h3>
+                    <p>{{ item.subtitle }}</p>
+                    <p>
+                      <a :href="item.link" class="btn" role="button"
+                        >了解更多</a
+                      >
+                    </p>
                   </div>
                 </div>
-              </a>
-            </div> -->
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-
     <!-- footer -->
     <Footer />
   </div>
@@ -289,7 +310,20 @@ export default {
   mounted() {
     let that = this;
     let params = new URLSearchParams();
-    params.append("tableName", "technology_page");
+
+    params.append("tableName", "home_page");
+    this.$api.getHomePageList(params).then((res) => {
+      that.homeTable = res.data.data;
+      console.log("home_page", that.homeTable);
+    });
+
+    params.set("tableName", "more_product_page");
+    this.$api.getHomePageList(params).then((res) => {
+      that.moreTable = res.data.data;
+      console.log("moreTable", that.moreTable);
+    });
+
+    params.set("tableName", "technology_page");
     this.$api.getHomePageList(params).then((res) => {
       that.techTable = res.data.data;
       console.log("techTable", that.techTable);
@@ -297,6 +331,8 @@ export default {
   },
   data() {
     return {
+      homeTable: [],
+      moreTable: [],
       techTable: [],
     };
   },
