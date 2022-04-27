@@ -181,6 +181,16 @@ img {
         width: 100%;
     }
 
+    #newProductionRight {
+        height: 586px;
+        object-fit: cover;
+        /* Do not scale the image */
+        object-position: center;
+        /* Center the image within the element */
+    }
+
+
+
 }
 
 
@@ -205,6 +215,15 @@ img {
     #oppo-thumbnail-right {
         height: 406.27px;
         width: 100%;
+    }
+
+    #newProductionRight {
+        height: 586px;
+        /* max-height: 586px; */
+        object-fit: cover;
+        /* Do not scale the image */
+        object-position: center;
+        /* Center the image within the element */
     }
 }
 

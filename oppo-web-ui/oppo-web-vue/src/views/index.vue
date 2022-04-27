@@ -1,5 +1,4 @@
 <template>
-  <!-- 更多产品已做了3个产品时的布局，只有1个和3个的还没做-->
   <div class="body">
     <!-- 导航条 -->
     <Navbar />
@@ -122,48 +121,87 @@
     </div>
 
     <!-- 更多产品 -->
-    <div class="newProdection">
-      <div class="container">
-        <div class="page-header">
-          <h1 style="font-size: 42px">
-            更多产品 <a style="cursor: pointer">查看其它产品</a>
-          </h1>
-        </div>
-        <div class="content">
-          <div class="row">
-            <div class="col-sm-12 col-lg-4">
+    <div v-show="moreTable.length != 0">
+      <div class="newProdection">
+        <div class="container" style="margin-bottom: 100px">
+          <div class="page-header">
+            <h1 style="font-size: 42px">
+              更多产品 <a style="cursor: pointer">查看其它产品</a>
+            </h1>
+          </div>
+          <div class="content">
+            <!-- 3款布局 -->
+            <div v-show="moreTable.length == 3">
               <div class="row">
-                <div v-for="item in moreTable.slice(0, 2)" :key="item.id">
-                  <div class="col-sm-6 col-lg-12">
+                <div class="col-sm-12 col-md-4">
+                  <div class="row">
+                    <div v-for="item in moreTable.slice(1, 3)" :key="item.id">
+                      <div class="col-sm-6 col-md-12">
+                        <div class="thumbnail oppo-thumbnail">
+                          <img :src="item.pictureUrl" alt="..." />
+                          <div class="caption">
+                            <h3>{{ item.title }} <small>新品</small></h3>
+                            <p>{{ item.subtitle }}</p>
+                            <p>
+                              <a :href="item.link" class="btn" role="button"
+                                >了解更多</a
+                              >
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div v-for="item in moreTable.slice(0, 1)" :key="item.id">
+                  <div class="col-sm-6 col-md-7 col-md-offset-1">
                     <div class="thumbnail oppo-thumbnail">
-                      <img :src="item.pictureUrl" alt="..." />
+                      <img
+                        :src="item.pictureUrl"
+                        alt="..."
+                        id="newProductionRight"
+                      />
                       <div class="caption">
-                        <h3>{{ item.title }} <small>新品</small></h3>
+                        <h3>{{ item.title }} <small>热销</small></h3>
                         <p>{{ item.subtitle }}</p>
                         <p>
                           <a :href="item.link" class="btn" role="button"
-                        >了解更多</a
-                      >
+                            >了解更多</a
+                          >
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!--row-->
             </div>
-            <div v-for="item in moreTable.slice(2, 3)" :key="item.id">
-              <div class="col-sm-6 col-lg-7 col-lg-offset-1">
-                <div class="thumbnail oppo-thumbnail">
-                  <img
-                    :src="item.pictureUrl"
-                    alt="..."
-                    id="newProductionRight"
-                  />
-                  <div class="caption">
-                    <h3>{{ item.title }} <small>热销</small></h3>
-                    <p>{{ item.subtitle }}</p>
-                    <p><a :href="item.link"  class="btn" role="button">了解更多</a></p>
+            <!-- 1-2款布局 -->
+            <div v-show="moreTable.length != 3">
+              <div class="row">
+                <div v-for="item in moreTable" :key="item.id">
+                  <div
+                    :class="
+                      moreTable.length == 1
+                        ? 'col-sm-8 col-sm-offset-2'
+                        : 'col-sm-6'
+                    "
+                  >
+                    <div class="thumbnail oppo-thumbnail">
+                      <img
+                        :src="item.pictureUrl"
+                        alt="..."
+                        id="newProductionRight"
+                      />
+                      <div class="caption">
+                        <h3>{{ item.title }} <small>热销</small></h3>
+                        <p>{{ item.subtitle }}</p>
+                        <p>
+                          <a :href="item.link" class="btn" role="button"
+                            >了解更多</a
+                          >
+                        </p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -172,77 +210,6 @@
         </div>
       </div>
     </div>
-
-    <!-- 
-    <!-- 更多产品 
-    <div class="newProdection">
-      <div class="container">
-        <div class="page-header">
-          <h1 style="font-size: 42px">
-            更多产品 <a style="cursor: pointer">查看其它产品</a>
-          </h1>
-        </div>
-        <div class="content">
-          <div class="row">
-            <div class="col-sm-12 col-lg-4">
-              <div class="row">
-                <div class="col-sm-6 col-lg-12">
-                  <a href="#">
-                    <div class="thumbnail oppo-thumbnail">
-                      <img
-                        src="../assets/images/index-content-A96.webp"
-                        alt="..."
-                      />
-                      <div class="caption">
-                        <h3>小星环 OPPO A96<small>新品</small></h3>
-                        <p>轻薄一点，轻快很多</p>
-                        <p>
-                          <a href="#" class="btn" role="button">了解更多</a>
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-                <div class="col-sm-6 col-lg-12">
-                  <a href="">
-                    <div class="thumbnail oppo-thumbnail">
-                      <img
-                        src="../assets/images/index-content-enco-air2.webp"
-                        alt="..."
-                      />
-                      <div class="caption">
-                        <h3>OPPO Enco Air2<small>新品</small></h3>
-                        <p>好声音，耳目一新</p>
-                        <p>
-                          <a href="#" class="btn" role="button">了解更多</a>
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-              
-            </div>
-            <div class="col-sm-6 col-lg-7 col-lg-offset-1">
-              <a href="">
-                <div class="thumbnail oppo-thumbnail">
-                  <img
-                    src="../assets/images/index-content-reno7.webp"
-                    alt="..."
-                    id="newProductionRight"
-                  />
-                  <div class="caption">
-                    <h3>OPPO Reno7 新年版 <small>热销</small></h3>
-                    <p>爱不释手红丝绒</p>
-                    <p><a href="#" class="btn" role="button">了解更多</a></p>
-                  </div>
-                </div>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
 
     <!-- OPPO科技 -->
     <div v-show="!techTable.length == 0">
