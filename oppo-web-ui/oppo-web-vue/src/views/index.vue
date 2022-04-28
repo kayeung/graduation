@@ -1,12 +1,15 @@
 <template>
   <!-- bug:1.轮播图背景为黑色时会遮住标题和副标题，可把字体换成灰色
                     2.轮播图高度总比图片高度要高一点点，导致与下方模块的空白隔太多
-                    3.当屏幕宽度缩小到小于768px时，轮播图高度不够，无法完整显示竖向的图片（要完善媒体查询的值） -->
+                    3.当屏幕宽度缩小到小于768px时，轮播图高度不够，无法完整显示竖向的图片（要完善媒体查询的值）
+                    4.图片跨域未加入白名单 
+                    -------------------------
+                    5.目前切换回bootstrap的轮播图，解决无法前进后退切换图片js即可-->
   <div class="body">
     <!-- 导航条 -->
     <Navbar />
     <!-- ElementUI轮播图 -->
-    <el-carousel indicator-position="none">
+    <el-carousel indicator-position="none" v-show="false">
       <el-carousel-item v-for="item in homeTable" :key="item.id">
         <div class="item">
           <img
@@ -16,20 +19,22 @@
           />
           <img
             :src="item.pictureUrl"
-            class="img-responsive hidden-xs"
+            class="img-responsive hidden-xs pic"
             alt="..."
           />
+          <!-- @load="bg2TextColor"
+            crossorigin="anonymous" -->
           <div class="carousel-content container">
-            <h2 class="title">
+            <h2 class="title" style="color: #777777">
               {{ item.title }}
             </h2>
-            <h3 class="subtitle">{{ item.subtitle }}</h3>
+            <h3 class="subtitle" style="color: #777777">{{ item.subtitle }}</h3>
             <a
               href="/gooddetail"
               id="btn"
               class="btn"
               role="button"
-              style="background-color: black; border-color: black"
+              style="background-color: #777777; border-color: #777777"
               >了解更多</a
             >
             <!-- 手机版按钮 -->
@@ -38,7 +43,7 @@
               id="btn-lg"
               class="btn btn-lg"
               role="button"
-              style="background-color: black; border-color: black"
+              style="background-color: #777777; border-color: #777777"
               >了解更多</a
             >
           </div>
@@ -47,7 +52,7 @@
     </el-carousel>
     <!-- Bootstrap轮播图 -->
     <div
-      v-show="false"
+      v-show="true"
       id="carousel-example-generic"
       class="carousel slide oppo-carousel"
       data-ride="carousel"
@@ -213,9 +218,7 @@
       <div class="newProdection">
         <div class="container" style="margin-bottom: 100px">
           <div class="page-header">
-            <h1 style="font-size: 42px">
-              更多产品 <a style="cursor: pointer">查看其它产品</a>
-            </h1>
+            <h1 style="font-size: 42px">更多产品</h1>
           </div>
           <div class="content">
             <!-- 3款布局 -->
@@ -357,6 +360,8 @@ import "../assets/css/index.css";
 import "../assets/js/iconfont";
 import Navbar from "../components/navbar.vue";
 import Footer from "../components/footer.vue";
+import textColor from "textcolor";
+import ColorThief from "colorthief";
 export default {
   components: {
     Navbar,
@@ -389,15 +394,30 @@ export default {
       homeTable: [],
       moreTable: [],
       techTable: [],
+      titlesColor: "",
     };
+  },
+  methods: {
+    bg2TextColor() {
+      const colorThief = new ColorThief();
+      const pic = document.querySelector(".pic");
+      console.log("pic:", pic);
+      let color = colorThief.getColor(pic);
+      console.log("color:", color[0], color[1], color[2]);
+      let hex = "rgb(color[0],color[1],color[2])";
+      let textcolor = textColor.findTextColor(hex);
+      this.titlesColor = textcolor;
+      console.log("titlesColor:", this.titlesColor);
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
-/deep/ .el-carousel,/deep/ .el-carousel__container {
+/deep/ .el-carousel,
+/deep/ .el-carousel__container {
   display: block;
   top: -50px;
-  height: 49vw;
+  height: 50vw;
 }
 </style>

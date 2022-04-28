@@ -18,8 +18,8 @@
 .btn {
     border-radius: 0px !important;
     color: white !important;
-    background-color: black !important;
-    border-color: black !important;
+    background-color: black ;
+    border-color: black;
 }
 
 

@@ -7,6 +7,7 @@ import $ from 'jquery'
 import './assets/css/bootstrap.min.css'
 import './assets/js/bootstrap.min'
 
+
 import {
   Menu, Submenu, MenuItem, MenuItemGroup, Collapse,
   CollapseItem, Carousel,
