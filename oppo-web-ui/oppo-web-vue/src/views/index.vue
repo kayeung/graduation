@@ -8,48 +8,6 @@
   <div class="body">
     <!-- 导航条 -->
     <Navbar />
-    <!-- ElementUI轮播图 -->
-    <el-carousel indicator-position="none" v-show="false">
-      <el-carousel-item v-for="item in homeTable" :key="item.id">
-        <div class="item">
-          <img
-            src="../assets/images/find-N-vertical.webp"
-            class="img-responsive visible-xs-inline topbanner-vertical-img"
-            alt="..."
-          />
-          <img
-            :src="item.pictureUrl"
-            class="img-responsive hidden-xs pic"
-            alt="..."
-          />
-          <!-- @load="bg2TextColor"
-            crossorigin="anonymous" -->
-          <div class="carousel-content container">
-            <h2 class="title" style="color: #777777">
-              {{ item.title }}
-            </h2>
-            <h3 class="subtitle" style="color: #777777">{{ item.subtitle }}</h3>
-            <a
-              href="/gooddetail"
-              id="btn"
-              class="btn"
-              role="button"
-              style="background-color: #777777; border-color: #777777"
-              >了解更多</a
-            >
-            <!-- 手机版按钮 -->
-            <a
-              :href="item.link"
-              id="btn-lg"
-              class="btn btn-lg"
-              role="button"
-              style="background-color: #777777; border-color: #777777"
-              >了解更多</a
-            >
-          </div>
-        </div>
-      </el-carousel-item>
-    </el-carousel>
     <!-- Bootstrap轮播图 -->
     <div
       v-show="true"
@@ -70,13 +28,13 @@
       </ol>
 
       <!-- 轮播图 -->
-      <div
-        class="carousel-inner"
-        role="listbox"
-        v-for="(item, index) in homeTable"
-        :key="item.id"
-      >
-        <div class="item" :class="index == 0 ? 'active' : ''">
+      <div class="carousel-inner" role="listbox">
+        <div
+          class="item"
+          :class="index == 0 ? 'active' : ''"
+          v-for="(item, index) in homeTable"
+          :key="item.id"
+        >
           <img
             src="../assets/images/find-N-vertical.webp"
             class="img-responsive visible-xs-inline topbanner-vertical-img"
@@ -112,77 +70,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Wrapper for slides -->
-      <!-- <div class="carousel-inner" role="listbox">
-        <div class="item active">
-          <img
-            src="../assets/images/find-N-vertical.webp"
-            class="img-responsive visible-xs-inline topbanner-vertical-img"
-            alt="..."
-          />
-          <img
-            src="../assets/images/find-N.webp"
-            class="img-responsive hidden-xs"
-            alt="..."
-          />
-          <div class="carousel-content container">
-            <h2 class="title">
-              OPPO Find N <br />
-              全新折叠旗舰
-            </h2>
-            <h3 class="subtitle">从尝鲜，到常用</h3>
-            <a
-              href="/gooddetail"
-              id="btn"
-              class="btn"
-              role="button"
-              style="background-color: black; border-color: black"
-              >了解更多</a
-            >
-            <a
-              href="/gooddetail"
-              id="btn-lg"
-              class="btn btn-lg"
-              role="button"
-              style="background-color: black; border-color: black"
-              >了解更多</a
-            >
-          </div>
-        </div>
-        <div class="item">
-          <img
-            src="../assets/images/find-x5-vertical.webp"
-            class="img-responsive visible-xs-inline topbanner-vertical-img"
-            alt="..."
-          />
-          <img
-            src="../assets/images/find-x5.webp"
-            class="img-responsive hidden-xs"
-            alt="..."
-          />
-          <div class="carousel-content container">
-            <h2 class="title">OPPO Find X5 系列</h2>
-            <h3 class="subtitle">一帧影像，动用两块芯片。</h3>
-            <a
-              href="/gooddetail"
-              id="btn"
-              class="btn"
-              role="button"
-              style="background-color: black; border-color: black"
-              >了解更多</a
-            >
-            <a
-              href="/gooddetail"
-              id="btn-lg"
-              class="btn btn-lg"
-              role="button"
-              style="background-color: black; border-color: black"
-              >了解更多</a
-            >
-          </div>
-        </div>
-      </div> -->
 
       <!-- Controls -->
       <a
