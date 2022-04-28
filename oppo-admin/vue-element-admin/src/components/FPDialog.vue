@@ -24,7 +24,7 @@
             :file-list="fileList"
             list-type="picture"
             :on-success="successUpload"
-            :limit="1"
+            :limit="2"
             :on-exceed="handleExceed"
             :before-upload="beforeUpload"
           >

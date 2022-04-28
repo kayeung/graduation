@@ -1,10 +1,7 @@
 <template>
-  <!-- bug:1.轮播图背景为黑色时会遮住标题和副标题，可把字体换成灰色
-                    2.轮播图高度总比图片高度要高一点点，导致与下方模块的空白隔太多
-                    3.当屏幕宽度缩小到小于768px时，轮播图高度不够，无法完整显示竖向的图片（要完善媒体查询的值）
-                    4.图片跨域未加入白名单 
-                    -------------------------
-                    5.目前切换回bootstrap的轮播图，解决无法前进后退切换图片js即可-->
+  <!-- bug:1.可以尝试使用ColorThief和TextColor两个插件动态识别轮播图主色并反转标题的字体色
+                    2.要想实现1，必须做图片跨域加入白名单
+                    3.修改后端，让接口的图片URL可以存两张轮播图，一张pc横图，一张手机竖图 -->
   <div class="body">
     <!-- 导航条 -->
     <Navbar />
@@ -46,16 +43,16 @@
             alt="..."
           />
           <div class="carousel-content container">
-            <h2 class="title">
+            <h2 class="title" style="color:#777777">
               {{ item.title }}
             </h2>
-            <h3 class="subtitle">{{ item.subtitle }}</h3>
+            <h3 class="subtitle"  style="color:#777777">{{ item.subtitle }}</h3>
             <a
               href="/gooddetail"
               id="btn"
               class="btn"
               role="button"
-              style="background-color: black; border-color: black"
+              style="background-color: #777777; border-color: #777777"
               >了解更多</a
             >
             <!-- 手机版按钮 -->
