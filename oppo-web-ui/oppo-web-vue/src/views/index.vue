@@ -40,15 +40,16 @@
           <img
             :src="item.pictureUrl"
             class="img-responsive hidden-xs pic"
+            :id="'pic' + index"
             alt="..."
-            @load="bg2TextColor"
+            @load="bg2TextColor(index)"
             crossorigin="anonymous"
           />
           <div class="carousel-content container">
-            <h2 class="title" style="color:#777777">
+            <h2 class="title" style="color: #777777">
               {{ item.title }}
             </h2>
-            <h3 class="subtitle"  style="color:#777777">{{ item.subtitle }}</h3>
+            <h3 class="subtitle" style="color: #777777">{{ item.subtitle }}</h3>
             <a
               href="/gooddetail"
               id="btn"
@@ -284,14 +285,16 @@ export default {
     };
   },
   methods: {
-    bg2TextColor() {
+    bg2TextColor(item) {
+      console.log("11", item);
       const colorThief = new ColorThief();
-      const pic = document.querySelector(".pic");
+      const pic = document.querySelector("#pic0");
       console.log("pic:", pic);
       let color = colorThief.getColor(pic);
-      console.log("color:", color[0], color[1], color[2]);
-      let hex = "rgb(color[0],color[1],color[2])";
-      let textcolor = textColor.findTextColor(hex);
+      let rgb = "rgb(color[0],color[1],color[2])";
+      console.log("rgb:", color[0], color[1], color[2]);
+      let hex='#0D0F14';
+      let textcolor = textColor.findTextColor(rgb);
       this.titlesColor = textcolor;
       console.log("titlesColor:", this.titlesColor);
     },
@@ -300,10 +303,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-/deep/ .el-carousel,
-/deep/ .el-carousel__container {
-  display: block;
-  top: -50px;
-  height: 50vw;
-}
 </style>
