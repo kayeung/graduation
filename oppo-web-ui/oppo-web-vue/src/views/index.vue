@@ -39,8 +39,10 @@
           />
           <img
             :src="item.pictureUrl"
-            class="img-responsive hidden-xs"
+            class="img-responsive hidden-xs pic"
             alt="..."
+            @load="bg2TextColor"
+            crossorigin="anonymous"
           />
           <div class="carousel-content container">
             <h2 class="title" style="color:#777777">

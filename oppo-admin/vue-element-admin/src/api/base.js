@@ -17,6 +17,8 @@ const base = {
     removeHomePage: '/api/home/delete',//删除首页信息
     editHomePage: '/api/home/edit',//修改首页信息
     categoryList: '/api/category/list',//获取分类列表
+    getNavbar:'/api/link/getNavbar',//获取导航栏信息
+
 }
 
 export default base;
