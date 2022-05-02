@@ -1,0 +1,84 @@
+2022/04/19-23:10:03.161975 28a0 RocksDB version: 5.18.4
+2022/04/19-23:10:03.162157 28a0 Git sha rocksdb_build_git_sha:@b9a4a10659969c71e6f6eab4e4bae8c36ede919f@
+2022/04/19-23:10:03.162231 28a0 Compile date Mar 11 2020
+2022/04/19-23:10:03.162275 28a0 DB SUMMARY
+2022/04/19-23:10:03.162587 28a0 CURRENT file:  CURRENT
+2022/04/19-23:10:03.162609 28a0 IDENTITY file:  IDENTITY
+2022/04/19-23:10:03.162621 28a0 SST files in D:\OneDrive - 33.email.ac.id\Graduation\work-upload\nacos\nacos\data\protocol\raft\naming_persistent_service_v2\log dir, Total Num: 8, files: 000006.sst 000008.sst 000010.sst 000012.sst 000014.sst 000016.sst 000018.sst 000020.sst 
+2022/04/19-23:10:03.162634 28a0 Write Ahead Log file in D:\OneDrive - 33.email.ac.id\Graduation\work-upload\nacos\nacos\data\protocol\raft\naming_persistent_service_v2\log: 
+2022/04/19-23:10:03.174208 28a0                         Options.error_if_exists: 0
+2022/04/19-23:10:03.174238 28a0                       Options.create_if_missing: 1
+2022/04/19-23:10:03.174244 28a0                         Options.paranoid_checks: 1
+2022/04/19-23:10:03.174248 28a0                                     Options.env: 000002ACC4050CA0
+2022/04/19-23:10:03.174253 28a0                                Options.info_log: 000002ACC48D90A0
+2022/04/19-23:10:03.174257 28a0                Options.max_file_opening_threads: 16
+2022/04/19-23:10:03.174261 28a0                              Options.statistics: 000002ACC990A820
+2022/04/19-23:10:03.174265 28a0                               Options.use_fsync: 0
+2022/04/19-23:10:03.174269 28a0                       Options.max_log_file_size: 0
+2022/04/19-23:10:03.174274 28a0                  Options.max_manifest_file_size: 1073741824
+2022/04/19-23:10:03.174279 28a0                   Options.log_file_time_to_roll: 0
+2022/04/19-23:10:03.174283 28a0                       Options.keep_log_file_num: 1000
+2022/04/19-23:10:03.174287 28a0                    Options.recycle_log_file_num: 0
+2022/04/19-23:10:03.174291 28a0                         Options.allow_fallocate: 1
+2022/04/19-23:10:03.174295 28a0                        Options.allow_mmap_reads: 0
+2022/04/19-23:10:03.174299 28a0                       Options.allow_mmap_writes: 0
+2022/04/19-23:10:03.174303 28a0                        Options.use_direct_reads: 0
+2022/04/19-23:10:03.174307 28a0                        Options.use_direct_io_for_flush_and_compaction: 0
+2022/04/19-23:10:03.174311 28a0          Options.create_missing_column_families: 1
+2022/04/19-23:10:03.174315 28a0                              Options.db_log_dir: 
+2022/04/19-23:10:03.174320 28a0                                 Options.wal_dir: D:\OneDrive - 33.email.ac.id\Graduation\work-upload\nacos\nacos\data\protocol\raft\naming_persistent_service_v2\log
+2022/04/19-23:10:03.174324 28a0                Options.table_cache_numshardbits: 6
+2022/04/19-23:10:03.174328 28a0                      Options.max_subcompactions: 1
+2022/04/19-23:10:03.174332 28a0                  Options.max_background_flushes: 1
+2022/04/19-23:10:03.174336 28a0                         Options.WAL_ttl_seconds: 0
+2022/04/19-23:10:03.174340 28a0                       Options.WAL_size_limit_MB: 0
+2022/04/19-23:10:03.174344 28a0             Options.manifest_preallocation_size: 4194304
+2022/04/19-23:10:03.174348 28a0                     Options.is_fd_close_on_exec: 1
+2022/04/19-23:10:03.174352 28a0                   Options.advise_random_on_open: 1
+2022/04/19-23:10:03.174356 28a0                    Options.db_write_buffer_size: 0
+2022/04/19-23:10:03.174360 28a0                    Options.write_buffer_manager: 000002ACCA2D6B60
+2022/04/19-23:10:03.174364 28a0         Options.access_hint_on_compaction_start: 1
+2022/04/19-23:10:03.174368 28a0  Options.new_table_reader_for_compaction_inputs: 0
+2022/04/19-23:10:03.174372 28a0           Options.random_access_max_buffer_size: 1048576
+2022/04/19-23:10:03.174379 28a0                      Options.use_adaptive_mutex: 0
+2022/04/19-23:10:03.174384 28a0                            Options.rate_limiter: 0000000000000000
+2022/04/19-23:10:03.174388 28a0     Options.sst_file_manager.rate_bytes_per_sec: 0
+2022/04/19-23:10:03.174427 28a0                       Options.wal_recovery_mode: 2
+2022/04/19-23:10:03.174434 28a0                  Options.enable_thread_tracking: 0
+2022/04/19-23:10:03.174439 28a0                  Options.enable_pipelined_write: 0
+2022/04/19-23:10:03.174445 28a0         Options.allow_concurrent_memtable_write: 1
+2022/04/19-23:10:03.174449 28a0      Options.enable_write_thread_adaptive_yield: 1
+2022/04/19-23:10:03.174453 28a0             Options.write_thread_max_yield_usec: 100
+2022/04/19-23:10:03.174458 28a0            Options.write_thread_slow_yield_usec: 3
+2022/04/19-23:10:03.174462 28a0                               Options.row_cache: None
+2022/04/19-23:10:03.174466 28a0                              Options.wal_filter: None
+2022/04/19-23:10:03.174470 28a0             Options.avoid_flush_during_recovery: 0
+2022/04/19-23:10:03.174474 28a0             Options.allow_ingest_behind: 0
+2022/04/19-23:10:03.174478 28a0             Options.preserve_deletes: 0
+2022/04/19-23:10:03.174482 28a0             Options.two_write_queues: 0
+2022/04/19-23:10:03.174486 28a0             Options.manual_wal_flush: 0
+2022/04/19-23:10:03.174490 28a0             Options.max_background_jobs: 2
+2022/04/19-23:10:03.174494 28a0             Options.max_background_compactions: 4
+2022/04/19-23:10:03.174498 28a0             Options.avoid_flush_during_shutdown: 0
+2022/04/19-23:10:03.174502 28a0           Options.writable_file_max_buffer_size: 1048576
+2022/04/19-23:10:03.174506 28a0             Options.delayed_write_rate : 16777216
+2022/04/19-23:10:03.174510 28a0             Options.max_total_wal_size: 0
+2022/04/19-23:10:03.174514 28a0             Options.delete_obsolete_files_period_micros: 21600000000
+2022/04/19-23:10:03.174518 28a0                   Options.stats_dump_period_sec: 600
+2022/04/19-23:10:03.174522 28a0                          Options.max_open_files: -1
+2022/04/19-23:10:03.174526 28a0                          Options.bytes_per_sync: 0
+2022/04/19-23:10:03.174530 28a0                      Options.wal_bytes_per_sync: 0
+2022/04/19-23:10:03.174534 28a0       Options.compaction_readahead_size: 0
+2022/04/19-23:10:03.174538 28a0 Compression algorithms supported:
+2022/04/19-23:10:03.174543 28a0 	kZSTD supported: 1
+2022/04/19-23:10:03.174548 28a0 	kSnappyCompression supported: 1
+2022/04/19-23:10:03.174552 28a0 	kBZip2Compression supported: 0
+2022/04/19-23:10:03.174557 28a0 	kZlibCompression supported: 1
+2022/04/19-23:10:03.174561 28a0 	kLZ4Compression supported: 1
+2022/04/19-23:10:03.174565 28a0 	kXpressCompression supported: 0
+2022/04/19-23:10:03.174569 28a0 	kLZ4HCCompression supported: 1
+2022/04/19-23:10:03.174573 28a0 	kZSTDNotFinalCompression supported: 1
+2022/04/19-23:10:03.174591 28a0 Fast CRC32 supported: Supported on x86
+2022/04/19-23:10:03.177253 28a0 [db\version_set.cc:3508] Recovering from manifest file: MANIFEST-000031
+2022/04/19-23:10:03.177563 28a0 [db\db_impl.cc:388] Shutdown: canceling all background work
+2022/04/19-23:10:03.177696 28a0 [db\db_impl.cc:562] Shutdown complete

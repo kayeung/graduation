@@ -1,0 +1,56 @@
+2022-04-19 23:10:02,269 INFO Initializes the Raft protocol, raft-config info : {}
+
+2022-04-19 23:10:02,785 INFO ========= The raft protocol is starting... =========
+
+2022-04-19 23:10:02,832 INFO ========= The raft protocol start finished... =========
+
+2022-04-19 23:10:02,878 INFO create raft group : naming_persistent_service_v2
+
+2022-04-19 23:10:03,222 INFO shutdown jraft server
+
+2022-04-19 23:10:03,222 INFO ========= The raft protocol is starting to close =========
+
+2022-04-19 23:10:03,222 INFO ========= The raft protocol has been closed =========
+
+2022-04-19 23:19:25,225 INFO Initializes the Raft protocol, raft-config info : {}
+
+2022-04-19 23:19:25,709 INFO ========= The raft protocol is starting... =========
+
+2022-04-19 23:19:25,756 INFO ========= The raft protocol start finished... =========
+
+2022-04-19 23:19:25,819 INFO create raft group : naming_persistent_service_v2
+
+2022-04-19 23:19:26,178 INFO shutdown jraft server
+
+2022-04-19 23:19:26,178 INFO ========= The raft protocol is starting to close =========
+
+2022-04-19 23:19:26,178 INFO ========= The raft protocol has been closed =========
+
+2022-04-19 23:33:00,297 INFO Initializes the Raft protocol, raft-config info : {}
+
+2022-04-19 23:33:00,773 INFO ========= The raft protocol is starting... =========
+
+2022-04-19 23:33:00,817 INFO ========= The raft protocol start finished... =========
+
+2022-04-19 23:33:00,887 INFO create raft group : naming_persistent_service_v2
+
+2022-04-19 23:33:01,230 INFO shutdown jraft server
+
+2022-04-19 23:33:01,230 INFO ========= The raft protocol is starting to close =========
+
+2022-04-19 23:33:01,230 INFO ========= The raft protocol has been closed =========
+
+2022-04-19 23:42:18,503 INFO Initializes the Raft protocol, raft-config info : {}
+
+2022-04-19 23:42:18,878 INFO ========= The raft protocol is starting... =========
+
+2022-04-19 23:42:18,925 INFO ========= The raft protocol start finished... =========
+
+2022-04-19 23:42:18,972 INFO create raft group : naming_persistent_service_v2
+
+2022-04-19 23:42:19,269 INFO shutdown jraft server
+
+2022-04-19 23:42:19,269 INFO ========= The raft protocol is starting to close =========
+
+2022-04-19 23:42:19,269 INFO ========= The raft protocol has been closed =========
+

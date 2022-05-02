@@ -69,7 +69,31 @@ const api = {
      */
     getNavbar() {
         return axios.post(base.getNavbar)
-    }
+    },
+    /**
+     * 添加导航栏信息
+     * @param {label,linkUrl} params 
+     * @returns 
+     */
+    addNavbar(params) {
+        return axios.post(base.addNavbar, params)
+    },
+    /**
+     * 删除导航栏信息
+     * @param {id} param 
+     * @returns 
+     */
+    removeNavbar(param) {
+        return axios.post(base.removeNavbar, param)
+    },
+    /**
+     * 更新导航栏信息
+     * @param {id,label,linkUrl} params 
+     * @returns 
+     */
+    updateNavbar(params) {
+        return axios.post(base.updateNavbar, params)
+    },
 
 }
 

@@ -1,6 +1,4 @@
 <template>
-<!-- 目前已完成了获取信息的功能，添加的前端逻辑（但没有与接口对接）
-         还有删除，修改没做（后端也没做） -->
   <div>
     <el-table :data="tableData" border style="width: 100%" row-key="id">
       <el-table-column prop="label" label="标签" width="180">
@@ -21,7 +19,7 @@
       <el-table-column label="操作" width="180" align="left">
         <template slot="header">
           <span class="controlText">操作</span>
-          
+
           <el-button
             type="info"
             size="small"
@@ -53,7 +51,7 @@
             icon="el-icon-warning"
             icon-color="red"
             title="真的要删除吗？"
-            @confirm="() => remove(scope, scope.$index)"
+            @confirm="() => remove(scope.row)"
           >
             <el-button
               type="danger"
@@ -74,11 +72,7 @@
 <script>
 export default {
   created() {
-    let that = this;
-    this.$api.getNavbar().then((res) => {
-      that.tableData = res.data.data;
-      console.log("tableData:", that.tableData);
-    });
+    this.refreshTable();
   },
   data() {
     return {
@@ -86,17 +80,98 @@ export default {
     };
   },
   methods: {
+    refreshTable() {
+      let that = this;
+      this.$api.getNavbar().then((res) => {
+        that.tableData = res.data.data;
+        console.log("tableData:", that.tableData);
+      });
+    },
     editContent(scope) {
       scope.row.isEditting = !scope.row.isEditting;
     },
     handleAdd() {
-      const newRecord = {
-        // id: this.tableData[this.tableData.length - 1].id + 1,
-        isEditting: true,
-        label: "",
-        linkUrl: "",
+      if (this.tableData.length < 6) {
+        const newRecord = {
+          isEditting: true,
+          label: "",
+          linkUrl: "",
+          status: "add",
+        };
+        this.tableData.push(newRecord);
+      }else{
+        this.$message({
+          message: "无法添加，导航栏最多只能有6个栏目！",
+          type: "warning",
+        });
+      }
+    },
+    submitEdit(scope) {
+      scope.row.isEditting = !scope.row.isEditting;
+      console.log("scope:", scope.row);
+
+      if (scope.row.status === "add") {
+        let obj = {
+          label: scope.row.label,
+          linkUrl: scope.row.linkUrl,
+        };
+        this.$api.addNavbar(obj).then((res) => {
+          console.log("add:", res);
+          if (res.data.success === true) {
+            this.$message({
+              message: "添加成功！",
+              type: "success",
+            });
+            this.refreshTable();
+          } else {
+            this.$message({
+              message: "添加失败！",
+              type: "warning",
+            });
+          }
+        });
+      } else {
+        let obj = {
+          id: scope.row.id,
+          label: scope.row.label,
+          linkUrl: scope.row.linkUrl,
+        };
+        this.$api.updateNavbar(obj).then((res) => {
+          console.log("update:", res);
+          if (res.data.success === true) {
+            this.$message({
+              message: "编辑成功！",
+              type: "success",
+            });
+            this.refreshTable();
+          } else {
+            this.$message({
+              message: "编辑失败！",
+              type: "warning",
+            });
+          }
+        });
+      }
+    },
+    remove(row) {
+      console.log("row:", row);
+      let obj = {
+        id: row.id,
       };
-      this.tableData.push(newRecord);
+      this.$api.removeNavbar(obj).then((res) => {
+        if (res.data.success === true) {
+          this.$message({
+            message: "删除成功！",
+            type: "success",
+          });
+          this.refreshTable();
+        } else {
+          this.$message({
+            message: "删除失败！",
+            type: "warning",
+          });
+        }
+      });
     },
   },
 };
@@ -107,8 +182,8 @@ export default {
   margin-right: 3px;
   float: right;
 }
-.controlText{
-    display: inline-block;
-    padding-top: 6px;
+.controlText {
+  display: inline-block;
+  padding-top: 6px;
 }
 </style>

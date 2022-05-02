@@ -18,7 +18,9 @@ const base = {
     editHomePage: '/api/home/edit',//修改首页信息
     categoryList: '/api/category/list',//获取分类列表
     getNavbar:'/api/link/getNavbar',//获取导航栏信息
-
+    addNavbar:'/api/link/addNavbar',//添加导航栏信息
+    removeNavbar:'/api/link/deleteNavbar',//删除导航栏信息
+    updateNavbar:'/api/link/updateNavbar',//更新导航栏信息
 }
 
 export default base;
