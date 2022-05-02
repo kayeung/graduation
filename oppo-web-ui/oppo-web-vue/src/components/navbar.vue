@@ -1,6 +1,9 @@
 <template>
   <div>
-    <nav class="navbar navbar-default navbar-default navbar-static-top" id="oppo-navbar">
+    <nav
+      class="navbar navbar-default navbar-default navbar-static-top"
+      id="oppo-navbar"
+    >
       <div class="container-fluid container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -26,21 +29,20 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li><router-link to="/">手机 </router-link></li>
-            <li><router-link to="/">智能硬件</router-link></li>
-            <li><router-link to="/">官方商城</router-link></li>
-            <li><router-link to="/">关于OPPO</router-link></li>
-            <li><router-link to="/">ColorOS</router-link></li>
-            <li><router-link to="/">服务</router-link></li>
+            <li v-for="item in navbarTable" :key="item.id">
+              <router-link :to="item.linkUrl">{{ item.label }}</router-link>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-            <!-- <li><router-link to="/"><span class="iconfont">&#xe6d4;</span></router-link></li>
-          <li><router-link to="/"><span class="iconfont">&#xe6b1;</span></router-link></li> -->
             <li>
-              <router-link to="/"><span class="glyphicon glyphicon-search"></span></router-link>
+              <router-link to="/"
+                ><span class="glyphicon glyphicon-search"></span
+              ></router-link>
             </li>
             <li>
-              <router-link to="/"><span class="glyphicon glyphicon-user"></span></router-link>
+              <router-link to="/"
+                ><span class="glyphicon glyphicon-user"></span
+              ></router-link>
             </li>
           </ul>
         </div>
@@ -52,8 +54,21 @@
 </template>
 
 <script>
-import '../assets/css/index.css'
-export default {};
+import "../assets/css/index.css";
+export default {
+  created() {
+    let that = this;
+    this.$api.getNavbar().then((res) => {
+      that.navbarTable = res.data.data;
+      console.log("navbarTable", that.navbarTable);
+    });
+  },
+  data() {
+    return {
+      navbarTable: [],
+    };
+  },
+};
 </script>
 
 <style>
