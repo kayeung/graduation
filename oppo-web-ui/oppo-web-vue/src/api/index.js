@@ -11,12 +11,19 @@ const api = {
         return axios.post(base.homePageList, param)
     },
     /**
-     * 
+     * 获取导航栏信息
      * @returns 
      */
     getNavbar() {
         return axios.post(base.getNavbar)
     },
+    /**
+     * 获取页脚信息
+     * @returns 
+     */
+    getFooter(){
+        return axios.post(base.getFooter)
+    }
 }
 
 export default api
