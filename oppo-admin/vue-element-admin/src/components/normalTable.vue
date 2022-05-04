@@ -51,7 +51,7 @@
             icon="el-icon-warning"
             icon-color="red"
             title="真的要删除吗？"
-            @confirm="() => remove(scope.row)"
+            @confirm="() => remove(scope)"
             v-if="!scope.row.isEditting"
           >
             <el-button
@@ -64,7 +64,7 @@
             >
           </el-popconfirm>
           <el-button
-            type="info"
+            type="warning"
             size="mini"
             icon="el-icon-close"
             v-else
@@ -106,8 +106,8 @@ export default {
     },
     handleAdd() {
       if (!this.tableIsEditting) {
-        this.tableIsEditting = !this.tableIsEditting;
         if (this.tableData.length < 6) {
+          this.tableIsEditting = !this.tableIsEditting;
           const newRecord = {
             isEditting: true,
             label: "",
@@ -136,13 +136,14 @@ export default {
         this.$api.addNavbar(obj).then((res) => {
           console.log("add:", res);
           if (res.data.success === true) {
-            this.tableIsEditting = !this.tableIsEditting;
+            this.tableIsEditting = false;
             this.$message({
               message: "添加成功！",
               type: "success",
             });
             this.refreshTable();
           } else {
+            this.tableIsEditting = false;
             this.$message({
               message: "添加失败！",
               type: "warning",
@@ -158,13 +159,14 @@ export default {
         this.$api.updateNavbar(obj).then((res) => {
           console.log("update:", res);
           if (res.data.success === true) {
-            this.tableIsEditting = !this.tableIsEditting;
+            this.tableIsEditting = false;
             this.$message({
               message: "编辑成功！",
               type: "success",
             });
             this.refreshTable();
           } else {
+            this.tableIsEditting = false;
             this.$message({
               message: "编辑失败！",
               type: "warning",
@@ -173,11 +175,11 @@ export default {
         });
       }
     },
-    remove(row) {
+    remove(scope) {
       if (!this.tableIsEditting) {
-        console.log("row:", row);
+        console.log("delete:", scope);
         let obj = {
-          id: row.id,
+          id: scope.row.id,
         };
         this.$api.removeNavbar(obj).then((res) => {
           if (res.data.success === true) {
@@ -197,11 +199,10 @@ export default {
         this.alertEditting();
       }
     },
-    handleCancel(row) {
-      console.log("row", row);
-      row.row.isEditting = !row.row.isEditting;
+    handleCancel(scope) {
+      scope.row.isEditting = !scope.row.isEditting;
       this.refreshTable();
-      this.tableIsEditting = !this.tableIsEditting;
+      this.tableIsEditting = false;
     },
     alertEditting() {
       this.$message({

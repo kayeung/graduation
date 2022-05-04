@@ -101,6 +101,30 @@ const api = {
     getAllLinks() {
         return axios.post(base.getAllLinks)
     },
+    /**
+     * 添加页脚信息（非一级）
+     * @param {label,linkUrl,parentId,titleId} params 
+     * @returns 
+     */
+    addLink(params) {
+        return axios.post(base.addLink, params)
+    },
+    /**
+     * 修改页脚信息
+     * @param {id,label,linkUrl,titleId,titleName} params 
+     * @returns 
+     */
+    updateLink(params) {
+        return axios.post(base.updateLink, params)
+    },
+    /**
+     * 删除页脚信息
+     * @param {id,parentId} params 
+     * @returns 
+     */
+    deleteLink(params) {
+        return axios.post(base.deleteLink, params)
+    }
 
 }
 

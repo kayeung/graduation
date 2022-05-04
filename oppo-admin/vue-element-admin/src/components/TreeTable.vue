@@ -11,7 +11,8 @@
       border
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
-      <el-table-column prop="titleName" label="栏目" width="180"> </el-table-column>
+      <el-table-column prop="titleName" label="栏目" width="180">
+      </el-table-column>
       <el-table-column prop="label" label="标签" width="180">
         <template slot-scope="scope">
           <el-input
@@ -52,7 +53,8 @@
             icon="el-icon-warning"
             icon-color="red"
             title="真的要删除吗？"
-            @confirm="() => remove(scope, scope.$index)"
+            @confirm="() => remove(scope)"
+            v-if="!scope.row.isEditting"
           >
             <el-button
               type="danger"
@@ -60,16 +62,24 @@
               icon="el-icon-delete"
               slot="reference"
               style="margin-left: 10px"
-              v-if="scope.row.id / 10 >= 1"
+              v-if="scope.row.level > 1"
               >删除</el-button
             >
           </el-popconfirm>
           <el-button
+            type="warning"
+            size="mini"
+            icon="el-icon-close"
+            v-else
+            @click="handleCancel(scope)"
+            >取消</el-button
+          >
+          <el-button
             type="info"
             size="mini"
             icon="el-icon-plus"
-            v-if="scope.row.id / 10 < 1"
-            @click="() => append(scope.row)"
+            v-if="scope.row.level == 1 && scope.row.isEditting==false"
+            @click="() => append(scope)"
             style="margin-left: 10px"
             >添加</el-button
           >
@@ -81,311 +91,148 @@
 <script>
 export default {
   props: ["status"],
-  mounted() {
-    let that=this;
-    this.$api.getAllLinks().then((res) => {
-      console.log("FooterRes", res);
-      that.tableData=res.data.data;
-    });
+  created() {
+    this.refreshTable();
   },
   data() {
     return {
-      tableData:[],
-      // footerTable: [
-      //   {
-      //     id: 1,
-      //     title: "推荐产品22222",
-      //     label: "推荐产品",
-      //     link: "#",
-      //     isEditting: false,
-      //     children: [
-      //       {
-      //         id: 11,
-      //         title: "推荐产品",
-      //         label: "Find N",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 12,
-      //         title: "推荐产品",
-      //         label: "Find X3 系列",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 13,
-      //         title: "推荐产品",
-      //         label: "Reno7 系列",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 14,
-      //         title: "推荐产品",
-      //         label: "A96",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 15,
-      //         title: "推荐产品",
-      //         label: "K9x",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 16,
-      //         title: "推荐产品",
-      //         label: "Watch Free",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     id: 2,
-      //     title: "购买渠道",
-      //     label: "购买渠道",
-      //     link: "#",
-      //     isEditting: false,
-      //     children: [
-      //       {
-      //         id: 21,
-      //         title: "购买渠道",
-      //         label: "线下体验店",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 22,
-      //         title: "购买渠道",
-      //         label: "OPPO商城",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 23,
-      //         title: "购买渠道",
-      //         label: "官方授权网点",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     id: 3,
-      //     title: "探索精彩OPPO",
-      //     label: "探索精彩OPPO",
-      //     link: "#",
-      //     isEditting: false,
-      //     children: [
-      //       {
-      //         id: 31,
-      //         title: "探索精彩OPPO",
-      //         label: "关于OPPO",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 32,
-      //         title: "探索精彩OPPO",
-      //         label: "新闻中心",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 33,
-      //         title: "探索精彩OPPO",
-      //         label: "OPPO社区",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 34,
-      //         title: "探索精彩OPPO",
-      //         label: "加入我们",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 35,
-      //         title: "探索精彩OPPO",
-      //         label: "知识产权",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 36,
-      //         title: "探索精彩OPPO",
-      //         label: "可持续发展报告",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 37,
-      //         title: "探索精彩OPPO",
-      //         label: "安全隐私",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     id: 4,
-      //     title: "商务合作",
-      //     label: "商务合作",
-      //     link: "#",
-      //     isEditting: false,
-      //     children: [
-      //       {
-      //         id: 41,
-      //         title: "商务合作",
-      //         label: "企业业务",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 42,
-      //         title: "商务合作",
-      //         label: "开放平台",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 43,
-      //         title: "商务合作",
-      //         label: "廉洁合规",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     id: 5,
-      //     title: "服务与支持",
-      //     label: "服务与支持",
-      //     link: "#",
-      //     isEditting: false,
-      //     children: [
-      //       {
-      //         id: 51,
-      //         title: "服务与支持",
-      //         label: "联系我们",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 52,
-      //         title: "服务与支持",
-      //         label: "服务网点查询",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 53,
-      //         title: "服务与支持",
-      //         label: "ColorOS",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 54,
-      //         title: "服务与支持",
-      //         label: "云服务",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 55,
-      //         title: "服务与支持",
-      //         label: "以旧换新",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 56,
-      //         title: "服务与支持",
-      //         label: "安全响应中心",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //     ],
-      //   },
-      //   {
-      //     id: 6,
-      //     title: "应用与下载",
-      //     label: "应用与下载",
-      //     link: "#",
-      //     isEditting: false,
-      //     children: [
-      //       {
-      //         id: 61,
-      //         title: "应用与下载",
-      //         label: "OPPO商城APP",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 62,
-      //         title: "应用与下载",
-      //         label: "预置软件公示",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //       {
-      //         id: 63,
-      //         title: "应用与下载",
-      //         label: "LOG专业调色文档",
-      //         link: "#",
-      //         isEditting: false,
-      //       },
-      //     ],
-      //   },
-      // ],
-
+      tableData: [],
+      tableIsEditting: false,
     };
   },
   methods: {
-    editContent(scope) {
-      console.log(scope);
-      scope.row.isEditting = !scope.row.isEditting;
+    refreshTable() {
+      let that = this;
+      this.$api.getAllLinks().then((res) => {
+        console.log("FooterRes", res);
+        that.tableData = res.data.data;
+      });
     },
-    remove(scope, data) {
-      console.log(
-        scope.store.states.data[parseInt(scope.row.id / 10) - 1].children[
-          (scope.row.id % 10) - 1
-        ]
-      );
-      //this.remove(node);
-      // scope.store.states.data[parseInt((scope.row.id)/10)-1].children[(scope.row.id%10)-1].splice();
+    editContent(scope) {
+      if (!this.tableIsEditting) {
+        scope.row.isEditting = !scope.row.isEditting;
+        this.tableIsEditting = !this.tableIsEditting;
+      } else {
+        this.alertEditting();
+      }
+    },
+    remove(scope) {
+      console.log("delete:",scope);
+      if (!this.tableIsEditting) {
+        let obj = {
+          id: scope.row.id,
+          parentId: scope.row.parentId,
+        };
+        this.$api.deleteLink(obj).then((res) => {
+          if (res.data.success === true) {
+            this.$message({
+              message: "删除成功！",
+              type: "success",
+            });
+            this.refreshTable();
+          } else {
+            this.$message({
+              message: "删除失败！",
+              type: "warning",
+            });
+          }
+        });
+      } else {
+        this.alertEditting();
+      }
     },
     submitEdit(scope) {
       scope.row.isEditting = !scope.row.isEditting;
-      //this.$api.
+      if (scope.row.status === "add") {
+        let obj = {
+          label: scope.row.label,
+          linkUrl: scope.row.linkUrl,
+          parentId: scope.row.parentId,
+          titleId: scope.row.titleId,
+        };
+        this.$api.addLink(obj).then((res) => {
+          console.log("add:", res);
+          if (res.data.success === true) {
+            this.tableIsEditting = false;
+            this.$message({
+              message: "添加成功！",
+              type: "success",
+            });
+          } else {
+            this.tableIsEditting = false;
+            this.$message({
+              message: "添加失败！",
+              type: "warning",
+            });
+          }
+        });
+      } else {
+        let obj = {
+          id: scope.row.id,
+          label: scope.row.label,
+          linkUrl: scope.row.linkUrl,
+          titleId: scope.row.titleId,
+          titleName: scope.row.titleName,
+        };
+        this.$api.updateLink(obj).then((res) => {
+          if (res.data.success === true) {
+            this.tableIsEditting = false;
+            this.$message({
+              message: "编辑成功！",
+              type: "success",
+            });
+          } else {
+            this.tableIsEditting = false;
+            this.$message({
+              message: "编辑失败！",
+              type: "warning",
+            });
+          }
+        });
+      }
     },
     //追加子节点
     append(scope) {
-      console.log("parent:", scope);
-      if (scope.children.length >= 7) {
-        this.$message({
-          message: "无法添加，单个栏目最多只能7条链接！",
-          type: "warning",
-        });
-      } else {
-        this.$refs.linksTable.toggleRowExpansion(scope, true); //展开子树
-        const newChild = {
-          id: scope.id * 10 + scope.children.length + 1,
-          title: scope.title,
-          label: "",
-          link: "",
-          isEditting: true,
-        };
-        if (!scope.children) {
-          this.$set(scope, "children", []);
+      if (!this.tableIsEditting) {
+        console.log("parent:", scope);
+        if (scope.row.children.length >= 7) {
+          this.$message({
+            message: "无法添加，单个栏目最多只能7条链接！",
+            type: "warning",
+          });
+        } else {
+          this.tableIsEditting = !this.tableIsEditting;
+          this.$refs.linksTable.toggleRowExpansion(scope.row, true); //展开子树
+          const newChild = {
+            id: 100,
+            level: 2,
+            label: "",
+            linkUrl: "",
+            titleName: scope.row.titleName,
+            parentId: scope.row.id,
+            titleId: scope.row.titleId,
+            isEditting: true,
+            status: "add",
+          };
+          if (!scope.row.children) {
+            this.$set(scope.row, "children", []);
+          }
+          scope.row.children.push(newChild);
         }
-        scope.children.push(newChild);
+      } else {
+        this.alertEditting();
       }
+    },
+    handleCancel(scope) {
+      scope.row.isEditting = !scope.row.isEditting;
+      this.refreshTable();
+      this.tableIsEditting = false;
+    },
+    alertEditting() {
+      this.$message({
+        message: "表格正处于编辑状态，请提交或取消正在编辑的内容，再重试！",
+        type: "warning",
+      });
     },
   },
 };

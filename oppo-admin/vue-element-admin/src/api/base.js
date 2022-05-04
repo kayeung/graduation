@@ -17,11 +17,14 @@ const base = {
     removeHomePage: '/api/home/delete',//删除首页信息
     editHomePage: '/api/home/edit',//修改首页信息
     categoryList: '/api/category/list',//获取分类列表
-    getNavbar:'/api/link/getNavbar',//获取导航栏信息
-    addNavbar:'/api/link/addNavbar',//添加导航栏信息
-    removeNavbar:'/api/link/deleteNavbar',//删除导航栏信息
-    updateNavbar:'/api/link/updateNavbar',//更新导航栏信息
-    getAllLinks:"/api/link/all",//获取页脚全部信息
+    getNavbar: '/api/link/getNavbar',//获取导航栏信息
+    addNavbar: '/api/link/addNavbar',//添加导航栏信息
+    removeNavbar: '/api/link/deleteNavbar',//删除导航栏信息
+    updateNavbar: '/api/link/updateNavbar',//修改导航栏信息
+    getAllLinks: "/api/link/all",//获取页脚全部信息
+    addLink: "/api/link/add",//添加页脚信息（非一级）
+    updateLink:"/api/link/update",//修改页脚信息
+    deleteLink:"/api/link/delete",//删除页脚信息
 }
 
 export default base;
