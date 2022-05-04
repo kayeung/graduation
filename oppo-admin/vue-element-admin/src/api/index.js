@@ -94,6 +94,13 @@ const api = {
     updateNavbar(params) {
         return axios.post(base.updateNavbar, params)
     },
+    /**
+     * 获取页脚全部信息
+     * @returns 
+     */
+    getAllLinks() {
+        return axios.post(base.getAllLinks)
+    },
 
 }
 

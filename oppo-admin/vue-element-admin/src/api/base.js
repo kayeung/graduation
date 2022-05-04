@@ -21,6 +21,7 @@ const base = {
     addNavbar:'/api/link/addNavbar',//添加导航栏信息
     removeNavbar:'/api/link/deleteNavbar',//删除导航栏信息
     updateNavbar:'/api/link/updateNavbar',//更新导航栏信息
+    getAllLinks:"/api/link/all",//获取页脚全部信息
 }
 
 export default base;
