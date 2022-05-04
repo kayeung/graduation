@@ -52,6 +52,7 @@
             icon-color="red"
             title="真的要删除吗？"
             @confirm="() => remove(scope.row)"
+            v-if="!scope.row.isEditting"
           >
             <el-button
               type="danger"
@@ -62,8 +63,15 @@
               >删除</el-button
             >
           </el-popconfirm>
+          <el-button
+            type="info"
+            size="mini"
+            icon="el-icon-close"
+            v-else
+            @click="handleCancel(scope)"
+            >取消</el-button
+          >
         </template>
-        <div slot="append">123</div>
       </el-table-column>
     </el-table>
   </div>
@@ -77,6 +85,7 @@ export default {
   data() {
     return {
       tableData: [],
+      tableIsEditting: false,
     };
   },
   methods: {
@@ -88,28 +97,37 @@ export default {
       });
     },
     editContent(scope) {
-      scope.row.isEditting = !scope.row.isEditting;
+      if (!this.tableIsEditting) {
+        this.tableIsEditting = !this.tableIsEditting;
+        scope.row.isEditting = !scope.row.isEditting;
+      } else {
+        this.alertEditting();
+      }
     },
     handleAdd() {
-      if (this.tableData.length < 6) {
-        const newRecord = {
-          isEditting: true,
-          label: "",
-          linkUrl: "",
-          status: "add",
-        };
-        this.tableData.push(newRecord);
-      }else{
-        this.$message({
-          message: "无法添加，导航栏最多只能有6个栏目！",
-          type: "warning",
-        });
+      if (!this.tableIsEditting) {
+        this.tableIsEditting = !this.tableIsEditting;
+        if (this.tableData.length < 6) {
+          const newRecord = {
+            isEditting: true,
+            label: "",
+            linkUrl: "",
+            status: "add",
+          };
+          this.tableData.push(newRecord);
+        } else {
+          this.$message({
+            message: "无法添加，导航栏最多只能有6个栏目！",
+            type: "warning",
+          });
+        }
+      } else {
+        this.alertEditting();
       }
     },
     submitEdit(scope) {
       scope.row.isEditting = !scope.row.isEditting;
       console.log("scope:", scope.row);
-
       if (scope.row.status === "add") {
         let obj = {
           label: scope.row.label,
@@ -118,6 +136,7 @@ export default {
         this.$api.addNavbar(obj).then((res) => {
           console.log("add:", res);
           if (res.data.success === true) {
+            this.tableIsEditting = !this.tableIsEditting;
             this.$message({
               message: "添加成功！",
               type: "success",
@@ -139,6 +158,7 @@ export default {
         this.$api.updateNavbar(obj).then((res) => {
           console.log("update:", res);
           if (res.data.success === true) {
+            this.tableIsEditting = !this.tableIsEditting;
             this.$message({
               message: "编辑成功！",
               type: "success",
@@ -154,23 +174,39 @@ export default {
       }
     },
     remove(row) {
-      console.log("row:", row);
-      let obj = {
-        id: row.id,
-      };
-      this.$api.removeNavbar(obj).then((res) => {
-        if (res.data.success === true) {
-          this.$message({
-            message: "删除成功！",
-            type: "success",
-          });
-          this.refreshTable();
-        } else {
-          this.$message({
-            message: "删除失败！",
-            type: "warning",
-          });
-        }
+      if (!this.tableIsEditting) {
+        console.log("row:", row);
+        let obj = {
+          id: row.id,
+        };
+        this.$api.removeNavbar(obj).then((res) => {
+          if (res.data.success === true) {
+            this.$message({
+              message: "删除成功！",
+              type: "success",
+            });
+            this.refreshTable();
+          } else {
+            this.$message({
+              message: "删除失败！",
+              type: "warning",
+            });
+          }
+        });
+      } else {
+        this.alertEditting();
+      }
+    },
+    handleCancel(row) {
+      console.log("row", row);
+      row.row.isEditting = !row.row.isEditting;
+      this.refreshTable();
+      this.tableIsEditting = !this.tableIsEditting;
+    },
+    alertEditting() {
+      this.$message({
+        message: "表格正处于编辑状态，请提交或取消正在编辑的内容，再重试！",
+        type: "warning",
       });
     },
   },
