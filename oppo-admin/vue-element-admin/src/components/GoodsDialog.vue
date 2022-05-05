@@ -356,7 +356,7 @@
       <el-form-item label="封面图" prop="uploadPic">
         <el-upload
           class="upload-demo"
-          :action="uploadUrl"
+          :action="uploadPic"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :file-list="coverList"
@@ -374,7 +374,7 @@
       <el-form-item label="详情图" prop="uploadPic">
         <el-upload
           class="upload-demo"
-          :action="uploadUrl"
+          :action="uploadPic"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :file-list="picList"
@@ -388,7 +388,7 @@
         </el-upload>
       </el-form-item>
 
-      <el-form-item label="备注">
+      <el-form-item label="备注" prop="desc">
         <wangeditor @sendEditor="sendEditor" />
       </el-form-item>
     </el-form>
@@ -420,7 +420,7 @@ export default {
     return {
       dialogVisible: false, //对话框可视
       innerVisible: false, //类目选择对话框可视
-      uploadUrl: base.uploadUrl,
+      uploadPic: base.uploadPic,
       coverList: [], //上传封面图
       picList: [], //上传详情图
       treeData: "",
@@ -665,6 +665,7 @@ export default {
         ],
         uploadPic: [{ required: true, message: "请上传图片", trigger: "blur" }],
       },
+      desc: [{ required: true, message: "请输入备注信息", trigger: "blur" }],
     };
   },
   methods: {
@@ -672,7 +673,7 @@ export default {
      * 接收wangEditor数据
      */
     sendEditor(val) {
-      // this.goodsform.descs=val;
+      this.goodsform.descs = val;
     },
     handleClose(done) {
       this.$confirm("确认关闭？")

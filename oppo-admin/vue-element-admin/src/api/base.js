@@ -25,6 +25,8 @@ const base = {
     addLink: "/api/link/add",//添加页脚信息（非一级）
     updateLink:"/api/link/update",//修改页脚信息
     deleteLink:"/api/link/delete",//删除页脚信息
+    getItemList:"/api/category/item/list",//分页获取商品信息
+    addItem:"/api/category/item/add",//添加商品详情
 }
 
 export default base;
