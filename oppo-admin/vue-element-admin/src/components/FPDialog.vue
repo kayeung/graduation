@@ -134,7 +134,7 @@ export default {
       console.log(file);
     },
     handleExceed(files, fileList) {
-      this.$message.warning("最多只能添加1张图片！");
+      this.$message.warning("最多只能添加2张图片！");
     },
     beforeUpload(file) {
       if (file.size / 1024 > 500) {

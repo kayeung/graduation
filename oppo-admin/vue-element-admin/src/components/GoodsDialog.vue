@@ -1,4 +1,9 @@
 <template>
+  <!-- bug:
+  1.备注无法进行表单验证，此项为必填
+  2.接口，字段为列表的，后端接口全为String，要改！
+  3.类目选择最好能加个加载转动的动画，因为获取远程数据需要时间，在等待过程中显示暂无数据，非常吓人！
+  4.提交失败要加个消息提示，不能单单只有表单验证的错误信息 -->
   <el-dialog
     :title="dialogTitle"
     :visible.sync="dialogVisible"
@@ -6,7 +11,7 @@
     :before-close="handleClose"
   >
     <el-form
-      ref="infoForm"
+      ref="form"
       :model="form"
       label-width="90px"
       status-icon
@@ -19,7 +24,7 @@
               >选择</el-button
             >
             <span style="display: inline-block; margin-left: 10px">{{
-              form.classification
+              treeData.name
             }}</span>
           </el-form-item>
         </el-col>
@@ -90,13 +95,13 @@
           <el-row>
             <!-- 多选时高度会撑爆，与下一行之间无空隙 -->
             <el-col :span="6">
-              <el-form-item label="容量" prop="ram_rom">
+              <el-form-item label="容量" prop="ramRom">
                 <div class="block">
                   <el-cascader
                     :options="options"
                     :props="props"
                     clearable
-                    v-model="form.ram_rom"
+                    v-model="form.ramRom"
                     separator="+"
                     style="width: 290px"
                   ></el-cascader>
@@ -142,7 +147,7 @@
             <el-col :span="6">
               <el-form-item label="尺寸" prop="screenSize">
                 <el-input type="text" v-model="form.screenSize">
-                  <template slot="append">寸</template>
+                  <template slot="append">英寸</template>
                 </el-input>
               </el-form-item>
             </el-col>
@@ -268,14 +273,14 @@
           <el-form-item label="蜂窝网络"> </el-form-item>
         </el-col>
         <el-col :span="11">
-          <el-form-item label="双卡" prop="isDoubleSIM">
-            <el-radio v-model="form.isDoubleSIM" label="1">支持</el-radio>
-            <el-radio v-model="form.isDoubleSIM" label="0">不支持</el-radio>
+          <el-form-item label="双卡" prop="doubleSIM">
+            <el-radio v-model="form.doubleSIM" label="true">支持</el-radio>
+            <el-radio v-model="form.doubleSIM" label="false">不支持</el-radio>
           </el-form-item>
         </el-col>
         <el-col :span="10" :offset="1">
-          <el-form-item label="SIM类型" prop="type_SIM">
-            <el-select v-model="form.type_SIM" placeholder="请选择">
+          <el-form-item label="SIM类型" prop="typeSIM">
+            <el-select v-model="form.typeSIM" placeholder="请选择">
               <el-option
                 v-for="item in options_SIM"
                 :key="item.value"
@@ -347,22 +352,25 @@
           </el-form-item>
         </el-col>
         <el-col :span="23" :offset="1">
-          <el-form-item label="其他功能" prop="otherLocation">
-            <el-input type="textarea" v-model="form.otherLocation"></el-input>
+          <el-form-item label="其他功能" prop="otherFunction">
+            <el-input type="textarea" v-model="form.otherFunction"></el-input>
           </el-form-item>
         </el-col>
       </el-row>
 
       <el-form-item label="封面图" prop="uploadPic">
         <el-upload
+          ref="uploadPic"
           class="upload-demo"
           :action="uploadPic"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :file-list="coverList"
           list-type="picture"
-          :on-success="successUpload"
+          :on-success="successUploadPic"
           :limit="1"
+          :on-exceed="handleExceed"
+          :before-upload="beforeUpload"
         >
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">
@@ -373,13 +381,15 @@
 
       <el-form-item label="详情图" prop="uploadPic">
         <el-upload
+          ref="uploadDetailPic"
           class="upload-demo"
           :action="uploadPic"
           :on-preview="handlePreview"
           :on-remove="handleRemove"
           :file-list="picList"
           list-type="picture"
-          :on-success="successUpload"
+          :on-success="successUploadDetailPic"
+          :before-upload="beforeUpload"
         >
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">
@@ -388,7 +398,7 @@
         </el-upload>
       </el-form-item>
 
-      <el-form-item label="备注" prop="desc">
+      <el-form-item label="备注" prop="description">
         <wangeditor @sendEditor="sendEditor" />
       </el-form-item>
     </el-form>
@@ -417,6 +427,28 @@ export default {
     GoodsTree,
   },
   data() {
+    var validateUploadPic = (rule, value, callback) => {
+      if (this.form.pictureUrl.length == 0) {
+        callback(new Error("请上传图片"));
+      } else {
+        callback();
+      }
+    };
+    var validateClassification = (rule, value, callback) => {
+      if (this.treeData.length == 0) {
+        callback(new Error("请选择产品类目"));
+      } else {
+        callback();
+      }
+    };
+    var validateDescription = (rule, value, callback) => {
+      console.log("VD:", this.form.description);
+      if (this.form.description.length == 0) {
+        callback(new Error("请输入备注信息"));
+      } else {
+        callback();
+      }
+    };
     return {
       dialogVisible: false, //对话框可视
       innerVisible: false, //类目选择对话框可视
@@ -426,14 +458,14 @@ export default {
       treeData: "",
       // 表单
       form: {
-        classification: "",
+        categoryId: "",
         goodName: "",
         model: "",
         height: "",
         width: "",
         thickness: "",
         weight: "",
-        ram_rom: "",
+        ramRom: "",
         ramType: "",
         romSpe: "",
         screenSize: "",
@@ -449,72 +481,75 @@ export default {
         battery: "",
         fastChargeList: [],
         sensorsList: [],
-        isDoubleSIM: "1",
-        type_SIM: "Nano-SIM",
+        doubleSIM: "true",
+        typeSIM: "Nano-SIM",
         bluetooth: "",
         nfc: "",
         earphoneJack: "3.5mm",
         usbInterface: "Type-c",
         gpsList: [],
-        otherLocation: "",
+        otherFunction: "",
+        pictureUrl: "",
+        detailPictureUrl: "",
+        description: "",
       },
       //容量多选
       props: { multiple: true, label: "label" },
       options: [
         {
-          value: 6,
+          value: "6GB",
           label: "6GB",
           children: [
             {
-              value: 64,
+              value: "64GB",
               label: "64GB",
             },
             {
-              value: 128,
+              value: "128GB",
               label: "128GB",
             },
             {
-              value: 256,
+              value: "256GB",
               label: "256GB",
             },
           ],
         },
         {
-          value: 8,
+          value: "8GB",
           label: "8GB",
           children: [
             {
-              value: 128,
+              value: "128GB",
               label: "128GB",
             },
             {
-              value: 256,
+              value: "256GB",
               label: "256GB",
             },
             {
-              value: 512,
+              value: "512GB",
               label: "512GB",
             },
           ],
         },
         {
-          value: 12,
+          value: "12GB",
           label: "12GB",
           children: [
             {
-              value: 128,
+              value: "128GB",
               label: "128GB",
             },
             {
-              value: 256,
+              value: "256GB",
               label: "256GB",
             },
             {
-              value: 512,
+              value: "512GB",
               label: "512GB",
             },
             {
-              value: 1024,
+              value: "1TB",
               label: "1TB",
             },
           ],
@@ -523,49 +558,49 @@ export default {
       //RAM规格
       ramOptions: [
         {
-          value: "选项1",
+          value: "LPDDR5",
           label: "LPDDR5",
         },
         {
-          value: "选项2",
+          value: "LPDDR4X",
           label: "LPDDR4X",
         },
         {
-          value: "选项3",
+          value: "LPDDR4",
           label: "LPDDR4",
         },
       ],
       //ROM规格
       romOptions: [
         {
-          value: "选项1",
+          value: "UFS3.1",
           label: "UFS3.1",
         },
         {
-          value: "选项2",
+          value: "UFS3.0",
           label: "UFS3.0",
         },
         {
-          value: "选项3",
+          value: "UFS2.1",
           label: "UFS2.1",
         },
         {
-          value: "选项4",
+          value: "eMMC5.1",
           label: "eMMC5.1",
         },
       ],
       //SIM类型
       options_SIM: [
         {
-          value: "选项1",
+          value: "Nano-SIM",
           label: "Nano-SIM",
         },
         {
-          value: "选项2",
+          value: "Micro-SIM",
           label: "Micro-SIM",
         },
         {
-          value: "选项3",
+          value: "Mini-SIM",
           label: "Mini-SIM",
         },
       ],
@@ -573,29 +608,33 @@ export default {
       //耳机插孔
       earphoneJackOptions: [
         {
-          value: "选项1",
+          value: "Type-c",
           label: "Type-c",
         },
         {
-          value: "选项2",
+          value: "3.5mm",
           label: "3.5mm",
         },
       ],
       //数据接口
       interfaceOptions: [
         {
-          value: "选项1",
+          value: "Type-c",
           label: "Type-c",
         },
         {
-          value: "选项2",
+          value: "Micro-USB",
           label: "Micro-USB",
         },
       ],
       //校验规则
       rules: {
         classification: [
-          { required: true, message: "请选择产品类目", trigger: "blur" },
+          {
+            required: true,
+            validator: validateClassification,
+            trigger: "blur",
+          },
         ],
         goodName: [{ required: true, message: "请输入名称", trigger: "blur" }],
         model: [{ required: true, message: "请输入型号", trigger: "blur" }],
@@ -611,7 +650,7 @@ export default {
         weight: [
           { required: true, message: "请输入产品的重量", trigger: "blur" },
         ],
-        ram_rom: [
+        ramRom: [
           { required: true, message: "请选择产品的存储组合", trigger: "blur" },
         ],
         ramType: [
@@ -660,12 +699,16 @@ export default {
         gpsList: [
           { required: true, message: "请选择支持定位的方式", trigger: "blur" },
         ],
-        otherLocation: [
+        otherFunction: [
           { required: true, message: "请输入更多的定位信息", trigger: "blur" },
         ],
-        uploadPic: [{ required: true, message: "请上传图片", trigger: "blur" }],
+        uploadPic: [
+          { required: true, validator: validateUploadPic, trigger: "blur" },
+        ],
       },
-      desc: [{ required: true, message: "请输入备注信息", trigger: "blur" }],
+      description: [
+        { required: true, validator: validateDescription, trigger: "blur" },
+      ],
     };
   },
   methods: {
@@ -673,7 +716,7 @@ export default {
      * 接收wangEditor数据
      */
     sendEditor(val) {
-      this.goodsform.descs = val;
+      this.form.description = val;
     },
     handleClose(done) {
       this.$confirm("确认关闭？")
@@ -682,19 +725,10 @@ export default {
           // 1.关闭弹窗 2.清空表单
           this.dialogVisible = false;
           this.resetForm();
+          this.$refs.uploadPic.clearFiles();
+          this.$refs.uploadDetailPic.clearFiles();
         })
         .catch((_) => {});
-    },
-    onSubmit() {
-      this.$refs["infoForm"].validate((isPass) => {
-        if (isPass) {
-          console.log(this.form);
-          console.log("submit success");
-          this.$emit("isCloseDialog");
-        } else {
-          console.log("submit fail...");
-        }
-      });
     },
     handleRemove(file, fileList) {
       console.log(file, fileList);
@@ -702,44 +736,118 @@ export default {
     handlePreview(file) {
       console.log(file);
     },
-    successUpload(res, file, fileList) {
-      console.log("上传成功", res, file, fileList);
+    handleExceed(files, fileList) {
+      this.$message.warning("最多只能添加1张图片！");
     },
-    // beforeImgUpload(file) {
-    //   var SuffixName = this.GetExtensionFileName(file.target.value);
-    //   var isLegalPic = false;
-    //   const isLt5M = file.size / 1024 / 1024 < 5;
-    //   if (SuffixName != "jpg" && SuffixName != "png" && SuffixName != "webp") {
-    //     this.$message.error("上传图片只允许是jpg/png/webp格式!");
-    //     isLegalPic = true;
-    //   }
-    //   if (!isLt5M) {
-    //     this.$message.error("上传图片大小不能超过 5MB!");
-    //   }
-    //   return isLegalPic && isLt2M;
-    // },
+    beforeUpload(file) {
+      if (file.size / 1024 > 500) {
+        this.$message({
+          message: "上传文件大小不能超过 500 KB!",
+          type: "error",
+        });
+        return false;
+      }
+      // 获取文件类型
+      var SuffixName = file.name.substring(file.name.lastIndexOf(".") + 1);
+      if (SuffixName != "jpg" && SuffixName != "png" && SuffixName != "webp") {
+        this.$message({
+          message: "上传文件只能是 jpg/png/webp格式!",
+          type: "warning",
+        });
+        return false;
+      }
+    },
+    successUploadPic(res, file, fileList) {
+      console.log("上传成功", res, file, fileList);
+      this.form.pictureUrl = res.data;
+    },
+    successUploadDetailPic(res, file, fileList) {
+      console.log("上传成功", res, file, fileList);
+      this.form.detailPictureUrl = res.data;
+    },
     //接收tree传递的数据
     getTreeData(val) {
-      console.log("tree数据：", val.name);
-      this.treeData = val.name;
+      console.log("tree数据：", val);
+      this.treeData = val;
     },
     //显示tree数据
     showTreeData() {
       this.innerVisible = false;
-      this.form.classification = this.treeData;
+      this.form.categoryId = this.treeData.cid;
+    },
+    onSubmit() {
+      this.$refs.form.validate((valid) => {
+        if (valid) {
+          console.log("表单已输入的信息：", this.form);
+          // 判断确定按钮的类型：新增？修改？
+          if (this.dialogTitle === "添加新品") {
+            let obj = {
+              battery: this.form.battery,
+              bluetooth: this.form.bluetooth,
+              cameraFront: this.form.cameraFront,
+              cameraRear: this.form.cameraRear,
+              categoryId: this.form.categoryId,
+              cpu: this.form.cpu,
+              description: this.form.description,
+              detailPictureUrl: this.form.detailPictureUrl,
+              doubleSIM: this.form.doubleSIM,
+              earphoneJack: this.form.earphoneJack,
+              fastChargeList: this.form.fastChargeList,
+              goodName: this.form.goodName,
+              gpsList: this.form.gpsList,
+              gpu: this.form.gpu,
+              height: this.form.height,
+              model: this.form.model,
+              nfc: this.form.nfc,
+              otherFunction: this.form.otherFunction,
+              pictureUrl: this.form.pictureUrl,
+              pixelDensity: this.form.pixelDensity,
+              ramRom: this.form.ramRom,
+              ramType: this.form.ramType,
+              refreshRate: this.form.refreshRate,
+              resolution: this.form.resolution,
+              romSpe: this.form.romSpe,
+              screenRatio: this.form.screenRatio,
+              screenSize: this.form.screenSize,
+              sensorsList: this.form.sensorsList,
+              thickness: this.form.thickness,
+              touchRate: this.form.touchRate,
+              typeSIM: this.form.typeSIM,
+              usbInterface: this.form.usbInterface,
+              weight: this.form.weight,
+              width: this.form.width,
+            };
+            this.$api.addItem(obj).then((res) => {
+              if (res.data.success === true) {
+                this.$message({
+                  message: "添加成功！",
+                  type: "success",
+                });
+                this.$emit("isCloseDialog");
+              } else {
+                this.$message.error("添加失败！");
+              }
+            });
+          } else {
+            console.log("修改产品");
+          }
+        } else {
+          console.log("submit fail...");
+        }
+      });
     },
     //清空表单
     resetForm() {
       this.$refs.infoForm.resetFields();
       this.form = {
-        classification: "",
+        categoryId: "",
         goodName: "",
         model: "",
         height: "",
         width: "",
         thickness: "",
         weight: "",
-        ram_rom: "",
+        ramRom: "",
         ramType: "",
         romSpe: "",
         screenSize: "",
@@ -755,14 +863,17 @@ export default {
         battery: "",
         fastChargeList: [],
         sensorsList: [],
-        isDoubleSIM: "1",
-        type_SIM: "Nano-SIM",
+        doubleSIM: true,
+        typeSIM: "Nano-SIM",
         bluetooth: "",
         nfc: "",
         earphoneJack: "3.5mm",
         usbInterface: "Type-c",
         gpsList: [],
-        otherLocation: "",
+        otherFunction: "",
+        pictureUrl: "",
+        detailPictureUrl: "",
+        description: "",
       };
     },
   },
