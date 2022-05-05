@@ -43,7 +43,7 @@
                   :aria-expanded="index != 0 ? false : true"
                   :aria-controls="'collapse' + index"
                 >
-                  {{ item.titleName }}
+                  {{ item.label }}
                 </a>
               </h4>
             </div>

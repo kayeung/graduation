@@ -172,7 +172,7 @@ export default {
           label: scope.row.label,
           linkUrl: scope.row.linkUrl,
           titleId: scope.row.titleId,
-          titleName: scope.row.titleName,
+          titleName: scope.row.label,
         };
         this.$api.updateLink(obj).then((res) => {
           if (res.data.success === true) {
