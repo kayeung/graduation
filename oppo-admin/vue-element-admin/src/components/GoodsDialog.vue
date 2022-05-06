@@ -1,5 +1,6 @@
 <template>
   <!-- bug:
+  0.现在正在尝试将gpsList改成字符串传给后端，但是会出现很多逗号，其中有一个逗号是有用的，展示页面时不能去掉。如果不转字符串，直接传给后端（后端字段属性为ArraryList），数据库字段为空。不转字符串，前端发送的格式为[1,[2,2],3]
   1.备注无法进行表单验证，此项为必填
   2.接口，字段为列表的，后端接口全为String，要改！
   3.类目选择最好能加个加载转动的动画，因为获取远程数据需要时间，在等待过程中显示暂无数据，非常吓人！
@@ -779,6 +780,14 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           console.log("表单已输入的信息：", this.form);
+
+          let s = [];
+          for (var i = 0; i < this.form.gpsList.length; i++) {
+            s.push(this.form.gpsList[i]);
+          }
+
+          this.form.gpsList = s.join();
+
           // 判断确定按钮的类型：新增？修改？
           if (this.dialogTitle === "添加新品") {
             let obj = {
