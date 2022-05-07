@@ -1,7 +1,8 @@
 <template>
-<!-- 已能互传标题及退出清空表单，编辑功能仍未能获取具体数据（需api配合） 
+  <!-- 已能互传标题及退出清空表单，编辑功能仍未能获取具体数据（需api配合） 
         bug:1.适配添加商品接口
-                2.获取商品信息接口要改，改成通过型号（或者其他字段）获取相应信息-->
+                2.获取商品信息接口要改，改成通过型号（或者其他字段）获取相应信息
+                3.表格正在适配接口显示数据-->
   <div>
     <!-- 添加按钮 -->
     <el-button
@@ -19,21 +20,10 @@
       ref="dialog"
     />
     <!-- 表格主体 -->
-    <el-table
-      ref="multipleTable"
-      :data="
-        this.status == 'flod'
-          ? flodTable
-          : this.status == 'pad'
-          ? padTable
-          : phoneTable
-      "
-      tooltip-effect="dark"
-      border
-    >
+    <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" border>
       <!-- <el-table-column type="selection" width="45" align="center">
       </el-table-column> -->
-      <el-table-column prop="classification" label="系列" align="center">
+      <el-table-column prop="categoryName" label="系列" align="center">
       </el-table-column>
       <el-table-column
         prop="goodName"
@@ -43,7 +33,7 @@
       >
       </el-table-column>
       <el-table-column
-        prop="model"
+        prop="modell"
         label="型号"
         width="100"
         align="center"
@@ -56,7 +46,7 @@
             <span class="demonstration"></span>
             <el-image
               style="width: 160px; height: 65px"
-              :src="scope.row.img"
+              :src="scope.row.pictureUrl"
               fit="cover"
             ></el-image>
           </div>
@@ -88,11 +78,20 @@ export default {
   components: {
     GoodsAddDialog,
   },
+  mounted() {
+    let that = this;
+    let obj = {
+      id: that.status,
+    };
+    this.$api.getItemListByCategory(obj).then((res) => {
+      console.log("CategoryTable:", res);
+    });
+  },
   data() {
     return {
       dialogVisible: false,
       dialogTitle: "添加新品",
-      status: "", //目前选择的产品分类
+      status: "", //目前选择的产品分类 1001智能手机 1002平板 1003折叠屏
       phoneTable: [
         {
           classification: "OPPO Find 系列",
@@ -135,14 +134,23 @@ export default {
           model: "CH2021",
         },
       ],
+      tableData: [],
       // multipleSelection: [],
     };
   },
   methods: {
     setParams(val) {
       //获取url传过来的参数
-      this.status = val.params.status;
-      console.log("status:", this.status);
+      let that = this;
+      that.status = val.params.status;
+      console.log("status:", that.status);
+      let obj = {
+        id: that.status,
+      };
+      this.$api.getItemListByCategory(obj).then((res) => {
+        console.log("CategoryTable:", res);
+        that.tableData = res.data.data;
+      });
     },
     handleAdd() {
       this.dialogTitle = "添加新品";

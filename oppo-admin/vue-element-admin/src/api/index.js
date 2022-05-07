@@ -142,6 +142,14 @@ const api = {
     addItem(params) {
         return axios.post(base.addItem, params)
     },
+    /**
+     * 分类获取商品信息
+     * @param {id} param 
+     * @returns 
+     */
+    getItemListByCategory(param) {
+        return axios.post(base.getItemListByCategory, param)
+    },
 
 }
 
