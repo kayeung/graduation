@@ -21,8 +21,16 @@ const api = {
      * 获取页脚信息
      * @returns 
      */
-    getFooter(){
+    getFooter() {
         return axios.post(base.getFooter)
+    },
+    /**
+     * 按型号获取商品信息
+     * @param {model} param 
+     * @returns 
+     */
+    getItemListByModel(param) {
+        return axios.post(base.getItemListByModel, param)
     }
 }
 

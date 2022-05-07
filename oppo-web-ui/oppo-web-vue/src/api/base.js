@@ -3,6 +3,7 @@ const base = {
     homePageList: '/api/home/list',//获取首页信息
     getNavbar: '/api/link/getNavbar',//获取导航栏信息
     getFooter: '/api/link/all',//获取页脚信息
+    getItemListByModel: "/api/category/item/listByModel",//按型号获取商品信息
 }
 
 export default base;

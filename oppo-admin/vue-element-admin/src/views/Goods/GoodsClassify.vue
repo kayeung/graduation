@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-menu :default-active="activeIndex1" class="el-menu-vertical-demo" router id="menu">
+    <el-menu default-active="/goodscontent&1001" class="el-menu-vertical-demo" router id="menu">
       <el-menu-item text-color="#ffffff" >
         <span slot="title" >产品分类</span>
       </el-menu-item>
@@ -22,13 +22,7 @@
 
 <script>
 export default {
-    data() {
-    return {
-      activeIndex1: "/goodscontent&phone",
-    };
-  },
   mounted() {
-    console.log("route11:",this.$route);
     this.activeIndex1 = this.$route.path;
   },
 };

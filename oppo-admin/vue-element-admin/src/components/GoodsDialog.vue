@@ -4,7 +4,8 @@
   1.备注无法进行表单验证，此项为必填
   2.接口，字段为列表的，后端接口全为String，要改！
   3.类目选择最好能加个加载转动的动画，因为获取远程数据需要时间，在等待过程中显示暂无数据，非常吓人！
-  4.提交失败要加个消息提示，不能单单只有表单验证的错误信息 -->
+  4.提交失败要加个消息提示，不能单单只有表单验证的错误信息 
+  5.目前对话框已经能够接收上一页表格传过来对应行的数据，输入框已能显示数据，但是其他选择框之类的还没设置绑定字段，所以这些组件还没数据-->
   <el-dialog
     :title="dialogTitle"
     :visible.sync="dialogVisible"
@@ -420,6 +421,12 @@ export default {
     dialogTitle: {
       type: String,
       default: "添加新品",
+    },
+    rowData: {
+      type: Object,
+      default: function () {
+        return {};
+      },
     },
   },
 
@@ -847,7 +854,7 @@ export default {
     },
     //清空表单
     resetForm() {
-      this.$refs.infoForm.resetFields();
+      this.$refs.form.resetFields();
       this.form = {
         categoryId: "",
         goodName: "",
@@ -884,6 +891,12 @@ export default {
         detailPictureUrl: "",
         description: "",
       };
+    },
+  },
+   watch: {
+    rowData(val) {
+      console.log("监听数据", val);
+      this.form = val;
     },
   },
 };

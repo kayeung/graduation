@@ -150,6 +150,14 @@ const api = {
     getItemListByCategory(param) {
         return axios.post(base.getItemListByCategory, param)
     },
+    /**
+     * 按型号获取商品信息
+     * @param {model} param 
+     * @returns 
+     */
+    getItemListByModel(param) {
+        return axios.post(base.getItemListByModel, param)
+    }
 
 }
 

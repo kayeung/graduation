@@ -28,6 +28,7 @@ const base = {
     getItemList: "/api/category/item/list",//分页获取商品信息
     addItem: "/api/category/item/add",//添加商品详情
     getItemListByCategory: "/api/category/item/listByCategory",//分类获取商品信息
+    getItemListByModel: "/api/category/item/listByModel",//按型号获取商品信息
 }
 
 export default base;
