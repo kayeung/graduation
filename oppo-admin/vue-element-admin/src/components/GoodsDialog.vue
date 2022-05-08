@@ -276,8 +276,10 @@
         </el-col>
         <el-col :span="11">
           <el-form-item label="双卡" prop="doubleSIM">
-            <el-radio v-model="form.doubleSIM" label="true">支持</el-radio>
-            <el-radio v-model="form.doubleSIM" label="false">不支持</el-radio>
+            <el-radio-group v-model="form.doubleSIM">
+              <el-radio :label="true">支持</el-radio>
+              <el-radio :label="false">不支持</el-radio>
+            </el-radio-group>
           </el-form-item>
         </el-col>
         <el-col :span="10" :offset="1">
@@ -401,7 +403,7 @@
       </el-form-item>
 
       <el-form-item label="备注" prop="description">
-        <wangeditor @sendEditor="sendEditor" />
+        <wangeditor ref="myEditor" @sendEditor="sendEditor" />
       </el-form-item>
     </el-form>
     <span slot="footer" class="dialog-footer">
@@ -463,7 +465,7 @@ export default {
       uploadPic: base.uploadPic,
       coverList: [], //上传封面图
       picList: [], //上传详情图
-      treeData: "",
+      treeData: [],
       // 表单
       form: {
         categoryId: "",
@@ -489,7 +491,7 @@ export default {
         battery: "",
         fastChargeList: [],
         sensorsList: [],
-        doubleSIM: "true",
+        doubleSIM: true,
         typeSIM: "Nano-SIM",
         bluetooth: "",
         nfc: "",
@@ -775,8 +777,8 @@ export default {
     },
     //接收tree传递的数据
     getTreeData(val) {
-      console.log("tree数据：", val);
       this.treeData = val;
+      console.log("tree数据：", this.treeData);
     },
     //显示tree数据
     showTreeData() {
@@ -893,10 +895,20 @@ export default {
       };
     },
   },
-   watch: {
+  watch: {
     rowData(val) {
       console.log("监听数据", val);
       this.form = val;
+      let tempTree = {
+        id: parseInt(val.categoryId / 10, 10),
+        cid: val.categoryId,
+        name: val.categoryName,
+      };
+      this.treeData = tempTree;
+      // 设置富文本内容
+      this.$nextTick(() => {
+        this.$refs.myEditor.editor.txt.html(val.description);
+      });
     },
   },
 };
