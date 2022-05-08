@@ -16,10 +16,10 @@ const routes = [{
   path: '/goods',
   component: Goods,
   children: [{
-    path: '/gooddetail',
+    path: '/gooddetail&:model',
     component: GoodDetail,
   }, {
-    path: '/goodspecs',
+    path: '/goodspecs&:model',
     component: GoodSpecs,
   }
   ]

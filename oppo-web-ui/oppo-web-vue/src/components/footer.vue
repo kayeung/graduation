@@ -35,7 +35,7 @@
             <div class="panel-heading" role="tab" :id="'heading' + index">
               <h4 class="panel-title">
                 <a
-                  :class="index != 0 ? collapsed : ''"
+                  :class="index != 0 ? 'collapsed' : ''"
                   role="button"
                   data-toggle="collapse"
                   data-parent="#accordion"

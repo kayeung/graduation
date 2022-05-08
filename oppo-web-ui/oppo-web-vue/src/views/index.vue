@@ -49,16 +49,16 @@
             </h2>
             <h3 class="subtitle" style="color: #777777">{{ item.subtitle }}</h3>
             <a
-              href="/gooddetail"
+              href="/gooddetail&PFEM10"
               id="btn"
               class="btn"
               role="button"
               style="background-color: #777777; border-color: #777777"
               >了解更多</a
             >
-            <!-- 手机版按钮 -->
+            <!-- 手机版按钮 item.link-->
             <a
-              :href="item.link"
+              href="/gooddetail&PFEM10"
               id="btn-lg"
               class="btn btn-lg"
               role="button"
@@ -258,7 +258,7 @@ export default {
     params.append("tableName", "home_page");
     this.$api.getHomePageList(params).then((res) => {
       that.homeTable = res.data.data;
-      console.log("home_page", that.homeTable);
+      console.log("homeTable", that.homeTable);
     });
 
     params.set("tableName", "more_product_page");

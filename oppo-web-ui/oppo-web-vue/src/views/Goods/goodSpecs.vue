@@ -1,14 +1,17 @@
 <template>
+<!-- bug:0.4个List的字段可能输出很丑
+                  1.描述的内容要innerHTML
+ -->
   <div class="container">
     <div class="overview">
       <div class="wraper">
         <div class="left">
           <div class="left-container">
             <div class="title">
-              <p>OPPO Find N <br />(IN2020)</p>
+              <p>{{itemData.goodName}} <br />({{itemData.model}})</p>
             </div>
             <div class="des">
-              <p>123<br />456<br />789<br />456<br />789<br />456<br />789</p>
+              {{itemData.description}}
             </div>
           </div>
         </div>
@@ -16,7 +19,7 @@
           <div class="right-container">
             <div class="img-box">
               <img
-                src="https://image.oppo.com/content/dam/oppo/product-asset-library/specs/find-n/Find-N-specs-pc-v2.png"
+                :src="itemData.pictureUrl"
               />
             </div>
           </div>
@@ -30,13 +33,13 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">高</p>
-              <p>约 163.2mm</p>
+              <p>约 {{ itemData.height }}mm</p>
               <p class="item-param-title">宽</p>
-              <p>约 73.9mm</p>
+              <p>约 {{ itemData.width }}mm</p>
               <p class="item-param-title">厚</p>
-              <p>约 8.5mm（陶瓷）</p>
+              <p>约 {{ itemData.thickness }}mm</p>
               <p class="item-param-title">重</p>
-              <p>约 218g（陶瓷）</p>
+              <p>约 {{ itemData.weight }}g</p>
             </div>
           </div>
         </div>
@@ -47,11 +50,11 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">RAM容量+ROM容量</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.ramRom }}</p>
               <p class="item-param-title">RAM规格</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.ramType }}</p>
               <p class="item-param-title">ROM规格</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.romSpe }}</p>
             </div>
           </div>
         </div>
@@ -62,17 +65,17 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">尺寸</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.screenSize }}英寸（对角线）</p>
               <p class="item-param-title">屏占比</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.screenRatio }}%</p>
               <p class="item-param-title">分辨率</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.resolution }}</p>
               <p class="item-param-title">刷新率</p>
-              <p>约 163.2mm</p>
+              <p>最高{{ itemData.refreshRate }}Hz</p>
               <p class="item-param-title">触控采样率</p>
-              <p>约 163.2mm</p>
+              <p>最高{{ itemData.touchRate }}Hz</p>
               <p class="item-param-title">像素密度</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.pixelDensity }}PPI</p>
             </div>
           </div>
         </div>
@@ -83,9 +86,9 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">后置</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.cameraRear }}</p>
               <p class="item-param-title">前置</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.cameraFront }}</p>
             </div>
           </div>
         </div>
@@ -96,9 +99,9 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">CPU</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.cpu }}</p>
               <p class="item-param-title">GPU</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.gpu }}</p>
             </div>
           </div>
         </div>
@@ -109,9 +112,9 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">电池容量</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.battery }}mAh</p>
               <p class="item-param-title">快速充电</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.fastChargeList }}</p>
             </div>
           </div>
         </div>
@@ -121,9 +124,8 @@
           <div class="item-title"></div>
           <div class="item-content">
             <div class="item-content-wrap">
-              <p>
-                地磁传感器、环境光传感器、色温传感器、接近传感器，加速度传感器，重力传感器、陀螺仪、后置光谱传感器、支持记步功能
-              </p>
+              <p class="item-param-title">内置传感器</p>
+              <p>{{ itemData.sensorsList }}</p>
             </div>
           </div>
         </div>
@@ -133,20 +135,20 @@
           <div class="item-title"></div>
           <div class="item-content">
             <div class="item-content-wrap">
-              <p class="item-param-title">是否支持双卡双待</p>
-              <p>约 163.2mm</p>
+              <p class="item-param-title">双卡双待</p>
+              <p>
+                <span v-if="!itemData.doubleSIM">不</span>支持
+              </p>
               <p class="item-param-title">SIM卡类型</p>
-              <p>约 163.2mm</p>
-              <p class="item-param-title">WLAN功能</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.typeSIM }}</p>
               <p class="item-param-title">蓝牙</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.bluetooth }}</p>
               <p class="item-param-title">数据接口</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.usbInterface }}</p>
+              <p class="item-param-title">耳机插孔</p>
+              <p>{{ itemData.earphoneJack }}</p>
               <p class="item-param-title">NFC</p>
-              <p>约 163.2mm</p>
-              <p class="item-param-title">快速充电</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.nfc }}</p>
             </div>
           </div>
         </div>
@@ -157,11 +159,9 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">卫星定位</p>
-              <p>约 163.2mm</p>
-              <p class="item-param-title">双频双天线定位</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.gpsList }}</p>
               <p class="item-param-title">其他</p>
-              <p>约 163.2mm</p>
+              <p>{{ itemData.otherFunction }}</p>
             </div>
           </div>
         </div>
@@ -172,9 +172,25 @@
 
 <script>
 export default {
+  created() {
+    let that = this;
+    that.model = this.$route.params.model;
+  },
+  mounted() {
+    let that = this;
+    let obj = {
+      model: that.model,
+    };
+    this.$api.getItemListByModel(obj).then((res) => {
+      that.itemData = res.data.data[0];
+      console.log("itemData:", that.itemData);
+    });
+  },
   data() {
     return {
       activeNames: ["1", "2", "3", "4", "5", "6", "7", "8", "9"],
+      model: "",
+      itemData: [],
     };
   },
   methods: {

@@ -15,8 +15,8 @@
           router
         >
           <div class="goodName">OPPO Find N</div>
-          <el-menu-item index="/goodspecs">参数</el-menu-item>
-          <el-menu-item index="/gooddetail">概览</el-menu-item>
+          <el-menu-item :index="'/goodspecs&' + model">参数</el-menu-item>
+          <el-menu-item :index="'/gooddetail&' + model">概览</el-menu-item>
         </el-menu>
       </div>
     </div>
@@ -39,7 +39,13 @@ export default {
   data() {
     return {
       activeIndex: "/goodspecs",
+      model: "",
     };
+  },
+  created(){
+    let that=this;
+    that.model=this.$route.params.model;
+    console.log("this.$route.params.model:",that.model);
   },
   mounted() {
     this.activeIndex = this.$route.path;
