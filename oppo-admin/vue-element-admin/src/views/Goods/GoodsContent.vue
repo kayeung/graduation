@@ -16,7 +16,7 @@
     <GoodsAddDialog
       :dialogVisible="dialogVisible"
       :dialogTitle="dialogTitle"
-       :rowData="rowData"
+      :rowData="rowData"
       ref="dialog"
     />
     <!-- 表格主体 -->
@@ -26,8 +26,6 @@
       tooltip-effect="dark"
       border
     >
-      <!-- <el-table-column type="selection" width="45" align="center">
-      </el-table-column> -->
       <el-table-column prop="categoryName" label="系列" align="center">
       </el-table-column>
       <el-table-column
@@ -109,18 +107,14 @@ export default {
     return {
       dialogVisible: false,
       dialogTitle: "添加新品",
-      tableData:[],
+      tableData: [],
       status: "", //目前选择的产品分类 1001智能手机 1002平板 1003折叠屏
-      rowData:{},
-      
+      rowData: {},
     };
   },
   methods: {
-    setParams(val) {
-      //获取url传过来的参数
+    refreshTable() {
       let that = this;
-      that.status = val.params.status;
-      console.log("status:", that.status);
       let obj = {
         id: that.status,
       };
@@ -128,6 +122,13 @@ export default {
         console.log("CategoryTable:", res);
         that.tableData = res.data.data;
       });
+    },
+    setParams(val) {
+      //获取url传过来的参数
+      let that = this;
+      that.status = val.params.status;
+      console.log("status:", that.status);
+      this.refreshTable();
     },
     handleAdd() {
       this.dialogTitle = "添加新品";
@@ -138,6 +139,25 @@ export default {
       this.dialogTitle = "编辑产品";
       this.$refs.dialog.dialogVisible = true;
       this.rowData = { ...scope.row }; //防止重复点击相同行，watch不到数据
+    },
+    remove(scope) {
+      let obj = {
+        id: scope.row.id,
+      };
+      this.$api.deleteItem(obj).then((res) => {
+        if (res.data.success === true) {
+          this.$message({
+            message: "删除成功！",
+            type: "success",
+          });
+          this.refreshTable();
+        } else {
+          this.$message({
+            message: "删除失败！",
+            type: "warning",
+          });
+        }
+      });
     },
   },
   watch: {

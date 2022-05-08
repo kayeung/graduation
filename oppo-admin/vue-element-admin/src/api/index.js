@@ -157,6 +157,14 @@ const api = {
      */
     getItemListByModel(param) {
         return axios.post(base.getItemListByModel, param)
+    },
+    /**
+     * 删除商品
+     * @param {id} param 
+     * @returns 
+     */
+    deleteItem(param) {
+        return axios.post(base.deleteItem, param)
     }
 
 }
