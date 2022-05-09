@@ -2,8 +2,9 @@
   <!-- bug:
   0.4个字段的类型为arrary，这4个字段对应的组件还未能获取接口值
   1.备注无法进行表单验证，此项为必填
-  3.类目选择最好能加个加载转动的动画，因为获取远程数据需要时间，在等待过程中显示暂无数据，非常吓人！
-  4.提交失败要加个消息提示，不能单单只有表单验证的错误信息 -->
+  2.类目选择最好能加个加载转动的动画，因为获取远程数据需要时间，在等待过程中显示暂无数据，非常吓人！
+  3.编辑商品，由于原因0，导致多选那4各字段时，只要选一个就会全选
+  -->
   <el-dialog
     :title="dialogTitle"
     :visible.sync="dialogVisible"
@@ -725,7 +726,7 @@ export default {
      */
     sendEditor(val) {
       this.form.description = val;
-      console.log("tree:",val);
+      console.log("tree:", val);
     },
     handleClose(done) {
       this.$confirm("确认关闭？")
@@ -734,8 +735,6 @@ export default {
           // 1.关闭弹窗 2.清空表单
           this.dialogVisible = false;
           this.resetForm();
-          this.$refs.uploadPic.clearFiles();
-          this.$refs.uploadDetailPic.clearFiles();
         })
         .catch((_) => {});
     },
@@ -789,12 +788,12 @@ export default {
         if (valid) {
           console.log("表单已输入的信息：", this.form);
 
-          let s = [];
-          for (var i = 0; i < this.form.gpsList.length; i++) {
-            s.push(this.form.gpsList[i]);
-          }
+          // let s = [];
+          // for (var i = 0; i < this.form.gpsList.length; i++) {
+          //   s.push(this.form.gpsList[i]);
+          // }
 
-          this.form.gpsList = s.join();
+          // this.form.gpsList = s.join();
 
           // 判断确定按钮的类型：新增？修改？
           if (this.dialogTitle === "添加新品") {
@@ -840,16 +839,65 @@ export default {
                   message: "添加成功！",
                   type: "success",
                 });
-                this.$emit("isCloseDialog");
+                this.dialogVisible = false;
+                this.resetForm();
               } else {
                 this.$message.error("添加失败！");
               }
             });
           } else {
-            console.log("修改产品");
+             let obj = {
+              battery: this.form.battery,
+              bluetooth: this.form.bluetooth,
+              cameraFront: this.form.cameraFront,
+              cameraRear: this.form.cameraRear,
+              categoryId: this.form.categoryId,
+              cpu: this.form.cpu,
+              description: this.form.description,
+              detailPictureUrl: this.form.detailPictureUrl,
+              doubleSIM: this.form.doubleSIM,
+              earphoneJack: this.form.earphoneJack,
+              fastChargeList: this.form.fastChargeList,
+              goodName: this.form.goodName,
+              gpsList: this.form.gpsList,
+              gpu: this.form.gpu,
+              height: this.form.height,
+              model: this.form.model,
+              nfc: this.form.nfc,
+              otherFunction: this.form.otherFunction,
+              pictureUrl: this.form.pictureUrl,
+              pixelDensity: this.form.pixelDensity,
+              ramRom: this.form.ramRom,
+              ramType: this.form.ramType,
+              refreshRate: this.form.refreshRate,
+              resolution: this.form.resolution,
+              romSpe: this.form.romSpe,
+              screenRatio: this.form.screenRatio,
+              screenSize: this.form.screenSize,
+              sensorsList: this.form.sensorsList,
+              thickness: this.form.thickness,
+              touchRate: this.form.touchRate,
+              typeSIM: this.form.typeSIM,
+              usbInterface: this.form.usbInterface,
+              weight: this.form.weight,
+              width: this.form.width,
+              id:this.form.id,
+            };
+            this.$api.updateItem(obj).then((res) => {
+              if (res.data.success === true) {
+                this.$message({
+                  message: "编辑成功！",
+                  type: "success",
+                });
+                this.dialogVisible = false;
+                this.resetForm();
+              } else {
+                this.$message.error("编辑失败！");
+              }
+            });
           }
         } else {
-          console.log("submit fail...");
+          this.$message.error("提交失败，检查是否有必填项未填！");
         }
       });
     },
@@ -891,7 +939,12 @@ export default {
         pictureUrl: "",
         detailPictureUrl: "",
         description: "",
+        id:"",
       };
+      this.$refs.uploadPic.clearFiles();
+      this.$refs.uploadDetailPic.clearFiles();
+      this.$refs.myEditor.editor.txt.html("");
+      this.treeData = "";
     },
   },
   watch: {

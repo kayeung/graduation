@@ -127,7 +127,7 @@ const api = {
     },
     /**
      * 分页获取商品信息
-     * @param {pageIndex,pageSize} params （待定）
+     * @param {pageIndex,pageSize} params 
      * pageIndex:第几页,pageSize:一页几条信息
      * @returns 
      */
@@ -165,6 +165,14 @@ const api = {
      */
     deleteItem(param) {
         return axios.post(base.deleteItem, param)
+    },
+/**
+ *  更新商品信息
+ * @param {battery, bluetooth, cameraFront, cameraRear, categoryId, cpu, description, detailPictureUrl, doubleSIM, earphoneJack, fastChargeList, goodName, gpsList, gpu, height, id,model, nfc, otherFunction, pictureUrl, pixelDensity, ramRom, ramType, refreshRate, resolution, romSpe, screenRatio, screenSize, sensorsList, thickness, touchRate, typeSIM, usbInterface, weight, width} params 
+ * @returns 
+ */
+    updateItem(params){
+        return axios.post(base.updateItem,params)
     }
 
 }

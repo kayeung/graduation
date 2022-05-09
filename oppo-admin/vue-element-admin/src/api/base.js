@@ -30,6 +30,7 @@ const base = {
     getItemListByCategory: "/api/category/item/listByCategory",//分类获取商品信息
     getItemListByModel: "/api/category/item/listByModel",//按型号获取商品信息
     deleteItem: '/api/category/item/delete',//删除商品
+    updateItem: '/api/category/item/update',//更新商品信息
 }
 
 export default base;
