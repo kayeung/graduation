@@ -1,26 +1,22 @@
 <template>
-<!-- bug:0.4个List的字段可能输出很丑
-                  1.描述的内容要innerHTML
- -->
+  <!-- bug:4个List的字段可能输出很丑 -->
   <div class="container">
     <div class="overview">
       <div class="wraper">
         <div class="left">
           <div class="left-container">
             <div class="title">
-              <p>{{itemData.goodName}} <br />({{itemData.model}})</p>
+              <p>{{ itemData.goodName }} <br />({{ itemData.model }})</p>
             </div>
             <div class="des">
-              {{itemData.description}}
+              <p v-html="itemData.description"></p>
             </div>
           </div>
         </div>
         <div class="right">
           <div class="right-container">
             <div class="img-box">
-              <img
-                :src="itemData.pictureUrl"
-              />
+              <img :src="itemData.pictureUrl" />
             </div>
           </div>
         </div>
@@ -136,9 +132,7 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">双卡双待</p>
-              <p>
-                <span v-if="!itemData.doubleSIM">不</span>支持
-              </p>
+              <p><span v-if="!itemData.doubleSIM">不</span>支持</p>
               <p class="item-param-title">SIM卡类型</p>
               <p>{{ itemData.typeSIM }}</p>
               <p class="item-param-title">蓝牙</p>
@@ -203,7 +197,13 @@ export default {
 
 <style lang="less" scoped>
 .overview {
-  padding: 128px 0 67px;
+  padding: 40px 0 32px;
+}
+
+@media only screen and (min-width: 768px) {
+  .overview {
+    padding: 128px 0 67px;
+  }
 }
 .wraper {
   display: flex;
@@ -211,13 +211,21 @@ export default {
   flex-wrap: wrap;
 }
 .left {
-  padding-right: 128px;
+  padding-right:20px;
   flex: 1 1 auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .left {
+    padding-right: 128px;
+    flex: 1 1 auto;
+  }
 }
 .title,
 .des {
   margin-bottom: 30px;
 }
+
 .title p {
   font-size: 36px;
   line-height: 43px;
@@ -229,6 +237,22 @@ export default {
   line-height: 43px;
   color: rgba(0, 0, 0, 0.78);
   margin-bottom: 0;
+}
+
+@media (min-width: 1px) and (max-width: 768px) {
+  .title p {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 500;
+    color: #000;
+  }
+
+  .des p {
+    font-size: 16px !important;
+    line-height: 33px !important;
+    color: rgba(0, 0, 0, 0.78);
+    margin-bottom: 0;
+  }
 }
 
 .right {
@@ -280,5 +304,20 @@ export default {
   line-height: 36px;
   font-weight: 500;
   height: 128px;
+}
+
+@media (min-width: 1px) and (max-width: 768px) {
+  .item-param-title {
+  font-size: 16px;
+  font-variation-settings: "wght" 750;
+  margin-top: 32px;
+  color: #000;
+}
+  /deep/.el-collapse-item__header {
+    font-size: 18px;
+    line-height: 27px;
+    font-weight: 500;
+    height: 64px;
+  }
 }
 </style>

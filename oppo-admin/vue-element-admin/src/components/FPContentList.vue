@@ -65,7 +65,19 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="链接" align="center" show-overflow-tooltip>
+      <el-table-column
+        label="型号"
+        align="center"
+        show-overflow-tooltip
+        v-if="status == 0 || status == 1"
+      >
+        <template slot-scope="scope">
+          <el-link :href="scope.row.link" target="_blank" icon="el-icon-link"
+            ><span>{{ scope.row.link }}</span></el-link
+          >
+        </template>
+      </el-table-column>
+      <el-table-column label="链接" align="center" show-overflow-tooltip v-else>
         <template slot-scope="scope">
           <el-link :href="scope.row.link" target="_blank" icon="el-icon-link"
             ><span>{{ scope.row.link }}</span></el-link

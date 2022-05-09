@@ -49,16 +49,16 @@
             </h2>
             <h3 class="subtitle" style="color: #777777">{{ item.subtitle }}</h3>
             <a
-              href="/gooddetail&PFEM10"
+              :href="'/gooddetail&'+item.link"
               id="btn"
               class="btn"
               role="button"
               style="background-color: #777777; border-color: #777777"
               >了解更多</a
             >
-            <!-- 手机版按钮 item.link-->
+            <!-- 手机版按钮 -->
             <a
-              href="/gooddetail&PFEM10"
+             :href="'/gooddetail&'+item.link"
               id="btn-lg"
               class="btn btn-lg"
               role="button"

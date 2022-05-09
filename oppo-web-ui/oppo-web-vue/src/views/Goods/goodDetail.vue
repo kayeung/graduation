@@ -1,23 +1,44 @@
 <template>
   <div>
     <div class="img-box">
-        <img src="https://www.oppo.com/content/dam/oppo/product-asset-library/k/k9-pro/v2/assets/kv-bg2-1920.webp" alt="">
-        <img src="https://www.oppo.com/content/dam/oppo/product-asset-library/a/a36/v5/assets/pc/1920_kv@3x.jpg" alt="">
+      <div v-for="item in detailPictureList" :key="item.id">
+        <img
+          :src="item"
+          alt=""
+        />
+      </div>
     </div>
-    
   </div>
 </template>
 
 <script>
 export default {
-
-}
+  created() {
+    let that = this;
+    that.model = this.$route.params.model;
+  },
+  mounted() {
+    let that = this;
+    let obj = {
+      model: that.model,
+    };
+    this.$api.getItemListByModel(obj).then((res) => {
+      that.detailPictureList = res.data.data[0].detailPictureUrl;
+      console.log("detailPictureUrl:", that.detailPictureList);
+    });
+  },
+  date() {
+    return {
+      model: [],
+      detailPictureList: [],
+    };
+  },
+};
 </script>
 
 <style lang="less" scoped>
-.img-box img{
+.img-box img {
   width: 100%;
   height: auto;
 }
-
 </style>

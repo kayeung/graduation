@@ -31,8 +31,7 @@
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">
               <span v-if="this.dialogTitle == '编辑'"
-                >如无需修改图片请<span style="color: #f56c6c"
-                  >不要</span
+                >如无需修改图片请<span style="color: #f56c6c">不要</span
                 >点击上传按钮！<br
               /></span>
               只能上传jpg/png/webp文件，且文件大小不能超过<span
@@ -44,7 +43,14 @@
             </div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="链接" prop="link">
+        <el-form-item
+          label="型号"
+          prop="link"
+          v-if="status == 0 || status == 1"
+        >
+          <el-input v-model="form.link"></el-input>
+        </el-form-item>
+        <el-form-item label="链接" prop="link" v-else>
           <el-input v-model="form.link"></el-input>
         </el-form-item>
       </el-form>

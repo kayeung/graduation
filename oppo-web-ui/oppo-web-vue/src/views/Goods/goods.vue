@@ -1,5 +1,4 @@
 <template>
-  <!-- 正在调通概览和参数两个组件 -->
   <div>
     <Navbar />
     <div
@@ -14,7 +13,7 @@
           @select="handleSelect"
           router
         >
-          <div class="goodName">OPPO Find N</div>
+          <div class="goodName">{{ goodName }}</div>
           <el-menu-item :index="'/goodspecs&' + model">参数</el-menu-item>
           <el-menu-item :index="'/gooddetail&' + model">概览</el-menu-item>
         </el-menu>
@@ -40,15 +39,23 @@ export default {
     return {
       activeIndex: "/goodspecs",
       model: "",
+      goodName: "",
     };
   },
-  created(){
-    let that=this;
-    that.model=this.$route.params.model;
-    console.log("this.$route.params.model:",that.model);
+  created() {
+    let that = this;
+    that.model = this.$route.params.model;
+    console.log("this.$route.params.model:", that.model);
   },
   mounted() {
-    this.activeIndex = this.$route.path;
+    let that = this;
+    that.activeIndex = this.$route.path;
+    let obj = {
+      model: that.model,
+    };
+    this.$api.getItemListByModel(obj).then((res) => {
+      that.goodName = res.data.data[0].goodName;
+    });
   },
   methods: {
     handleSelect(key, keyPath) {
