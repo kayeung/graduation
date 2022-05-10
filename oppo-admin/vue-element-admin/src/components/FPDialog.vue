@@ -222,6 +222,14 @@ export default {
     rowData(val) {
       console.log("监听数据", val);
       this.form = val;
+      if (this.status == "0") {
+        this.fileList = [
+          { name: "电脑版轮播横图", url: this.form.pictureUrl },
+          // { name: "手机版轮播竖图", url: this.form.pictureUrl[0] },
+        ];
+      } else {
+        this.fileList = [{ name: "已上传图片1", url: this.form.pictureUrl }];
+      }
     },
   },
 };

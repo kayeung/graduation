@@ -1,9 +1,10 @@
 <template>
   <!-- bug:
   0.4个字段的类型为arrary，这4个字段对应的组件还未能获取接口值
-  1.备注无法进行表单验证，此项为必填
   2.类目选择最好能加个加载转动的动画，因为获取远程数据需要时间，在等待过程中显示暂无数据，非常吓人！
   3.编辑商品，由于原因0，导致多选那4各字段时，只要选一个就会全选
+  4.进行编辑时，由于详细图不知有多少张，watch设置文件列表时要用for插入到列表内
+  5.详细图的字段后端要改成数组类型
   -->
   <el-dialog
     :title="dialogTitle"
@@ -340,7 +341,7 @@
       <!-- 定位功能 -->
       <el-row>
         <el-col :span="1">
-          <el-form-item label="内置感应器"> </el-form-item>
+          <el-form-item label="卫星定位"> </el-form-item>
         </el-col>
         <el-col :span="21">
           <el-form-item label="定位" prop="gpsList">
@@ -401,7 +402,7 @@
         </el-upload>
       </el-form-item>
 
-      <el-form-item label="备注" prop="description">
+      <el-form-item label="特色卖点" prop="description">
         <wangeditor ref="myEditor" @sendEditor="sendEditor" />
       </el-form-item>
     </el-form>
@@ -453,7 +454,7 @@ export default {
     var validateDescription = (rule, value, callback) => {
       console.log("VD:", this.form.description);
       if (this.form.description.length == 0) {
-        callback(new Error("请输入备注信息"));
+        callback(new Error("请输入特色卖点信息"));
       } else {
         callback();
       }
@@ -714,10 +715,10 @@ export default {
         uploadPic: [
           { required: true, validator: validateUploadPic, trigger: "blur" },
         ],
+        description: [
+          { required: true, validator: validateDescription, trigger: "blur" },
+        ],
       },
-      description: [
-        { required: true, validator: validateDescription, trigger: "blur" },
-      ],
     };
   },
   methods: {
@@ -846,7 +847,7 @@ export default {
               }
             });
           } else {
-             let obj = {
+            let obj = {
               battery: this.form.battery,
               bluetooth: this.form.bluetooth,
               cameraFront: this.form.cameraFront,
@@ -881,7 +882,7 @@ export default {
               usbInterface: this.form.usbInterface,
               weight: this.form.weight,
               width: this.form.width,
-              id:this.form.id,
+              id: this.form.id,
             };
             this.$api.updateItem(obj).then((res) => {
               if (res.data.success === true) {
@@ -939,7 +940,7 @@ export default {
         pictureUrl: "",
         detailPictureUrl: "",
         description: "",
-        id:"",
+        id: "",
       };
       this.$refs.uploadPic.clearFiles();
       this.$refs.uploadDetailPic.clearFiles();
@@ -961,6 +962,10 @@ export default {
       this.$nextTick(() => {
         this.$refs.myEditor.editor.txt.html(val.description);
       });
+      this.coverList = [{ name: "已上传封面图", url: this.form.pictureUrl }];
+      this.picList = [
+        { name: "已上传详细图", url: this.form.detailPictureUrl },
+      ];
     },
   },
 };

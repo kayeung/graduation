@@ -18,7 +18,7 @@
 .btn {
     border-radius: 0px !important;
     color: white !important;
-    background-color: black ;
+    background-color: black;
     border-color: black;
 }
 
@@ -69,6 +69,12 @@
     fill: currentColor;
     overflow: hidden;
     font-size: 96px;
+}
+
+.brandBox {
+    width: 156px;
+    display: block;
+    margin: 0 auto;
 }
 
 .navbar .navbar-header .navbar-brand {
@@ -291,7 +297,13 @@ img {
 }
 
 .page-header {
-    margin-top: 128px !important;
+    margin-top: 64px !important;
+}
+
+@media only screen and (min-width:768px) {
+    .page-header {
+        margin-top: 128px !important;
+    }
 }
 
 .page-header a {
@@ -362,7 +374,7 @@ dd a {
     color: #0000008f;
 }
 
-.footer-mobile dd a{
+.footer-mobile dd a {
     display: block;
     margin-bottom: 10px;
 }
@@ -412,6 +424,10 @@ dd a {
 
 .copyright {
     display: block;
+}
+
+.panel {
+    box-shadow: 0 0 0!important;
 }
 
 .panel-heading,

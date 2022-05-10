@@ -1,5 +1,4 @@
 <template>
-  <!-- bug:可接收后端返回的token，但首页右上角的用户名仍为空 -->
   <div class="page">
     <div style="height: 24vh"></div>
     <div class="login-box">

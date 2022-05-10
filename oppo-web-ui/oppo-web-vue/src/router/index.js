@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Index from '../views/index.vue'
 import Goods from '../views/Goods/goods.vue'
 import GoodDetail from '../views/Goods/goodDetail.vue'
+import NotFound from '../views/NotFound.vue'
 
 const GoodSpecs = () => import('../views/Goods/goodSpecs.vue')
 
@@ -23,6 +24,9 @@ const routes = [{
     component: GoodSpecs,
   }
   ]
+}, {
+  path: '*',
+  component: NotFound,
 }
 ]
 

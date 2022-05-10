@@ -62,7 +62,7 @@
               id="btn-lg"
               class="btn btn-lg"
               role="button"
-              style="background-color: black; border-color: black"
+              style="background-color: #777777; border-color:#777777"
               >了解更多</a
             >
           </div>

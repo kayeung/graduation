@@ -7,7 +7,7 @@
       <div class="container-fluid container">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button
+          <!-- <button
             type="button"
             class="navbar-toggle collapsed"
             data-toggle="collapse"
@@ -18,12 +18,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
+          </button> -->
+          <div class="brandBox ">
           <router-link to="/" class="navbar-brand">
             <svg class="icon-brand" aria-hidden="true">
               <use xlink:href="#icon-oppo"></use>
             </svg>
-          </router-link>
+          </router-link></div>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

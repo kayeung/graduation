@@ -42,8 +42,6 @@
       tooltip-effect="dark"
       border
     >
-      <!-- <el-table-column type="selection" width="55" align="center">
-      </el-table-column> -->
       <el-table-column prop="title" label="标题" width="200" align="center">
       </el-table-column>
       <el-table-column
