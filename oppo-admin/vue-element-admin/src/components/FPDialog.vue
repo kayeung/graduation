@@ -1,4 +1,5 @@
 <template>
+  <!-- bug:移除某张图片后，记得删除方法里要将filelist pictrueUrl里的地址也要移除 -->
   <div>
     <!-- 点击添加按钮后的模态框 -->
     <el-dialog
@@ -7,33 +8,54 @@
       width="30%"
       :before-close="handleClose"
     >
-      <el-form ref="form" :model="form" label-width="80px" :rules="rules">
+      <el-form ref="form" :model="form" label-width="95px" :rules="rules">
         <el-form-item label="标题" prop="title">
           <el-input v-model="form.title"></el-input>
         </el-form-item>
         <el-form-item label="副标题" prop="subtitle">
           <el-input type="textarea" v-model="form.subtitle"></el-input>
         </el-form-item>
-        <el-form-item label="图片" prop="pic">
+        <el-form-item :label="status == 0 ? '电脑端横图' : '图片'" prop="pic">
           <el-upload
-            ref="upload"
+            ref="upload1"
             class="upload-demo"
             :action="uploadPic"
             :on-preview="handlePreview"
             :on-remove="handleRemove"
-            :file-list="fileList"
+            :file-list="status == 0 ? uploadListForPC : fileList"
             list-type="picture"
             :on-success="successUpload"
-            :limit="2"
+            :limit="1"
             :on-exceed="handleExceed"
             :before-upload="beforeUpload"
           >
             <el-button size="small" type="primary">点击上传</el-button>
             <div slot="tip" class="el-upload__tip">
-              <span v-if="this.dialogTitle == '编辑'"
-                >如无需修改图片请<span style="color: #f56c6c">不要</span
-                >点击上传按钮！<br
-              /></span>
+              只能上传jpg/png/webp文件，且文件大小不能超过<span
+                style="color: #f56c6c; font-size: 14px"
+              >
+                500</span
+              >
+              KB！
+            </div>
+          </el-upload>
+        </el-form-item>
+        <el-form-item label="手机端竖图" prop="pic" v-if="status == 0">
+          <el-upload
+            ref="upload2"
+            class="upload-demo"
+            :action="uploadPic"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            :file-list="uploadListForMB"
+            list-type="picture"
+            :on-success="successUpload"
+            :limit="1"
+            :on-exceed="handleExceed"
+            :before-upload="beforeUpload"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+            <div slot="tip" class="el-upload__tip">
               只能上传jpg/png/webp文件，且文件大小不能超过<span
                 style="color: #f56c6c; font-size: 14px"
               >
@@ -101,6 +123,8 @@ export default {
       dialogVisible: false,
       tableName: "",
       fileList: [],
+      uploadListForPC: [],
+      uploadListForMB: [],
       uploadPic: base.uploadPic,
       form: {
         title: "",
@@ -125,7 +149,14 @@ export default {
       // 1.关闭弹窗 2.清空表单
       this.dialogVisible = false;
       this.$refs.form.resetFields();
-      this.$refs.upload.clearFiles();
+      this.$refs.upload1.clearFiles();
+      if (this.status == 0) {
+        this.$refs.upload2.clearFiles();
+      }
+      this.fileList = [];
+      this.uploadListForPC = [];
+      this.uploadListForMB = [];
+      this.tableName = "";
       this.form = {
         title: "",
         subtitle: "",
@@ -162,8 +193,8 @@ export default {
     },
     successUpload(res, file, fileList) {
       console.log("上传成功", res, file, fileList);
-      this.form.pictureUrl.push( res.data);
-      console.log("form.pictureUrl:",this.form.pictureUrl);
+      this.form.pictureUrl.push(res.data);
+      console.log("form.pictureUrl:", this.form.pictureUrl);
     },
     onSubmit() {
       console.log("表单已输入的信息：", this.form);
@@ -224,12 +255,14 @@ export default {
       console.log("监听数据", val);
       this.form = val;
       if (this.status == "0") {
-        this.fileList = [
-          { name: "电脑版轮播横图", url: this.form.pictureUrl },
-          // { name: "手机版轮播竖图", url: this.form.pictureUrl[0] },
+        this.uploadListForPC = [
+          { name: "电脑版轮播横图", url: this.form.pictureUrl[0] },
+        ];
+        this.uploadListForMB = [
+          { name: "手机版轮播竖图", url: this.form.pictureUrl[1] },
         ];
       } else {
-        this.fileList = [{ name: "已上传图片1", url: this.form.pictureUrl }];
+        this.fileList = [{ name: "已上传图片", url: this.form.pictureUrl[0] }];
       }
     },
   },

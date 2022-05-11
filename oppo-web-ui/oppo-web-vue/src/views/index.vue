@@ -30,13 +30,15 @@
           v-for="(item, index) in homeTable"
           :key="item.id"
         >
+        <!-- 手机端轮播图 -->
           <img
-            src="../assets/images/find-N-vertical.webp"
+            :src="item.pictureUrl[1]"
             class="img-responsive visible-xs-inline topbanner-vertical-img"
             alt="..."
           />
+          <!-- 电脑端轮播图 -->
           <img
-            :src="item.pictureUrl"
+            :src="item.pictureUrl[0]"
             class="img-responsive hidden-xs pic"
             :id="'pic' + index"
             alt="..."

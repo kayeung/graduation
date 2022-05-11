@@ -17,7 +17,7 @@
         line-height: 32px;
         margin-right: 5px;
       "
-      >(最多3条记录)</span
+      >(最多{{ status == 0 ? "5" : "3" }}条记录)</span
     >
     <FPDialog
       :dialogVisible="dialogVisible"
@@ -51,20 +51,41 @@
         show-overflow-tooltip
       >
       </el-table-column>
-      <el-table-column label="图片" width="200" align="center">
+      <el-table-column
+        :label="status == '0' ? '电脑版横图' : '图片'"
+        width="200"
+        align="center"
+      >
         <template slot-scope="scope">
           <div class="block">
             <span class="demonstration"></span>
             <el-image
               style="width: 160px; height: 65px"
-              :src="scope.row.pictureUrl"
+              :src="scope.row.pictureUrl[0]"
               fit="cover"
             ></el-image>
           </div>
         </template>
       </el-table-column>
       <el-table-column
-        label="型号"
+        label="手机版竖图"
+        width="200"
+        align="center"
+        v-if="status == '0'"
+      >
+        <template slot-scope="scope">
+          <div class="block">
+            <span class="demonstration"></span>
+            <el-image
+              style="width: 160px; height: 65px"
+              :src="scope.row.pictureUrl[1]"
+              fit="cover"
+            ></el-image>
+          </div>
+        </template>
+      </el-table-column>
+      <el-table-column
+        label="产品型号"
         align="center"
         show-overflow-tooltip
         v-if="status == 0 || status == 1"
@@ -132,7 +153,6 @@ export default {
       carouselTable: [],
       moreTable: [],
       techTable: [],
-      // multipleSelection: [],
     };
   },
   methods: {
@@ -163,7 +183,7 @@ export default {
     },
     handleAdd() {
       this.dialogTitle = "添加";
-      if (this.status == "0" && this.carouselTable.length < 3) {
+      if (this.status == "0" && this.carouselTable.length < 5) {
         this.$refs.dialog.dialogVisible = true;
       } else if (this.status == "1" && this.moreTable.length < 3) {
         this.$refs.dialog.dialogVisible = true;
