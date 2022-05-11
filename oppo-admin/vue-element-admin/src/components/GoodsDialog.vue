@@ -475,7 +475,7 @@ export default {
         width: "",
         thickness: "",
         weight: "",
-        ramRom: "",
+        ramRom: [],
         ramType: "",
         romSpe: "",
         screenSize: "",
@@ -500,7 +500,7 @@ export default {
         gpsList: [],
         otherFunction: "",
         pictureUrl: "",
-        detailPictureUrl: "",
+        detailPictureUrl: [],
         description: "",
       },
       //容量多选
@@ -772,7 +772,7 @@ export default {
     },
     successUploadDetailPic(res, file, fileList) {
       console.log("上传成功", res, file, fileList);
-      this.form.detailPictureUrl = res.data;
+      this.form.detailPictureUrl.push(res.data);
     },
     //接收tree传递的数据
     getTreeData(val) {
@@ -913,7 +913,7 @@ export default {
         width: "",
         thickness: "",
         weight: "",
-        ramRom: "",
+        ramRom: [],
         ramType: "",
         romSpe: "",
         screenSize: "",
@@ -938,7 +938,7 @@ export default {
         gpsList: [],
         otherFunction: "",
         pictureUrl: "",
-        detailPictureUrl: "",
+        detailPictureUrl: [],
         description: "",
         id: "",
       };

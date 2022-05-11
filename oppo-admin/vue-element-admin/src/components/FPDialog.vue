@@ -105,7 +105,7 @@ export default {
       form: {
         title: "",
         subtitle: "",
-        pictureUrl: "",
+        pictureUrl: [],
         link: "",
       },
       rules: {
@@ -129,7 +129,7 @@ export default {
       this.form = {
         title: "",
         subtitle: "",
-        pictureUrl: "",
+        pictureUrl: [],
         link: "",
       };
     },
@@ -162,7 +162,8 @@ export default {
     },
     successUpload(res, file, fileList) {
       console.log("上传成功", res, file, fileList);
-      this.form.pictureUrl = res.data;
+      this.form.pictureUrl.push( res.data);
+      console.log("form.pictureUrl:",this.form.pictureUrl);
     },
     onSubmit() {
       console.log("表单已输入的信息：", this.form);
