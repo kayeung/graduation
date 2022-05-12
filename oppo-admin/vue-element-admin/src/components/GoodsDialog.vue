@@ -94,10 +94,10 @@
         </el-col>
         <el-col :span="23">
           <el-row>
-            <!-- 多选时高度会撑爆，与下一行之间无空隙 -->
             <el-col :span="6">
               <el-form-item label="容量" prop="ramRom">
-                <div class="block">
+                <el-input type="text" v-model="form.ramRom"> </el-input>
+                <!-- <div class="block">
                   <el-cascader
                     :options="options"
                     :props="props"
@@ -106,7 +106,7 @@
                     separator="+"
                     style="width: 290px"
                   ></el-cascader>
-                </div>
+                </div> -->
               </el-form-item>
             </el-col>
             <el-col :span="6" :offset="3">
@@ -474,7 +474,7 @@ export default {
         width: "",
         thickness: "",
         weight: "",
-        ramRom: [],
+        ramRom: "",
         ramType: "",
         romSpe: "",
         screenSize: "",
@@ -503,67 +503,67 @@ export default {
         description: "",
       },
       //容量多选
-      props: { multiple: true, label: "label" },
-      options: [
-        {
-          value: "6GB",
-          label: "6GB",
-          children: [
-            {
-              value: "64GB",
-              label: "64GB",
-            },
-            {
-              value: "128GB",
-              label: "128GB",
-            },
-            {
-              value: "256GB",
-              label: "256GB",
-            },
-          ],
-        },
-        {
-          value: "8GB",
-          label: "8GB",
-          children: [
-            {
-              value: "128GB",
-              label: "128GB",
-            },
-            {
-              value: "256GB",
-              label: "256GB",
-            },
-            {
-              value: "512GB",
-              label: "512GB",
-            },
-          ],
-        },
-        {
-          value: "12GB",
-          label: "12GB",
-          children: [
-            {
-              value: "128GB",
-              label: "128GB",
-            },
-            {
-              value: "256GB",
-              label: "256GB",
-            },
-            {
-              value: "512GB",
-              label: "512GB",
-            },
-            {
-              value: "1TB",
-              label: "1TB",
-            },
-          ],
-        },
-      ],
+      // props: { multiple: true, label: "label" },
+      // options: [
+      //   {
+      //     value: "6GB",
+      //     label: "6GB",
+      //     children: [
+      //       {
+      //         value: "64GB",
+      //         label: "64GB",
+      //       },
+      //       {
+      //         value: "128GB",
+      //         label: "128GB",
+      //       },
+      //       {
+      //         value: "256GB",
+      //         label: "256GB",
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     value: "8GB",
+      //     label: "8GB",
+      //     children: [
+      //       {
+      //         value: "128GB",
+      //         label: "128GB",
+      //       },
+      //       {
+      //         value: "256GB",
+      //         label: "256GB",
+      //       },
+      //       {
+      //         value: "512GB",
+      //         label: "512GB",
+      //       },
+      //     ],
+      //   },
+      //   {
+      //     value: "12GB",
+      //     label: "12GB",
+      //     children: [
+      //       {
+      //         value: "128GB",
+      //         label: "128GB",
+      //       },
+      //       {
+      //         value: "256GB",
+      //         label: "256GB",
+      //       },
+      //       {
+      //         value: "512GB",
+      //         label: "512GB",
+      //       },
+      //       {
+      //         value: "1TB",
+      //         label: "1TB",
+      //       },
+      //     ],
+      //   },
+      // ],
       //RAM规格
       ramOptions: [
         {
@@ -912,7 +912,7 @@ export default {
         width: "",
         thickness: "",
         weight: "",
-        ramRom: [],
+        ramRom: "",
         ramType: "",
         romSpe: "",
         screenSize: "",

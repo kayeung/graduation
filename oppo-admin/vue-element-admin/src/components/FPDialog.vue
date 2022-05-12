@@ -16,7 +16,7 @@
         <el-form-item label="副标题" prop="subtitle">
           <el-input type="textarea" v-model="form.subtitle"></el-input>
         </el-form-item>
-        <el-form-item :label="status == 0 ? '电脑端横图' : '图片'" prop="pic">
+        <el-form-item :label="status == 0 ? '电脑端横图' : '图片'" prop="pic1">
           <el-upload
             ref="upload1"
             class="upload-demo"
@@ -41,7 +41,7 @@
             </div>
           </el-upload>
         </el-form-item>
-        <el-form-item label="手机端竖图" prop="pic" v-if="status == 0">
+        <el-form-item label="手机端竖图" prop="pic2" v-if="status == 0">
           <el-upload
             ref="upload2"
             class="upload-demo"
@@ -106,8 +106,23 @@ export default {
     this.setTableName();
   },
   data() {
-    var validateUploadPic = (rule, value, callback) => {
-      if (this.form.pictureUrl.length == 0) {
+    var validateUploadPic1 = (rule, value, callback) => {
+      if (this.status == 0) {
+        if (this.uploadListForPC.length == 0) {
+          callback(new Error("请上传图片"));
+        } else {
+          callback();
+        }
+      } else {
+        if (this.fileList.length == 0) {
+          callback(new Error("请上传图片"));
+        } else {
+          callback();
+        }
+      }
+    };
+    var validateUploadPic2 = (rule, value, callback) => {
+      if (this.uploadListForMB.length == 0) {
         callback(new Error("请上传图片"));
       } else {
         callback();
@@ -131,8 +146,11 @@ export default {
         subtitle: [
           { required: true, message: "请输入副标题", trigger: "blur" },
         ],
-        pic: [
-          { required: true, validator: validateUploadPic, trigger: "blur" },
+        pic1: [
+          { required: true, validator: validateUploadPic1, trigger: "blur" },
+        ],
+        pic2: [
+          { required: true, validator: validateUploadPic2, trigger: "blur" },
         ],
         link: [{ required: true, message: "请输入页面链接", trigger: "blur" }],
       },
