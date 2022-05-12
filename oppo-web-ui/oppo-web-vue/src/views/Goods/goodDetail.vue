@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="img-box">
-      <div v-for="item in detailPictureList" :key="item.id">
-        <img
-          :src="item"
-          alt=""
-        />
-      </div>
+      <img
+        v-for="item in itemData.detailPictureUrl"
+        :key="item"
+        :src="item"
+        alt=""
+      />
     </div>
   </div>
 </template>
@@ -16,21 +16,19 @@ export default {
   created() {
     let that = this;
     that.model = this.$route.params.model;
-  },
-  mounted() {
-    let that = this;
     let obj = {
       model: that.model,
     };
     this.$api.getItemListByModel(obj).then((res) => {
-      that.detailPictureList = res.data.data[0].detailPictureUrl;
-      console.log("detailPictureUrl:", that.detailPictureList);
+      console.log("detail.res:", res);
+      that.itemData = res.data.data[0];
+      console.log("itemData:", that.itemData);
     });
   },
-  date() {
+  data() {
     return {
-      model: [],
-      detailPictureList: [],
+      model: "",
+     itemData: [],
     };
   },
 };

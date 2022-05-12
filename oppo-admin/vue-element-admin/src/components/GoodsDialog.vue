@@ -361,13 +361,13 @@
         </el-col>
       </el-row>
 
-      <el-form-item label="封面图" prop="uploadPic">
+      <el-form-item label="封面图" prop="uploadCoverPic">
         <el-upload
           ref="uploadPic"
           class="upload-demo"
           :action="uploadPic"
           :on-preview="handlePreview"
-          :on-remove="handleRemove"
+          :on-remove="handleRemovePic"
           :file-list="coverList"
           list-type="picture"
           :on-success="successUploadPic"
@@ -382,13 +382,13 @@
         </el-upload>
       </el-form-item>
 
-      <el-form-item label="详情图" prop="uploadPic">
+      <el-form-item label="详情图" prop="uploadDetailPic">
         <el-upload
           ref="uploadDetailPic"
           class="upload-demo"
           :action="uploadPic"
           :on-preview="handlePreview"
-          :on-remove="handleRemove"
+          :on-remove="handleRemoveDetailPic"
           :file-list="picList"
           list-type="picture"
           :on-success="successUploadDetailPic"
@@ -436,9 +436,16 @@ export default {
     GoodsTree,
   },
   data() {
-    var validateUploadPic = (rule, value, callback) => {
+    var validateCoverPic = (rule, value, callback) => {
       if (this.form.pictureUrl.length == 0) {
-        callback(new Error("请上传图片"));
+        callback(new Error("请上传封面图"));
+      } else {
+        callback();
+      }
+    };
+    var validateDetailPic = (rule, value, callback) => {
+      if (this.form.detailPictureUrl.length == 0) {
+        callback(new Error("请上传详情图"));
       } else {
         callback();
       }
@@ -612,6 +619,10 @@ export default {
           value: "Mini-SIM",
           label: "Mini-SIM",
         },
+        {
+          value: "无SIM",
+          label: "无SIM",
+        },
       ],
       value_SIM: "Nano-SIM",
       //耳机插孔
@@ -711,8 +722,11 @@ export default {
         otherFunction: [
           { required: true, message: "请输入更多的定位信息", trigger: "blur" },
         ],
-        uploadPic: [
-          { required: true, validator: validateUploadPic, trigger: "blur" },
+        uploadCoverPic: [
+          { required: true, validator: validateCoverPic, trigger: "blur" },
+        ],
+        uploadDetailPic: [
+          { required: true, validator: validateDetailPic, trigger: "blur" },
         ],
         description: [
           { required: true, validator: validateDescription, trigger: "blur" },
@@ -733,13 +747,28 @@ export default {
         .then((_) => {
           done();
           // 1.关闭弹窗 2.清空表单
+          this.$emit("refreshTable");
           this.dialogVisible = false;
           this.resetForm();
+          this.picList=[];
+          this.coverList=[];
+          this.$refs.uploadPic.clearFiles();
+          this.$refs.uploadDetailPic.clearFiles();
+          
         })
         .catch((_) => {});
     },
-    handleRemove(file, fileList) {
+    handleRemovePic(file, fileList) {
+      this.form.pictureUrl="";
+      this.coverList.shift();
+    },
+    handleRemoveDetailPic(file, fileList) {
       console.log(file, fileList);
+      let index=file.name-1;
+      this.picList.splice(index,1);
+      this.form.detailPictureUrl.splice(index,1);
+      console.log("this.picList:",this.picList);
+      console.log("this.form.detailPictureUrl:",this.form.detailPictureUrl);
     },
     handlePreview(file) {
       console.log(file);
@@ -787,14 +816,6 @@ export default {
       this.$refs.form.validate((valid) => {
         if (valid) {
           console.log("表单已输入的信息：", this.form);
-
-          // let s = [];
-          // for (var i = 0; i < this.form.gpsList.length; i++) {
-          //   s.push(this.form.gpsList[i]);
-          // }
-
-          // this.form.gpsList = s.join();
-
           // 判断确定按钮的类型：新增？修改？
           if (this.dialogTitle === "添加新品") {
             let obj = {
@@ -841,6 +862,7 @@ export default {
                 });
                 this.dialogVisible = false;
                 this.resetForm();
+                this.$emit("refreshTable");
               } else {
                 this.$message.error("添加失败！");
               }
@@ -891,6 +913,7 @@ export default {
                 });
                 this.dialogVisible = false;
                 this.resetForm();
+                this.$emit("refreshTable");
               } else {
                 this.$message.error("编辑失败！");
               }
@@ -962,9 +985,12 @@ export default {
         this.$refs.myEditor.editor.txt.html(val.description);
       });
       this.coverList = [{ name: "已上传封面图", url: this.form.pictureUrl }];
-      this.picList = [
-        { name: "已上传详细图", url: this.form.detailPictureUrl },
-      ];
+      for (let i = 1; i <= this.form.detailPictureUrl.length; i++) {
+        this.picList.push({
+          name: i,
+          url: this.form.detailPictureUrl[i-1],
+        });
+      }
     },
   },
 };

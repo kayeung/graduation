@@ -1,6 +1,4 @@
 <template>
-  <!-- bug:0.编辑图片，删除图片，再上传，tableName莫名消失，导致后端无法执行SQL
-                    1.删除图片，如果立即提交，没有校验出图为空 -->
   <div>
     <!-- 点击添加按钮后的模态框 -->
     <el-dialog
@@ -239,18 +237,11 @@ export default {
         this.fileList.push(file);
       }
       this.form.pictureUrl.push(res.data);
-      console.log("form.pictureUrl:", this.form.pictureUrl);
-      console.log("uploadListForPC:", this.uploadListForPC);
-      console.log("uploadListForMB:", this.uploadListForMB);
-      console.log("fileList:", this.fileList);
     },
     successUploadMB(res, file, fileList) {
       console.log("上传成功", res, file, fileList);
       this.form.pictureUrl.push(res.data);
       this.uploadListForMB.push(file);
-      console.log("form.pictureUrl:", this.form.pictureUrl);
-      console.log("uploadListForPC:", this.uploadListForPC);
-      console.log("uploadListForMB:", this.uploadListForMB);
     },
     onSubmit() {
       console.log("表单已输入的信息：", this.form);

@@ -15,6 +15,7 @@
       :dialogVisible="dialogVisible"
       :dialogTitle="dialogTitle"
       :rowData="rowData"
+      @refreshTable="refreshTable"
       ref="dialog"
     />
     <!-- 表格主体 -->

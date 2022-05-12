@@ -110,7 +110,17 @@
               <p class="item-param-title">电池容量</p>
               <p>{{ itemData.battery }}mAh</p>
               <p class="item-param-title">快速充电</p>
-              <p>{{ itemData.fastChargeList }}</p>
+              <p>
+                <span
+                  v-for="(item, index) in itemData.fastChargeList"
+                  :key="item"
+                >
+                  {{ item }}
+                  <span v-if="index != itemData.fastChargeList.length - 1"
+                    >、</span
+                  >
+                </span>
+              </p>
             </div>
           </div>
         </div>
@@ -121,7 +131,14 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">内置传感器</p>
-              <p>{{ itemData.sensorsList }}</p>
+              <p>
+                <span v-for="(item, index) in itemData.sensorsList" :key="item">
+                  {{ item }}
+                  <span v-if="index != itemData.sensorsList.length - 1"
+                    >、</span
+                  >
+                </span>
+              </p>
             </div>
           </div>
         </div>
@@ -153,7 +170,11 @@
           <div class="item-content">
             <div class="item-content-wrap">
               <p class="item-param-title">卫星定位</p>
-              <p>{{ itemData.gpsList }}</p>
+              <p>
+                <span v-for="item in itemData.gpsList" :key="item">
+                  {{ item }}
+                </span>
+              </p>
               <p class="item-param-title">其他</p>
               <p>{{ itemData.otherFunction }}</p>
             </div>
@@ -211,7 +232,7 @@ export default {
   flex-wrap: wrap;
 }
 .left {
-  padding-right:20px;
+  padding-right: 20px;
   flex: 1 1 auto;
 }
 
@@ -308,11 +329,11 @@ export default {
 
 @media (min-width: 1px) and (max-width: 768px) {
   .item-param-title {
-  font-size: 16px;
-  font-variation-settings: "wght" 750;
-  margin-top: 32px;
-  color: #000;
-}
+    font-size: 16px;
+    font-variation-settings: "wght" 750;
+    margin-top: 32px;
+    color: #000;
+  }
   /deep/.el-collapse-item__header {
     font-size: 18px;
     line-height: 27px;
