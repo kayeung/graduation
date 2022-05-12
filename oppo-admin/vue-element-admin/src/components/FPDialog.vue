@@ -22,10 +22,10 @@
             class="upload-demo"
             :action="uploadPic"
             :on-preview="handlePreview"
-            :on-remove="handleRemove"
+            :on-remove="handleRemovePC"
             :file-list="status == 0 ? uploadListForPC : fileList"
             list-type="picture"
-            :on-success="successUpload"
+            :on-success="successUploadPC"
             :limit="1"
             :on-exceed="handleExceed"
             :before-upload="beforeUpload"
@@ -47,10 +47,10 @@
             class="upload-demo"
             :action="uploadPic"
             :on-preview="handlePreview"
-            :on-remove="handleRemove"
+            :on-remove="handleRemoveMB"
             :file-list="uploadListForMB"
             list-type="picture"
-            :on-success="successUpload"
+            :on-success="successUploadMB"
             :limit="1"
             :on-exceed="handleExceed"
             :before-upload="beforeUpload"
@@ -103,14 +103,7 @@ export default {
     },
   },
   mounted() {
-    let that = this;
-    if (this.status == "0") {
-      that.tableName = "home_page";
-    } else if (this.status == "1") {
-      that.tableName = "more_product_pagee";
-    } else if (this.status == "2") {
-      that.tableName = "technology_page";
-    }
+    this.setTableName();
   },
   data() {
     var validateUploadPic = (rule, value, callback) => {
@@ -146,6 +139,16 @@ export default {
     };
   },
   methods: {
+    setTableName() {
+      let that = this;
+      if (this.status == "0") {
+        that.tableName = "home_page";
+      } else if (this.status == "1") {
+        that.tableName = "more_product_pagee";
+      } else if (this.status == "2") {
+        that.tableName = "technology_page";
+      }
+    },
     handleClose() {
       // 1.关闭弹窗 2.清空表单
       this.dialogVisible = false;
@@ -165,8 +168,26 @@ export default {
         link: "",
       };
     },
-    handleRemove(file, fileList) {
+    handleRemovePC(file, fileList) {
       console.log(file, fileList);
+      this.form.pictureUrl.shift();
+      if (this.status == 0) {
+        this.uploadListForPC.shift();
+      } else {
+        this.fileList.shift();
+      }
+      console.log("form.pictureUrl:", this.form.pictureUrl);
+      console.log("uploadListForPC:", this.uploadListForPC);
+      console.log("uploadListForMB:", this.uploadListForMB);
+      console.log("fileList:", this.fileList);
+    },
+    handleRemoveMB(file, fileList) {
+      console.log(file, fileList);
+      this.form.pictureUrl.pop();
+      this.uploadListForMB.pop();
+      console.log("form.pictureUrl:", this.form.pictureUrl);
+      console.log("uploadListForPC:", this.uploadListForPC);
+      console.log("uploadListForMB:", this.uploadListForMB);
     },
     handlePreview(file) {
       console.log(file);
@@ -192,13 +213,30 @@ export default {
         return false;
       }
     },
-    successUpload(res, file, fileList) {
+    successUploadPC(res, file, fileList) {
       console.log("上传成功", res, file, fileList);
+      if (this.status == 0) {
+        this.uploadListForPC.push(file);
+      } else {
+        this.fileList.push(file);
+      }
       this.form.pictureUrl.push(res.data);
       console.log("form.pictureUrl:", this.form.pictureUrl);
+      console.log("uploadListForPC:", this.uploadListForPC);
+      console.log("uploadListForMB:", this.uploadListForMB);
+      console.log("fileList:", this.fileList);
+    },
+    successUploadMB(res, file, fileList) {
+      console.log("上传成功", res, file, fileList);
+      this.form.pictureUrl.push(res.data);
+      this.uploadListForMB.push(file);
+      console.log("form.pictureUrl:", this.form.pictureUrl);
+      console.log("uploadListForPC:", this.uploadListForPC);
+      console.log("uploadListForMB:", this.uploadListForMB);
     },
     onSubmit() {
       console.log("表单已输入的信息：", this.form);
+      this.setTableName();
       this.$refs.form.validate((valid) => {
         if (valid) {
           // 判断确定按钮的类型：新增？修改？
@@ -210,6 +248,12 @@ export default {
               link: this.form.link,
               tableName: this.tableName,
             };
+            console.log(
+              "添加时Name：",
+              this.tableName,
+              "添加时Status：",
+              this.status
+            );
             this.$api.addHomePage(addObj).then((res) => {
               if (res.data.success === true) {
                 this.$message({
@@ -231,6 +275,12 @@ export default {
               link: this.form.link,
               tableName: this.tableName,
             };
+            console.log(
+              "编辑时Name：",
+              this.tableName,
+              "编辑时Status：",
+              this.status
+            );
             this.$api.editHomePage(editObj).then((res) => {
               if (res.data.success === true) {
                 this.$message({
