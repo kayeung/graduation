@@ -1,5 +1,4 @@
 <template>
-  <!-- bug:4个List的字段可能输出很丑 -->
   <div class="container">
     <div class="overview">
       <div class="wraper">

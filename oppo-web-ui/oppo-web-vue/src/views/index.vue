@@ -1,6 +1,5 @@
 <template>
-  <!-- bug:1.TextColor插件有点问题，白底识别出来的文字仍是白色，黑底正常
-                    2.修改后端，让接口的图片URL可以存两张轮播图，一张pc横图，一张手机竖图 -->
+  <!-- bug:1.TextColor插件有点问题，白底识别出来的文字仍是白色，黑底正常 -->
   <div class="body">
     <Navbar />
     <!-- Bootstrap轮播图 -->
