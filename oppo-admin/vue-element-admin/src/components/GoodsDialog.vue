@@ -1,7 +1,4 @@
 <template>
-  <!-- bug:
-  0.ramRom的二维数组还要修改后端接口
-  -->
   <el-dialog
     :title="dialogTitle"
     :visible.sync="dialogVisible"

@@ -1,5 +1,4 @@
 <template>
-  <!-- bug:1.TextColor插件有点问题，白底识别出来的文字仍是白色，黑底正常 -->
   <div class="body">
     <Navbar />
     <!-- Bootstrap轮播图 -->
